@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/screens/recipe_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,32 +25,32 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'MoonShine',
-          // style: TextStyle(
-          //     // fontWeight: FontWeight.bold,
-          //     ),
+        title: Row(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(Icons.wine_bar_outlined),
+            Text(
+              'MoonShine',
+              // style: TextStyle(
+              //     // fontWeight: FontWeight.bold,
+              //     ),
+            ),
+          ],
         ),
         backgroundColor: Colors.black,
         bottom: TabBar(
           tabs: const [
             Tab(
               text: '#Map',
-              // icon: Icon(
-              //   Icons.map_outlined,
-              // ),
+              // icon: Icon(Icons.map_outlined),
             ),
             Tab(
               text: '#Blog',
-              // icon: Icon(
-              //   Icons.comment_bank_outlined,
-              // ),
+              // icon: Icon(Icons.comment_bank_outlined),
             ),
             Tab(
               text: '#Recipe',
-              // icon: Icon(
-              //   Icons.wine_bar_outlined,
-              // ),
+              // icon: Icon(Icons.wine_bar_outlined),
             ),
           ],
           controller: _tabController,
@@ -61,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         children: const [
           Text('Map Page'),
           Text('Blog Page'),
-          Text('Recipe Page'),
+          RecipeScreen(),
         ],
       ),
     );
