@@ -24,46 +24,95 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.wine_bar_outlined),
-            Text(
-              'MoonShine',
-              // style: TextStyle(
-              //     // fontWeight: FontWeight.bold,
-              //     ),
+      // appBar: AppBar(
+      //   title: Row(
+      //     // mainAxisAlignment: MainAxisAlignment.center,
+      //     children: const [
+      //       Icon(Icons.wine_bar_outlined),
+      //       Text(
+      //         'MoonShine',
+      //         // style: TextStyle(
+      //         //     // fontWeight: FontWeight.bold,
+      //         //     ),
+      //       ),
+      //     ],
+      //   ),
+      //   backgroundColor: Colors.black,
+      //   bottom: TabBar(
+      // tabs: const [
+      //   Tab(
+      //     text: '#Map',
+      //     // icon: Icon(Icons.map_outlined),
+      //   ),
+      //   Tab(
+      //     text: '#Blog',
+      //     // icon: Icon(Icons.comment_bank_outlined),
+      //   ),
+      //   Tab(
+      //     text: '#Recipe',
+      //     // icon: Icon(Icons.wine_bar_outlined),
+      //   ),
+      // ],
+      //     controller: _tabController,
+      //   ),
+      // ),
+      // body: TabBarView(
+      //   controller: _tabController,
+      //   physics: const NeverScrollableScrollPhysics(),
+      //   children: [
+      //     const Text('Map Page'),
+      //     const Text('Blog Page'),
+      //     RecipeScreen(),
+      //   ],
+      // ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              title: Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.wine_bar_outlined),
+                  Text(
+                    'MoonShine',
+                    // style: TextStyle(
+                    //     // fontWeight: FontWeight.bold,
+                    //     ),
+                  ),
+                ],
+              ),
+              backgroundColor: Colors.black87,
+              pinned: true,
+              floating: true,
+              forceElevated: innerBoxIsScrolled,
+              bottom: TabBar(
+                tabs: const <Tab>[
+                  Tab(
+                    text: '#Map',
+                    // icon: Icon(Icons.map_outlined),
+                  ),
+                  Tab(
+                    text: '#Blog',
+                    // icon: Icon(Icons.comment_bank_outlined),
+                  ),
+                  Tab(
+                    text: '#Recipe',
+                    // icon: Icon(Icons.wine_bar_outlined),
+                  ),
+                ],
+                controller: _tabController,
+              ),
             ),
-          ],
-        ),
-        backgroundColor: Colors.black,
-        bottom: TabBar(
-          tabs: const [
-            Tab(
-              text: '#Map',
-              // icon: Icon(Icons.map_outlined),
-            ),
-            Tab(
-              text: '#Blog',
-              // icon: Icon(Icons.comment_bank_outlined),
-            ),
-            Tab(
-              text: '#Recipe',
-              // icon: Icon(Icons.wine_bar_outlined),
-            ),
-          ],
+          ];
+        },
+        body: TabBarView(
           controller: _tabController,
+          children: const <Widget>[
+            Text('Map Page'),
+            Text('Blog Page'),
+            RecipeScreen(),
+          ],
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const Text('Map Page'),
-          const Text('Blog Page'),
-          RecipeScreen(),
-        ],
       ),
     );
   }
