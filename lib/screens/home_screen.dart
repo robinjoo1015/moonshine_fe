@@ -59,9 +59,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       body: TabBarView(
         controller: _tabController,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          Text('Map Page'),
-          Text('Blog Page'),
+        children: [
+          const Text('Map Page'),
+          const Text('Blog Page'),
           RecipeScreen(),
         ],
       ),
