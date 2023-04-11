@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(fontFamily: 'Georgia'),
           bodySmall: TextStyle(fontFamily: 'Georgia'),
         ),
+        primaryColor: Colors.black,
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: const HomeScreen(),
     );

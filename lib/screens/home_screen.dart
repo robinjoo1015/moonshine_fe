@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return <Widget>[
+          return [
             SliverAppBar(
               title: Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       Theme.of(context).textTheme.titleMedium!.fontFamily,
                   fontSize: 16,
                 ),
-                tabs: const <Tab>[
+                tabs: const [
                   Tab(
                     text: '#Map',
                     // icon: Icon(Icons.map_outlined),
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
         body: TabBarView(
           controller: _tabController,
-          children: <Widget>[
+          children: [
             const Text('Map Page'),
             const Text('Blog Page'),
             RecipeTabScreen(),
