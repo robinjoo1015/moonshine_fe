@@ -12,16 +12,23 @@ class RecipeDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          name,
-        ),
-        elevation: 2,
-      ),
-      body: Container(
-        child: Center(
-          child: Text(
-            name,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              title: Text(name),
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+              pinned: true,
+              floating: true,
+              forceElevated: innerBoxIsScrolled,
+            )
+          ];
+        },
+        body: Container(
+          child: Center(
+            child: Text(
+              name,
+            ),
           ),
         ),
       ),

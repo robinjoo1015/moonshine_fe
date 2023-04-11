@@ -45,8 +45,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-              backgroundColor: Colors.black87,
-              pinned: true,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+              pinned: false,
               floating: true,
               forceElevated: innerBoxIsScrolled,
               bottom: TabBar(
