@@ -30,13 +30,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             SliverAppBar(
               title: Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.wine_bar_outlined),
+                children: [
+                  const Icon(
+                    Icons.wine_bar_outlined,
+                  ),
                   Text(
                     'MoonShine',
-                    // style: TextStyle(
-                    //     // fontWeight: FontWeight.bold,
-                    //     ),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      fontFamily:
+                          Theme.of(context).textTheme.titleLarge!.fontFamily,
+                    ),
                   ),
                 ],
               ),
@@ -45,6 +50,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               floating: true,
               forceElevated: innerBoxIsScrolled,
               bottom: TabBar(
+                labelStyle: TextStyle(
+                  fontFamily:
+                      Theme.of(context).textTheme.titleMedium!.fontFamily,
+                  fontSize: 16,
+                ),
                 tabs: const <Tab>[
                   Tab(
                     text: '#Map',

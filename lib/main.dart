@@ -15,6 +15,14 @@ class MyApp extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         hoverColor: Colors.transparent,
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(fontFamily: 'Georgia'),
+          titleMedium: TextStyle(fontFamily: 'Georgia'),
+          titleSmall: TextStyle(fontFamily: 'Georgia'),
+          bodyLarge: TextStyle(fontFamily: 'Georgia'),
+          bodyMedium: TextStyle(fontFamily: 'Georgia'),
+          bodySmall: TextStyle(fontFamily: 'Georgia'),
+        ),
       ),
       home: const HomeScreen(),
     );
