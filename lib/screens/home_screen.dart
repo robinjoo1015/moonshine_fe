@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moonshine_fe/screens/recipe_screen.dart';
+import 'package:moonshine_fe/screens/recipe_tab_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           children: <Widget>[
             const Text('Map Page'),
             const Text('Blog Page'),
-            RecipeScreen(),
+            RecipeTabScreen(),
           ],
         ),
       ),
