@@ -24,47 +24,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Row(
-      //     // mainAxisAlignment: MainAxisAlignment.center,
-      //     children: const [
-      //       Icon(Icons.wine_bar_outlined),
-      //       Text(
-      //         'MoonShine',
-      //         // style: TextStyle(
-      //         //     // fontWeight: FontWeight.bold,
-      //         //     ),
-      //       ),
-      //     ],
-      //   ),
-      //   backgroundColor: Colors.black,
-      //   bottom: TabBar(
-      // tabs: const [
-      //   Tab(
-      //     text: '#Map',
-      //     // icon: Icon(Icons.map_outlined),
-      //   ),
-      //   Tab(
-      //     text: '#Blog',
-      //     // icon: Icon(Icons.comment_bank_outlined),
-      //   ),
-      //   Tab(
-      //     text: '#Recipe',
-      //     // icon: Icon(Icons.wine_bar_outlined),
-      //   ),
-      // ],
-      //     controller: _tabController,
-      //   ),
-      // ),
-      // body: TabBarView(
-      //   controller: _tabController,
-      //   physics: const NeverScrollableScrollPhysics(),
-      //   children: [
-      //     const Text('Map Page'),
-      //     const Text('Blog Page'),
-      //     RecipeScreen(),
-      //   ],
-      // ),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return <Widget>[
@@ -107,9 +66,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
         body: TabBarView(
           controller: _tabController,
-          children: const <Widget>[
-            Text('Map Page'),
-            Text('Blog Page'),
+          children: <Widget>[
+            const Text('Map Page'),
+            const Text('Blog Page'),
             RecipeScreen(),
           ],
         ),
