@@ -29,12 +29,43 @@ class RecipeTabMenu extends StatelessWidget {
             horizontal: 5,
             vertical: 10,
           ),
-          child: Column(
+          child: Stack(
+            alignment: AlignmentDirectional.bottomStart,
             children: [
               Image.network(
                 baseUrl + imgUrl,
+                fit: BoxFit.fill,
               ),
-              Text(name),
+              Container(
+                // alignment: Alignment.topRight,
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.bookmark_border_outlined,
+                      ),
+                      color: Colors.white,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 5,
+                      ),
+                      child: Text(
+                        name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
