@@ -68,7 +68,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                                                 [index % 3],
                                         width: size,
                                         height: size,
-                                        fit: BoxFit.fill,
+                                        fit: BoxFit.fitHeight,
                                       ),
                                     );
                                   },
