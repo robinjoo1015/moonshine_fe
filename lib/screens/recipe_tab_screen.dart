@@ -8,7 +8,6 @@ class RecipeTabScreen extends StatelessWidget {
   // https://www.thecocktailproject.com/search-recipes/
   final Future<List<Map<String, String>>> cocktailList =
       CocktailProject.getCocktailList();
-  final baseUrl = "https://www.thecocktailproject.com/";
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

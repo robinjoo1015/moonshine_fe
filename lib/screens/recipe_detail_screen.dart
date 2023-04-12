@@ -49,30 +49,33 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       children: [
                         Expanded(
                           flex: 1,
-                          child: LayoutBuilder(builder: (context, constraints) {
-                            final size = constraints.maxWidth;
-                            return SizedBox(
-                              height: size,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                physics: const PageScrollPhysics(),
-                                itemCount: 3,
-                                itemBuilder: (context, index) {
-                                  return SizedBox(
-                                    height: size,
-                                    width: size,
-                                    child: Image.network(
-                                      CocktailProject.baseUrl +
-                                          snapshot.data!['imgList'][index % 3],
-                                      width: size,
+                          child: LayoutBuilder(
+                            builder: (context, constraints) {
+                              final size = constraints.maxWidth;
+                              return SizedBox(
+                                height: size,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  physics: const PageScrollPhysics(),
+                                  itemCount: 3,
+                                  itemBuilder: (context, index) {
+                                    return SizedBox(
                                       height: size,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-                          }),
+                                      width: size,
+                                      child: Image.network(
+                                        CocktailProject.baseUrl +
+                                            snapshot.data!['imgList']
+                                                [index % 3],
+                                        width: size,
+                                        height: size,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
