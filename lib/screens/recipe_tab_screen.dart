@@ -19,6 +19,7 @@ class RecipeTabScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemCount: snapshot.data!.length ~/ 2,
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            physics: const BouncingScrollPhysics(),
             separatorBuilder: (context, index) {
               return const SizedBox(
                 height: 0,

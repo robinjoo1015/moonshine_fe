@@ -68,7 +68,9 @@ class RecipeTabMenu extends StatelessWidget {
                                   vertical: 10,
                                 ),
                                 child: Text(
-                                  name,
+                                  name.length > 20
+                                      ? name.substring(0, 20)
+                                      : name,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,
