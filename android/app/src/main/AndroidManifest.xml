@@ -4,6 +4,9 @@
         android:label="moonshine_fe"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data  android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAu48qec9YqV_yUdOjNXMfcEG0HbyyLFGQ"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

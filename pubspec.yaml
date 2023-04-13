@@ -35,9 +35,12 @@ dependencies:
   # Add postgres package for database
   postgres: ^2.4.3
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  google_maps_flutter: ^2.2.5
+  google_maps_flutter_web: ^0.4.0+7
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/screens/map_tap_screen.dart';
 import 'package:moonshine_fe/screens/recipe_tab_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -77,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         body: TabBarView(
           controller: _tabController,
           children: [
-            const Text('Map Page'),
+            MapTabScreen(),
             const Text('Blog Page'),
             RecipeTabScreen(),
           ],
