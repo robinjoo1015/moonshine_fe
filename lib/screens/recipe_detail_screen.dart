@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
@@ -79,14 +80,30 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                         ),
                       ],
                     ),
-                    // Text(
-                    //   widget.name,
-                    //   style: TextStyle(
-                    //     fontSize: 24,
-                    //     fontFamily:
-                    //         Theme.of(context).textTheme.bodyLarge!.fontFamily,
-                    //   ),
-                    // ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: RadarChart.light(
+                              ticks: const [1, 2, 3, 4, 5],
+                              features: const [
+                                'Sweet',
+                                'Sour',
+                                'Bitter',
+                                'Spice',
+                                'Alcohol'
+                              ],
+                              data: const [
+                                [3, 2, 4, 1, 3],
+                                [4, 3, 2, 2.5, 1],
+                              ],
+                              useSides: true,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               );
