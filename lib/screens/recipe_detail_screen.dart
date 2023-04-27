@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_radar_chart/flutter_radar_chart.dart';
+// import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final String name;
@@ -80,29 +81,96 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                         ),
                       ],
                     ),
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: RadarChart.light(
-                              ticks: const [1, 2, 3, 4, 5],
-                              features: const [
-                                'Sweet',
-                                'Sour',
-                                'Bitter',
-                                'Spice',
-                                'Alcohol'
-                              ],
-                              data: const [
-                                [3, 2, 4, 1, 3],
-                                [4, 3, 2, 2.5, 1],
-                              ],
-                              useSides: true,
-                            ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: LayoutBuilder(
+                            builder: (context, constraints) {
+                              final size = constraints.maxWidth;
+                              return SizedBox(
+                                height: size,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 10,
+                                  ),
+                                  child: RadarChart(
+                                    RadarChartData(
+                                      dataSets: [
+                                        RadarDataSet(
+                                          dataEntries: [
+                                            const RadarEntry(value: 5),
+                                            const RadarEntry(value: 5),
+                                            const RadarEntry(value: 5),
+                                            const RadarEntry(value: 5),
+                                            const RadarEntry(value: 5),
+                                          ],
+                                          fillColor: Colors.transparent,
+                                          borderColor: Colors.transparent,
+                                          borderWidth: 0,
+                                          entryRadius: 0,
+                                        ),
+                                        RadarDataSet(
+                                          dataEntries: [
+                                            const RadarEntry(value: 2),
+                                            const RadarEntry(value: 3),
+                                            const RadarEntry(value: 4),
+                                            const RadarEntry(value: 3),
+                                            const RadarEntry(value: 2),
+                                          ],
+                                          fillColor:
+                                              Colors.blue.withOpacity(0.3),
+                                          borderColor: Colors.blue,
+                                        ),
+                                        RadarDataSet(
+                                          dataEntries: [
+                                            const RadarEntry(value: 4),
+                                            const RadarEntry(value: 4),
+                                            const RadarEntry(value: 1),
+                                            const RadarEntry(value: 4),
+                                            const RadarEntry(value: 4),
+                                          ],
+                                          fillColor:
+                                              Colors.red.withOpacity(0.3),
+                                          borderColor: Colors.red,
+                                        ),
+                                      ],
+                                      radarShape: RadarShape.polygon,
+                                      tickCount: 4,
+                                      tickBorderData: const BorderSide(
+                                        color: Colors.black12,
+                                        width: 1,
+                                      ),
+                                      gridBorderData: const BorderSide(
+                                        color: Colors.black26,
+                                        width: 1,
+                                      ),
+                                      radarBorderData: const BorderSide(
+                                        color: Colors.black38,
+                                        width: 1,
+                                      ),
+                                      getTitle: (index, angle) {
+                                        var title = [
+                                          'Sweet',
+                                          'Sour',
+                                          'Bitter',
+                                          'Spice',
+                                          'Alcohol'
+                                        ];
+                                        return RadarChartTitle(
+                                          text: title[index],
+                                          angle: 0,
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
