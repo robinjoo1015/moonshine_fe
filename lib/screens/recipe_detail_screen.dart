@@ -81,7 +81,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                         ),
                       ],
                     ),
-                    const RecipeMenuChart(),
+                    RecipeMenuChart(name: widget.name),
+                    Row()
                   ],
                 ),
               );
