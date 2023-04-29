@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import '../apis/cocktail_project.dart';
 
 class RecipeMenuImage extends StatelessWidget {
-  final Map<String, dynamic> detail;
-  const RecipeMenuImage({super.key, required this.detail});
+  final List<String> imgList;
+  const RecipeMenuImage({super.key, required this.imgList});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class RecipeMenuImage extends StatelessWidget {
                       height: size,
                       width: size,
                       child: Image.network(
-                        CocktailProject.baseUrl + detail['imgList'][index % 3],
+                        CocktailProject.baseUrl + imgList[index % 3],
                         width: size,
                         height: size,
                         fit: BoxFit.fitHeight,

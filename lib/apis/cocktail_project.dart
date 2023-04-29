@@ -29,6 +29,8 @@ class CocktailProject {
     final response = await http.get(Uri.parse('$baseUrl/$name'));
     Map<String, dynamic> details = {};
     List<String> imgList = [];
+    List<String> ingredientImgList = [];
+    List<String> ingredientList = [];
     if (response.statusCode == 200) {
       var document = parse(response.body);
       var carousel = document.getElementsByClassName('carousel-inner');
@@ -38,6 +40,16 @@ class CocktailProject {
         imgList.add(item.children[0].innerHtml.split('src="')[1].split('"')[0]);
       }
       details['imgList'] = imgList;
+      var ingredientGallery = document.getElementsByClassName(
+          "row justify-content-center no-gutters desktop-only");
+      for (var item in ingredientGallery.first.children) {
+        ingredientImgList
+            .add(item.children[0].innerHtml.split('src="')[1].split('"')[0]);
+        ingredientList
+            .add(item.children[0].innerHtml.split('alt="')[1].split('"')[0]);
+      }
+      details['ingredientImgList'] = ingredientImgList;
+      details['ingredientList'] = ingredientList;
       return details;
     }
     throw Error();

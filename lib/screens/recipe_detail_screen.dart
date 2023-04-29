@@ -49,7 +49,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 physics: const ClampingScrollPhysics(),
                 child: Column(
                   children: [
-                    RecipeMenuImage(detail: snapshot.data!),
+                    RecipeMenuImage(imgList: snapshot.data!['imgList']),
                     RecipeMenuChart(name: widget.name),
                     Row()
                   ],
