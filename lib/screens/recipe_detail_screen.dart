@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/widgets/recipe_menu_chart_widget.dart';
+import 'package:moonshine_fe/widgets/recipe_menu_image_widget.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final String name;
@@ -45,42 +46,10 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
             if (snapshot.hasData) {
               return SingleChildScrollView(
                 scrollDirection: Axis.vertical,
+                physics: const ClampingScrollPhysics(),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: LayoutBuilder(
-                            builder: (context, constraints) {
-                              final size = constraints.maxWidth;
-                              return SizedBox(
-                                height: size,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  physics: const PageScrollPhysics(),
-                                  itemCount: 3,
-                                  itemBuilder: (context, index) {
-                                    return SizedBox(
-                                      height: size,
-                                      width: size,
-                                      child: Image.network(
-                                        CocktailProject.baseUrl +
-                                            snapshot.data!['imgList']
-                                                [index % 3],
-                                        width: size,
-                                        height: size,
-                                        fit: BoxFit.fitHeight,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                    RecipeMenuImage(detail: snapshot.data!),
                     RecipeMenuChart(name: widget.name),
                     Row()
                   ],

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class RecipeMenuChart extends StatelessWidget {
   final String name;
-  const RecipeMenuChart({super.key, required this.name});
+  RecipeMenuChart({super.key, required this.name});
+  final ScrollController chartScrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +25,18 @@ class RecipeMenuChart extends StatelessWidget {
                     child: Stack(
                       children: [
                         ListView(
+                          controller: chartScrollController,
                           scrollDirection: Axis.horizontal,
-                          physics: const PageScrollPhysics(),
+                          physics: const PageScrollPhysics(
+                            parent: ClampingScrollPhysics(),
+                          ),
                           children: [
                             SizedBox(
                               height: size,
                               width: size,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
-                                  vertical: 20,
+                                  vertical: 40,
                                   horizontal: 40,
                                 ),
                                 child: RadarChart(
@@ -111,8 +115,8 @@ class RecipeMenuChart extends StatelessWidget {
                               height: size,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 40,
                                   vertical: 40,
+                                  horizontal: 40,
                                 ),
                                 child: RotatedBox(
                                   quarterTurns: 1,
@@ -295,8 +299,56 @@ class RecipeMenuChart extends StatelessWidget {
                           ],
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Container(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    chartScrollController.animateTo(
+                                      chartScrollController.offset - size,
+                                      duration: const Duration(
+                                        milliseconds: 200,
+                                      ),
+                                      curve: Curves.easeIn,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.arrow_back_ios_outlined,
+                                    size: 12,
+                                    // color: (chartScrollController.hasClients &&
+                                    //         chartScrollController.offset ==
+                                    //             chartScrollController
+                                    //                 .position.minScrollExtent)
+                                    //     ? Colors.black
+                                    //     : Colors.transparent,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    chartScrollController.animateTo(
+                                      chartScrollController.offset + size,
+                                      duration: const Duration(
+                                        milliseconds: 200,
+                                      ),
+                                      curve: Curves.easeIn,
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    size: 12,
+                                    // color: (chartScrollController.hasClients &&
+                                    //         chartScrollController.offset ==
+                                    //             chartScrollController
+                                    //                 .position.maxScrollExtent)
+                                    //     ? Colors.black
+                                    //     : Colors.transparent,
+                                  ),
+                                )
+                              ],
+                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 vertical: 40,
