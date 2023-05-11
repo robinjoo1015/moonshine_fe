@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/screens/cocktail_detail_screen.dart';
 
-class CocktailTabMenu extends StatelessWidget {
+class CocktailTabItem extends StatelessWidget {
   final baseUrl = CocktailProject.baseUrl;
   final String imgUrl, name;
 
-  const CocktailTabMenu({
+  const CocktailTabItem({
     super.key,
     required this.imgUrl,
     required this.name,

@@ -55,3 +55,28 @@ class CocktailProject {
     throw Error();
   }
 }
+
+class DiffordsGuide {
+  static const baseUrl = 'https://www.diffordsguide.com/pubs-and-bars';
+
+  static Future<List<Map<String, String>>> getBarList() async {
+    final response = await http.get(Uri.parse(baseUrl));
+    List<Map<String, String>> barList = [];
+    if (response.statusCode == 200) {
+      var document = parse(response.body);
+      var elements =
+          document.getElementsByClassName('cell small-6 medium-3 large-2 box');
+      // print(elements);
+      for (var item in elements) {
+        String imgUrl =
+            item.children[0].innerHtml.split('src="')[1].split('"')[0];
+        String name = item.children[1].innerHtml;
+        // print(name);
+        barList.add({'name': name, 'imgUrl': imgUrl});
+      }
+      return barList;
+    } else {
+      throw Error();
+    }
+  }
+}

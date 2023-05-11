@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
-
-import 'package:moonshine_fe/widgets/cocktail_tab_menu_widget.dart';
+import 'package:moonshine_fe/widgets/cocktail_tab_item_widget.dart';
 
 class CocktailTabScreen extends StatelessWidget {
   CocktailTabScreen({super.key});
@@ -29,11 +28,11 @@ class CocktailTabScreen extends StatelessWidget {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CocktailTabMenu(
+                  CocktailTabItem(
                     imgUrl: snapshot.data![index * 2]['src']!,
                     name: snapshot.data![index * 2]['name']!,
                   ),
-                  CocktailTabMenu(
+                  CocktailTabItem(
                     imgUrl: snapshot.data![index * 2 + 1]['src']!,
                     name: snapshot.data![index * 2 + 1]['name']!,
                   ),
