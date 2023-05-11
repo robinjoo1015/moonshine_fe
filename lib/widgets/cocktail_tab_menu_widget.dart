@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
-import 'package:moonshine_fe/screens/recipe_detail_screen.dart';
+import 'package:moonshine_fe/screens/cocktail_detail_screen.dart';
 
-class RecipeTabMenu extends StatelessWidget {
+class CocktailTabMenu extends StatelessWidget {
   final baseUrl = CocktailProject.baseUrl;
   final String imgUrl, name;
-  const RecipeTabMenu({
+
+  const CocktailTabMenu({
     super.key,
     required this.imgUrl,
     required this.name,
@@ -21,7 +22,7 @@ class RecipeTabMenu extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => RecipeDetailScreen(
+              builder: (context) => CocktailDetailScreen(
                 name: name,
               ),
             ),

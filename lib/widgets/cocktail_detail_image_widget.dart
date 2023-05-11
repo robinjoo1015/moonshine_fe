@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 
 import '../apis/cocktail_project.dart';
 
-class RecipeMenuImage extends StatefulWidget {
+class CocktailDetailImage extends StatefulWidget {
   final List<String> imgList;
-  const RecipeMenuImage({super.key, required this.imgList});
+
+  const CocktailDetailImage({super.key, required this.imgList});
 
   @override
-  State<RecipeMenuImage> createState() => _RecipeMenuImageState();
+  State<CocktailDetailImage> createState() => _CocktailDetailImageState();
 }
 
-class _RecipeMenuImageState extends State<RecipeMenuImage> {
+class _CocktailDetailImageState extends State<CocktailDetailImage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
 

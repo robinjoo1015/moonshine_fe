@@ -4,15 +4,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class RecipeMenuChart extends StatefulWidget {
+class CocktailDetailChart extends StatefulWidget {
   final String name;
-  const RecipeMenuChart({super.key, required this.name});
+
+  const CocktailDetailChart({super.key, required this.name});
 
   @override
-  State<RecipeMenuChart> createState() => _RecipeMenuChartState();
+  State<CocktailDetailChart> createState() => _CocktailDetailChartState();
 }
 
-class _RecipeMenuChartState extends State<RecipeMenuChart> {
+class _CocktailDetailChartState extends State<CocktailDetailChart> {
   final ScrollController chartScrollController = ScrollController();
   final CarouselController _controller = CarouselController();
   int _current = 0;

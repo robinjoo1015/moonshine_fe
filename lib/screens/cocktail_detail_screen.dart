@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
-import 'package:moonshine_fe/widgets/recipe_menu_chart_widget.dart';
-import 'package:moonshine_fe/widgets/recipe_menu_image_widget.dart';
+import 'package:moonshine_fe/widgets/cocktail_detail_chart_widget.dart';
+import 'package:moonshine_fe/widgets/cocktail_detail_image_widget.dart';
 
-class RecipeDetailScreen extends StatefulWidget {
+class CocktailDetailScreen extends StatefulWidget {
   final String name;
-  const RecipeDetailScreen({
+
+  const CocktailDetailScreen({
     super.key,
     required this.name,
   });
 
   @override
-  State<RecipeDetailScreen> createState() => _RecipeDetailScreenState();
+  State<CocktailDetailScreen> createState() => _CocktailDetailScreenState();
 }
 
-class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
+class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
   late Future<Map<String, dynamic>> detail;
 
   @override
@@ -49,8 +50,8 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                 physics: const ClampingScrollPhysics(),
                 child: Column(
                   children: [
-                    RecipeMenuImage(imgList: snapshot.data!['imgList']),
-                    RecipeMenuChart(name: widget.name),
+                    CocktailDetailImage(imgList: snapshot.data!['imgList']),
+                    CocktailDetailChart(name: widget.name),
                     Row()
                   ],
                 ),

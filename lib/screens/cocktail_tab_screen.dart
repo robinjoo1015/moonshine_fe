@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 
-import '../widgets/recipe_tab_menu_widget.dart';
+import 'package:moonshine_fe/widgets/cocktail_tab_menu_widget.dart';
 
-class RecipeTabScreen extends StatelessWidget {
-  RecipeTabScreen({super.key});
+class CocktailTabScreen extends StatelessWidget {
+  CocktailTabScreen({super.key});
   // https://www.thecocktailproject.com/search-recipes/
   final Future<List<Map<String, String>>> cocktailList =
       CocktailProject.getCocktailList();
@@ -29,11 +29,11 @@ class RecipeTabScreen extends StatelessWidget {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RecipeTabMenu(
+                  CocktailTabMenu(
                     imgUrl: snapshot.data![index * 2]['src']!,
                     name: snapshot.data![index * 2]['name']!,
                   ),
-                  RecipeTabMenu(
+                  CocktailTabMenu(
                     imgUrl: snapshot.data![index * 2 + 1]['src']!,
                     name: snapshot.data![index * 2 + 1]['name']!,
                   ),

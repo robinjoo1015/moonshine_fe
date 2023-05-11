@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/screens/map_tap_screen.dart';
-import 'package:moonshine_fe/screens/recipe_tab_screen.dart';
+import 'package:moonshine_fe/screens/cocktail_tab_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -58,15 +58,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 tabs: const [
                   Tab(
-                    text: '#Map',
+                    text: '#Bar',
                     // icon: Icon(Icons.map_outlined),
                   ),
                   Tab(
-                    text: '#Blog',
+                    text: '#Cocktail',
                     // icon: Icon(Icons.comment_bank_outlined),
                   ),
                   Tab(
-                    text: '#Recipe',
+                    text: '#Blog',
                     // icon: Icon(Icons.wine_bar_outlined),
                   ),
                 ],
@@ -78,9 +78,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         body: TabBarView(
           controller: _tabController,
           children: [
-            MapTabScreen(),
+            const MapTabScreen(),
+            CocktailTabScreen(),
             const Text('Blog Page'),
-            RecipeTabScreen(),
           ],
         ),
       ),
