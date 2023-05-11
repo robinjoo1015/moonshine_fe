@@ -25,6 +25,16 @@ class CocktailTabScreen extends StatelessWidget {
               );
             },
             itemBuilder: (context, index) {
+              if (index == 0) {
+                return Column(
+                  children: const [
+                    SizedBox(
+                      height: 40,
+                      child: Text('Search'),
+                    ),
+                  ],
+                );
+              }
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

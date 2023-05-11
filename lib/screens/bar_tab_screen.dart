@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/widgets/bar_tab_item_widget.dart';
 
-class BarTabScreen extends StatelessWidget {
-  BarTabScreen({super.key});
+class BarTabScreen extends StatefulWidget {
+  final Geolocation geolocation;
+  const BarTabScreen({super.key, required this.geolocation});
 
+  @override
+  State<BarTabScreen> createState() => _BarTabScreenState();
+}
+
+class _BarTabScreenState extends State<BarTabScreen> {
   final Future<List<Map<String, String>>> barList = DiffordsGuide.getBarList();
+  String? currentAddress;
+
+  void getLocation() async {
+    await widget.geolocation.getAddressFromLatLng().then((address) {
+      currentAddress = address;
+    });
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getLocation();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +45,20 @@ class BarTabScreen extends StatelessWidget {
               );
             }),
             itemBuilder: (context, index) {
+              // print(index);
+              if (index == 0) {
+                return SizedBox(
+                  height: 40,
+                  child: Column(
+                    children: [
+                      const Text('Search'),
+                      Text(
+                        (currentAddress != null) ? currentAddress! : '',
+                      ),
+                    ],
+                  ),
+                );
+              }
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

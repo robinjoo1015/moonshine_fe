@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
+
 import 'package:moonshine_fe/screens/bar_tab_screen.dart';
+import 'package:moonshine_fe/screens/blog_tab_screen.dart';
 import 'package:moonshine_fe/screens/cocktail_tab_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
+  late Geolocation geolocation;
 
   @override
   void initState() {
@@ -19,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       vsync: this,
       animationDuration: Duration.zero,
     );
+    geolocation = Geolocation();
     super.initState();
   }
 
@@ -77,11 +82,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
         body: TabBarView(
           controller: _tabController,
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             // const MapTabScreen(),
-            BarTabScreen(),
+            BarTabScreen(geolocation: geolocation),
             CocktailTabScreen(),
-            const Text('Blog Page'),
+            const BlogTabScreen(),
           ],
         ),
       ),

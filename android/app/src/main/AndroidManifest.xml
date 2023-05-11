@@ -33,5 +33,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- below line is for GPS Usage, it may need to be moved to another line -->
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     </application>
 </manifest>
