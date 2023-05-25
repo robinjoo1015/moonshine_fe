@@ -51,8 +51,40 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                 child: Column(
                   children: [
                     CocktailDetailImage(imgList: snapshot.data!['imgList']),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                          child: Text(
+                            widget.name,
+                            style: TextStyle(
+                              fontFamily: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
+                                  .fontFamily,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '40%',
+                          style: TextStyle(
+                            fontFamily: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .fontFamily,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
                     CocktailDetailChart(name: widget.name),
-                    Row()
+                    Row(),
                   ],
                 ),
               );
