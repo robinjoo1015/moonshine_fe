@@ -91,6 +91,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ],
         ),
       ),
+      endDrawer: Drawer(
+        child: Column(
+          children: const [
+            UserAccountsDrawerHeader(
+              accountName: Text('accountName'),
+              accountEmail: Text('accountEmail'),
+              currentAccountPicture: CircleAvatar(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
