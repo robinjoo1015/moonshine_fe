@@ -84,7 +84,133 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                       ],
                     ),
                     CocktailDetailChart(name: widget.name),
-                    Row(),
+                    Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text(
+                              'Ingredients',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .fontFamily),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text(
+                              'Recipe',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .fontFamily),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 10,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Ingredient1',
+                                    style: TextStyle(
+                                      fontFamily: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Ingredient2',
+                                    style: TextStyle(
+                                      fontFamily: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Ingredient3',
+                                    style: TextStyle(
+                                      fontFamily: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const VerticalDivider(
+                            color: Colors.black38,
+                            thickness: 1,
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 10,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '1. Recipe1Recipe1Recipe1Recipe1Recipe1Recipe1',
+                                    style: TextStyle(
+                                      fontFamily: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                  Text(
+                                    '2. Recipe2Recipe2Recipe2Recipe2Recipe2Recipe2',
+                                    style: TextStyle(
+                                      fontFamily: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                  Text(
+                                    '3. Recipe3Recipe3Recipe3Recipe3Recipe3Recipe3',
+                                    style: TextStyle(
+                                      fontFamily: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .fontFamily,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               );
