@@ -95,9 +95,51 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         child: Column(
           children: const [
             UserAccountsDrawerHeader(
-              accountName: Text('accountName'),
-              accountEmail: Text('accountEmail'),
+              accountName: Text('AccountName'),
+              accountEmail: Text('AccountEmail'),
               currentAccountPicture: CircleAvatar(),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
+              ),
+              child: Text('Account Settings'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
+              ),
+              child: Text('Favorites'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
+              ),
+              child: Text('My Bar Blog'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
+              ),
+              child: Text('My Cocktail Blog'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
+              ),
+              child: Text('My Recipe Blog'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
+              ),
+              child: Text('My Free Blog'),
             ),
           ],
         ),
