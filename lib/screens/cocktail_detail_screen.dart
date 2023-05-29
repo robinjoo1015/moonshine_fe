@@ -39,6 +39,12 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
               pinned: true,
               floating: true,
               forceElevated: innerBoxIsScrolled,
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.bookmark_border_outlined),
+                )
+              ],
             )
           ];
         },
