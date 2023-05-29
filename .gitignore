@@ -45,3 +45,6 @@ app.*.map.json
 
 # Dart tools
 local.properties
+
+# Rust cargo
+Cargo.*
