@@ -10,7 +10,7 @@ class BarTabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Flexible(
       flex: 1,
       child: GestureDetector(
           onTap: () {},
@@ -55,8 +55,8 @@ class BarTabItem extends StatelessWidget {
                                     vertical: 10,
                                   ),
                                   child: Text(
-                                    name.length > 20
-                                        ? name.substring(0, 20)
+                                    name.length > 16
+                                        ? name.substring(0, 16)
                                         : name,
                                     style: const TextStyle(
                                       fontSize: 16,

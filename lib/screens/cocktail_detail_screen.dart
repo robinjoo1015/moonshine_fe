@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:moonshine_fe/widgets/cocktail_detail_bar_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_chart_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_image_widget.dart';
 
@@ -50,7 +51,9 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                 physics: const ClampingScrollPhysics(),
                 child: Column(
                   children: [
+                    // Image
                     CocktailDetailImage(imgList: snapshot.data!['imgList']),
+                    // Name
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -83,7 +86,9 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                         ),
                       ],
                     ),
+                    // Chart
                     CocktailDetailChart(name: widget.name),
+                    // Ingredients, Recipe Title
                     Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -119,6 +124,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                         ),
                       ],
                     ),
+                    // Ingredients, Recipe
                     IntrinsicHeight(
                       child: Row(
                         children: [
@@ -210,7 +216,27 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                           ),
                         ],
                       ),
-                    )
+                    ),
+                    // Bars Title
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 30, 0, 0),
+                          child: Text(
+                            'Bars',
+                            style: TextStyle(
+                              fontFamily: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .fontFamily,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    CocktailDetailBarList(),
                   ],
                 ),
               );
