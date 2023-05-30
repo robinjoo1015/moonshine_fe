@@ -750,9 +750,8 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                           ],
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Container(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -804,9 +803,12 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                 )
                               ],
                             ),
+                            SizedBox(
+                              height: size / 4 - 50,
+                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                vertical: 40,
+                                vertical: 10,
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -841,6 +843,28 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                       horizontal: 10,
                                     ),
                                     child: Text('My Preference'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        'Match 80%',
+                                        style: TextStyle(
+                                          fontFamily: Theme.of(context)
+                                              .textTheme
+                                              .bodyMedium!
+                                              .fontFamily,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
