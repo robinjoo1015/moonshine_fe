@@ -150,10 +150,12 @@ class _BarTabScreenState extends State<BarTabScreen> {
                         BarTabItem(
                           imgUrl: snapshot.data![0]['imgUrl']!,
                           name: snapshot.data![0]['name']!,
+                          url: snapshot.data![0]['url']!,
                         ),
                         BarTabItem(
                           imgUrl: snapshot.data![1]['imgUrl']!,
                           name: snapshot.data![1]['name']!,
+                          url: snapshot.data![1]['url']!,
                         ),
                       ],
                     )
@@ -166,10 +168,12 @@ class _BarTabScreenState extends State<BarTabScreen> {
                   BarTabItem(
                     imgUrl: snapshot.data![index * 2]['imgUrl']!,
                     name: snapshot.data![index * 2]['name']!,
+                    url: snapshot.data![index * 2]['url']!,
                   ),
                   BarTabItem(
                     imgUrl: snapshot.data![index * 2 + 1]['imgUrl']!,
                     name: snapshot.data![index * 2 + 1]['name']!,
+                    url: snapshot.data![index * 2 + 1]['url']!,
                   ),
                 ],
               );

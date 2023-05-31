@@ -72,7 +72,10 @@ class DiffordsGuide {
             item.children[0].innerHtml.split('src="')[1].split('"')[0];
         String name = item.children[1].innerHtml;
         // print(name);
-        barList.add({'name': name, 'imgUrl': imgUrl});
+        // print(item.outerHtml);
+        String url = item.outerHtml.split('href="')[1].split('"')[0];
+        // print(url);
+        barList.add({'name': name, 'imgUrl': imgUrl, 'url': url});
       }
       return barList;
     } else {

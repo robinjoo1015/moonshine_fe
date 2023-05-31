@@ -45,6 +45,7 @@ class CocktailDetailBarList extends StatelessWidget {
                                 BarTabItem(
                                   imgUrl: item['imgUrl']!,
                                   name: item['name']!,
+                                  url: item['url']!,
                                 )
                               ],
                             );

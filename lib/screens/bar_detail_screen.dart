@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class BarDetailScreen extends StatelessWidget {
-  final String name;
+  final String name, url;
   const BarDetailScreen({
     super.key,
     required this.name,
+    required this.url,
   });
 
   @override
