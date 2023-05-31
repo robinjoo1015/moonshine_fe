@@ -158,7 +158,7 @@ class _BarTabScreenState extends State<BarTabScreen> {
                           url: snapshot.data![1]['url']!,
                         ),
                       ],
-                    )
+                    ),
                   ],
                 );
               }

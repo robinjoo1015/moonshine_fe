@@ -44,7 +44,8 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                             enableInfiniteScroll: false,
                             enlargeCenterPage: false,
                             scrollPhysics: const PageScrollPhysics(
-                                parent: ClampingScrollPhysics()),
+                              parent: ClampingScrollPhysics(),
+                            ),
                             onPageChanged: (index, reason) {
                               setState(() {
                                 _current = index;
@@ -746,7 +747,7 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                   ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         ),
                         Column(
@@ -800,7 +801,7 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                         ? Colors.transparent
                                         : Colors.black,
                                   ),
-                                )
+                                ),
                               ],
                             ),
                             SizedBox(

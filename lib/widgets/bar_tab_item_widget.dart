@@ -76,7 +76,7 @@ class BarTabItem extends StatelessWidget {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ],

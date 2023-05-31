@@ -43,7 +43,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.bookmark_border_outlined),
-                )
+                ),
               ],
             ),
           ];

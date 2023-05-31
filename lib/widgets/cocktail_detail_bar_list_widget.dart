@@ -46,7 +46,7 @@ class CocktailDetailBarList extends StatelessWidget {
                                   imgUrl: item['imgUrl']!,
                                   name: item['name']!,
                                   url: item['url']!,
-                                )
+                                ),
                               ],
                             );
                           });
