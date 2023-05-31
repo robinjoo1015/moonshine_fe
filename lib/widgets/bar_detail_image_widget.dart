@@ -1,21 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../apis/cocktail_project.dart';
-
-class CocktailDetailImage extends StatefulWidget {
+class BarDetailImage extends StatefulWidget {
   final List<String> imgList;
-
-  const CocktailDetailImage({
+  const BarDetailImage({
     super.key,
     required this.imgList,
   });
 
   @override
-  State<CocktailDetailImage> createState() => _CocktailDetailImageState();
+  State<BarDetailImage> createState() => _BarDetailImageState();
 }
 
-class _CocktailDetailImageState extends State<CocktailDetailImage> {
+class _BarDetailImageState extends State<BarDetailImage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
 
@@ -32,25 +29,6 @@ class _CocktailDetailImageState extends State<CocktailDetailImage> {
                   final size = constraints.maxWidth;
                   return SizedBox(
                     height: size,
-                    // child: ListView.builder(
-                    //   scrollDirection: Axis.horizontal,
-                    //   physics: const PageScrollPhysics(
-                    //     parent: ClampingScrollPhysics(),
-                    //   ),
-                    //   itemCount: 3,
-                    //   itemBuilder: (context, index) {
-                    //     return SizedBox(
-                    //       height: size,
-                    //       width: size,
-                    //       child: Image.network(
-                    //         CocktailProject.baseUrl + imgList[index % 3],
-                    //         width: size,
-                    //         height: size,
-                    //         fit: BoxFit.fitHeight,
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
                     child: CarouselSlider(
                       carouselController: _controller,
                       options: CarouselOptions(
@@ -64,27 +42,24 @@ class _CocktailDetailImageState extends State<CocktailDetailImage> {
                           parent: ClampingScrollPhysics(),
                         ),
                         onPageChanged: (index, reason) {
-                          // print(index);
                           setState(() {
                             _current = index;
                           });
                         },
                       ),
                       items: widget.imgList.map((item) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return SizedBox(
-                              height: size,
+                        return Builder(builder: (BuildContext context) {
+                          return SizedBox(
+                            height: size,
+                            width: size,
+                            child: Image.network(
+                              item,
                               width: size,
-                              child: Image.network(
-                                CocktailProject.baseUrl + item,
-                                width: size,
-                                height: size,
-                                fit: BoxFit.fitHeight,
-                              ),
-                            );
-                          },
-                        );
+                              height: size,
+                              fit: BoxFit.fitHeight,
+                            ),
+                          );
+                        });
                       }).toList(),
                     ),
                   );

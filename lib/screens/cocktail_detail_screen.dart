@@ -45,7 +45,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                   icon: const Icon(Icons.bookmark_border_outlined),
                 )
               ],
-            )
+            ),
           ];
         },
         body: FutureBuilder(
@@ -58,7 +58,9 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                 child: Column(
                   children: [
                     // Image
-                    CocktailDetailImage(imgList: snapshot.data!['imgList']),
+                    CocktailDetailImage(
+                      imgList: snapshot.data!['imgList'],
+                    ),
                     // Name
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -104,12 +106,13 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                             child: Text(
                               'Ingredients',
                               style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .fontFamily),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .fontFamily,
+                              ),
                             ),
                           ),
                         ),
@@ -119,12 +122,13 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                             child: Text(
                               'Recipe',
                               style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .fontFamily),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .fontFamily,
+                              ),
                             ),
                           ),
                         ),

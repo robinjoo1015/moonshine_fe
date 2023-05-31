@@ -57,10 +57,10 @@ class CocktailProject {
 }
 
 class DiffordsGuide {
-  static const baseUrl = 'https://www.diffordsguide.com/pubs-and-bars';
+  static const baseUrl = 'https://www.diffordsguide.com';
 
   static Future<List<Map<String, String>>> getBarList() async {
-    final response = await http.get(Uri.parse(baseUrl));
+    final response = await http.get(Uri.parse('$baseUrl/pubs-and-bars'));
     List<Map<String, String>> barList = [];
     if (response.statusCode == 200) {
       var document = parse(response.body);
@@ -73,7 +73,8 @@ class DiffordsGuide {
         String name = item.children[1].innerHtml;
         // print(name);
         // print(item.outerHtml);
-        String url = item.outerHtml.split('href="')[1].split('"')[0];
+        // String url = item.outerHtml.split('href="')[1].split('"')[0];
+        String url = item.attributes['href']!;
         // print(url);
         barList.add({'name': name, 'imgUrl': imgUrl, 'url': url});
       }
@@ -81,5 +82,42 @@ class DiffordsGuide {
     } else {
       throw Error();
     }
+  }
+
+  static Future<Map<String, dynamic>> getDetail(String url) async {
+    final response = await http.get(Uri.parse('$baseUrl$url'));
+    // print(Uri.parse('$baseUrl$url'));
+    Map<String, dynamic> details = {};
+    List<String> imgList = [];
+    if (response.statusCode == 200) {
+      var document = parse(response.body);
+      var inner = document
+          .getElementsByClassName('cell large-8 medium-9 small-12 notch')[0]
+          .getElementsByClassName('grid-x grid-margin-x')[0];
+      // print(inner.innerHtml);
+      var img = inner.getElementsByTagName('img');
+      for (var item in img) {
+        imgList.add(item.attributes['src']!);
+        // print(item.attributes['src']);
+      }
+      // print(inner.getElementsByClassName('cell auto')[0].children[0].innerHtml);
+      var infolist = inner.getElementsByClassName('cell auto')[0].children[0];
+      String address =
+          infolist.innerHtml.split('</strong>')[1].split('<br>')[0].trim();
+      String tel =
+          infolist.innerHtml.split('</strong>')[2].split('<br>')[0].trim();
+      String hours =
+          infolist.innerHtml.split('</strong>')[5].split('<br>')[0].trim();
+      // print(address);
+      // print(tel);
+      // print(hours);
+      details['imgList'] = imgList;
+      details['address'] = address;
+      details['tel'] = tel;
+      details['Hours'] = hours;
+    } else {
+      throw Error();
+    }
+    return details;
   }
 }
