@@ -242,7 +242,12 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                         ),
                       ],
                     ),
+                    // Bars List
                     CocktailDetailBarList(),
+                    // Sized Box
+                    const SizedBox(
+                      height: 50,
+                    ),
                   ],
                 ),
               );

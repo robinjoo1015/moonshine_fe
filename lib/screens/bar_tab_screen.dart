@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
+import 'package:moonshine_fe/screens/map_tap_screen.dart';
 import 'package:moonshine_fe/widgets/bar_tab_item_widget.dart';
 import 'package:searchfield/searchfield.dart';
 
@@ -42,7 +43,10 @@ class _BarTabScreenState extends State<BarTabScreen> {
           return ListView.separated(
             scrollDirection: Axis.vertical,
             itemCount: snapshot.data!.length ~/ 2,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 10,
+            ),
             physics: const BouncingScrollPhysics(),
             separatorBuilder: ((context, index) {
               return const SizedBox(
@@ -115,10 +119,29 @@ class _BarTabScreenState extends State<BarTabScreen> {
                     ),
                     SizedBox(
                       height: 40,
-                      child: Center(
-                        child: Text(
-                          (currentAddress != null) ? currentAddress! : '',
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                            ),
+                            child: Text(
+                              (currentAddress != null) ? currentAddress! : '',
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MapTabScreen(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.map_outlined),
+                          ),
+                        ],
                       ),
                     ),
                     Row(
