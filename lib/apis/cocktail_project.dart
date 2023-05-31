@@ -110,11 +110,11 @@ class DiffordsGuide {
           infolist.innerHtml.split('</strong>')[5].split('<br>')[0].trim();
       // print(address);
       // print(tel);
-      // print(hours);
+      print(hours);
       details['imgList'] = imgList;
       details['address'] = address;
       details['tel'] = tel;
-      details['Hours'] = hours;
+      details['hours'] = hours;
     } else {
       throw Error();
     }

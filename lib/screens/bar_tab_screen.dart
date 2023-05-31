@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
-import 'package:moonshine_fe/screens/map_tap_screen.dart';
+import 'package:moonshine_fe/screens/map_tab_screen.dart';
 import 'package:moonshine_fe/widgets/bar_tab_item_widget.dart';
 import 'package:searchfield/searchfield.dart';
 
