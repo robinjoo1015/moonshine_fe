@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
-import 'package:moonshine_fe/screens/map_tab_screen.dart';
+import 'package:moonshine_fe/screens/map_screen.dart';
 import 'package:moonshine_fe/widgets/bar_tab_item_widget.dart';
 import 'package:searchfield/searchfield.dart';
 
 class BarTabScreen extends StatefulWidget {
   final Geolocation geolocation;
-  const BarTabScreen({super.key, required this.geolocation});
+  const BarTabScreen({
+    super.key,
+    required this.geolocation,
+  });
 
   @override
   State<BarTabScreen> createState() => _BarTabScreenState();
@@ -135,7 +138,7 @@ class _BarTabScreenState extends State<BarTabScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const MapTabScreen(),
+                                  builder: (context) => const MapScreen(),
                                 ),
                               );
                             },
