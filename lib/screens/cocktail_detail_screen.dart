@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_bar_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_chart_widget.dart';
+import 'package:moonshine_fe/widgets/cocktail_detail_cocktail_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_image_widget.dart';
 
 class CocktailDetailScreen extends StatefulWidget {
@@ -97,42 +98,45 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                     // Chart
                     CocktailDetailChart(name: widget.name),
                     // Ingredients, Recipe Title
-                    Row(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: Text(
-                              'Ingredients',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .fontFamily,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                'Ingredients',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .fontFamily,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: Text(
-                              'Recipe',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .fontFamily,
+                          Expanded(
+                            flex: 1,
+                            child: Center(
+                              child: Text(
+                                'Recipe',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .fontFamily,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     // Ingredients, Recipe
                     IntrinsicHeight(
@@ -248,7 +252,86 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                     ),
                     // Bars List
                     CocktailDetailBarList(),
-                    // Sized Box
+                    // Similar Cocktails Title
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                          child: Text(
+                            'Similar Cocktails',
+                            style: TextStyle(
+                              fontFamily: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .fontFamily,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Similar Cocktails List
+                    CocktailDetailCocktailList(),
+                    // User Recipes Title
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                          child: Text(
+                            'User Recipes',
+                            style: TextStyle(
+                              fontFamily: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .fontFamily,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // User Recipes List
+                    Row(
+                      children: const [
+                        Expanded(
+                          child: Center(
+                            child: Text('User Recipes List'),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Blogs Title
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                          child: Text(
+                            'Blogs',
+                            style: TextStyle(
+                              fontFamily: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .fontFamily,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Blogs List
+                    Row(
+                      children: const [
+                        Expanded(
+                          child: Center(
+                            child: Text('Blogs List'),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // SizedBox
                     const SizedBox(
                       height: 50,
                     ),
