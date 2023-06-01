@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapScreen extends StatefulWidget {
@@ -12,15 +15,29 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final List<Marker> _markers = [];
+  Completer<GoogleMapController> _controller = Completer();
+  late Position _currentPosition;
 
   @override
   void initState() {
     super.initState();
+    _getCurrentLocation();
     _markers.add(Marker(
         markerId: const MarkerId("1"),
         draggable: true,
         onTap: () => print("Marker!"),
         position: const LatLng(37.4537251, 126.7960716)));
+  }
+
+  _getCurrentLocation() {
+    Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   @override
@@ -35,29 +52,38 @@ class _MapScreenState extends State<MapScreen> {
           zoomControlsEnabled: true,
           mapType: MapType.normal,
           markers: Set.from(_markers),
-          initialCameraPosition: const CameraPosition(
-            target: LatLng(37.5035, 126.961),
+          initialCameraPosition: CameraPosition(
+            target: LatLng(_currentPosition?.latitude ?? 37.5035,
+                _currentPosition?.longitude ?? 126.961),
             zoom: 14,
           ),
+          myLocationButtonEnabled: false,
+          myLocationEnabled: true,
           cameraTargetBounds: CameraTargetBounds(LatLngBounds(
             southwest: const LatLng(33, 124),
             northeast: const LatLng(39, 132),
-          )), //카메라 이동 제한(대한민국으로 특정)
-          minMaxZoomPreference: const MinMaxZoomPreference(10, 18), //최소, 최대 줌
-          myLocationButtonEnabled: true, //내 위치 버튼
-          myLocationEnabled: true, //내 위치
-          gestureRecognizers: {} //제스처 인식
+          )),
+          minMaxZoomPreference: const MinMaxZoomPreference(10, 18),
+          gestureRecognizers: {}
             ..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer())),
-          //현재 위치 알려주는 버튼
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
           },
         ),
       ]),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final GoogleMapController controller = await _controller.future;
+          controller.animateCamera(CameraUpdate.newCameraPosition(
+            CameraPosition(
+              target:
+                  LatLng(_currentPosition.latitude, _currentPosition.longitude),
+              zoom: 14,
+            ),
+          ));
+        },
+        child: Icon(Icons.location_searching),
+      ),
     );
   }
-}
-
-class _controller {
-  static complete(GoogleMapController controller) {}
 }
