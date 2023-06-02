@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/widgets/bar_detail_image_widget.dart';
 
@@ -146,11 +147,35 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                       ),
                       child: SizedBox(
                         height: 120,
-                        child: Container(
-                          color: Colors.green,
-                          child: const Center(
-                            child: Text('MAP'),
+                        // child: Container(
+                        //   color: Colors.green,
+                        //   child: const Center(
+                        //     child: Text('MAP'),
+                        //   ),
+                        // ),
+                        child: GoogleMap(
+                          initialCameraPosition: const CameraPosition(
+                            target: LatLng(
+                              37.5036383,
+                              126.9570617,
+                            ),
+                            zoom: 14,
                           ),
+                          zoomGesturesEnabled: false,
+                          zoomControlsEnabled: false,
+                          mapType: MapType.normal,
+                          minMaxZoomPreference:
+                              const MinMaxZoomPreference(14, 14),
+                          myLocationButtonEnabled: false,
+                          myLocationEnabled: false,
+                          markers: {
+                            Marker(
+                              markerId: const MarkerId("1"),
+                              draggable: false,
+                              onTap: () {},
+                              position: const LatLng(37.5036383, 126.9570617),
+                            ),
+                          },
                         ),
                       ),
                     ),

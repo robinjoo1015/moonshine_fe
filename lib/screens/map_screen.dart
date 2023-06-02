@@ -15,18 +15,21 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final List<Marker> _markers = [];
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
   late Position _currentPosition;
 
   @override
   void initState() {
     super.initState();
     _getCurrentLocation();
-    _markers.add(Marker(
+    _markers.add(
+      Marker(
         markerId: const MarkerId("1"),
         draggable: true,
         onTap: () => print("Marker!"),
-        position: const LatLng(37.4537251, 126.7960716)));
+        position: const LatLng(37.4537251, 126.7960716),
+      ),
+    );
   }
 
   _getCurrentLocation() {
@@ -46,43 +49,56 @@ class _MapScreenState extends State<MapScreen> {
       appBar: AppBar(
         title: const Text('Map'),
       ),
-      body: Stack(children: [
-        GoogleMap(
-          zoomGesturesEnabled: true,
-          zoomControlsEnabled: true,
-          mapType: MapType.normal,
-          markers: Set.from(_markers),
-          initialCameraPosition: CameraPosition(
-            target: LatLng(_currentPosition?.latitude ?? 37.5035,
-                _currentPosition?.longitude ?? 126.961),
-            zoom: 14,
+      body: Stack(
+        children: [
+          GoogleMap(
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: true,
+            mapType: MapType.normal,
+            markers: Set.from(_markers),
+            initialCameraPosition: CameraPosition(
+              target: LatLng(
+                _currentPosition.latitude,
+                _currentPosition.longitude,
+              ),
+              zoom: 14,
+            ),
+            myLocationButtonEnabled: false,
+            myLocationEnabled: true,
+            cameraTargetBounds: CameraTargetBounds(
+              LatLngBounds(
+                southwest: const LatLng(33, 124),
+                northeast: const LatLng(39, 132),
+              ),
+            ),
+            minMaxZoomPreference: const MinMaxZoomPreference(10, 18),
+            gestureRecognizers: {}..add(
+                Factory<PanGestureRecognizer>(
+                  () => PanGestureRecognizer(),
+                ),
+              ),
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
           ),
-          myLocationButtonEnabled: false,
-          myLocationEnabled: true,
-          cameraTargetBounds: CameraTargetBounds(LatLngBounds(
-            southwest: const LatLng(33, 124),
-            northeast: const LatLng(39, 132),
-          )),
-          minMaxZoomPreference: const MinMaxZoomPreference(10, 18),
-          gestureRecognizers: {}
-            ..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer())),
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-        ),
-      ]),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final GoogleMapController controller = await _controller.future;
-          controller.animateCamera(CameraUpdate.newCameraPosition(
-            CameraPosition(
-              target:
-                  LatLng(_currentPosition.latitude, _currentPosition.longitude),
-              zoom: 14,
+          controller.animateCamera(
+            CameraUpdate.newCameraPosition(
+              CameraPosition(
+                target: LatLng(
+                  _currentPosition.latitude,
+                  _currentPosition.longitude,
+                ),
+                zoom: 14,
+              ),
             ),
-          ));
+          );
         },
-        child: Icon(Icons.location_searching),
+        child: const Icon(Icons.location_searching),
       ),
     );
   }
