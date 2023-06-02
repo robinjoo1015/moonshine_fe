@@ -46,6 +46,9 @@ class Geolocation {
     final hasPermission = await _handleLocationPermission();
 
     if (!hasPermission) return null;
+    if (_currentPosition != null) {
+      return _currentPosition;
+    }
     await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high)
         .then((Position position) {
       // setState(() => _currentPosition = position);

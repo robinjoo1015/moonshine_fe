@@ -1,10 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/widgets/bar_tab_item_widget.dart';
 
 class CocktailDetailBarList extends StatelessWidget {
-  CocktailDetailBarList({super.key});
+  final Geolocation geolocation;
+  CocktailDetailBarList({
+    super.key,
+    required this.geolocation,
+  });
   final Future<List<Map<String, String>>> barList = DiffordsGuide.getBarList();
 
   @override
@@ -46,6 +51,7 @@ class CocktailDetailBarList extends StatelessWidget {
                                   imgUrl: item['imgUrl']!,
                                   name: item['name']!,
                                   url: item['url']!,
+                                  geolocation: geolocation,
                                 ),
                               ],
                             );

@@ -5,9 +5,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
+  final Geolocation geolocation;
+  const MapScreen({
+    super.key,
+    required this.geolocation,
+  });
 
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -16,7 +21,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final List<Marker> _markers = [];
   final Completer<GoogleMapController> _controller = Completer();
-  late Position _currentPosition;
+
+  Position? _currentPosition;
 
   @override
   void initState() {
@@ -32,15 +38,20 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  _getCurrentLocation() {
-    Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-        .then((Position position) {
-      setState(() {
-        _currentPosition = position;
-      });
-    }).catchError((e) {
-      print(e);
+  _getCurrentLocation() async {
+    // Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+    //     .then((Position position) {
+    //   setState(() {
+    //     _currentPosition = position;
+    //   });
+    // }).catchError((e) {
+    //   print(e);
+    // });
+
+    await widget.geolocation.getCurrentPosition().then((position) {
+      _currentPosition = position!;
     });
+    setState(() {});
   }
 
   @override
@@ -58,8 +69,12 @@ class _MapScreenState extends State<MapScreen> {
             markers: Set.from(_markers),
             initialCameraPosition: CameraPosition(
               target: LatLng(
-                _currentPosition.latitude,
-                _currentPosition.longitude,
+                _currentPosition != null
+                    ? _currentPosition!.latitude
+                    : 37.5036383,
+                _currentPosition != null
+                    ? _currentPosition!.longitude
+                    : 126.9570617,
               ),
               zoom: 14,
             ),
@@ -90,8 +105,12 @@ class _MapScreenState extends State<MapScreen> {
             CameraUpdate.newCameraPosition(
               CameraPosition(
                 target: LatLng(
-                  _currentPosition.latitude,
-                  _currentPosition.longitude,
+                  _currentPosition != null
+                      ? _currentPosition!.latitude
+                      : 37.5036383,
+                  _currentPosition != null
+                      ? _currentPosition!.longitude
+                      : 126.9570617,
                 ),
                 zoom: 14,
               ),

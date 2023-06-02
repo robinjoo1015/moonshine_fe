@@ -138,7 +138,9 @@ class _BarTabScreenState extends State<BarTabScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const MapScreen(),
+                                  builder: (context) => MapScreen(
+                                    geolocation: widget.geolocation,
+                                  ),
                                 ),
                               );
                             },
@@ -154,11 +156,13 @@ class _BarTabScreenState extends State<BarTabScreen> {
                           imgUrl: snapshot.data![0]['imgUrl']!,
                           name: snapshot.data![0]['name']!,
                           url: snapshot.data![0]['url']!,
+                          geolocation: widget.geolocation,
                         ),
                         BarTabItem(
                           imgUrl: snapshot.data![1]['imgUrl']!,
                           name: snapshot.data![1]['name']!,
                           url: snapshot.data![1]['url']!,
+                          geolocation: widget.geolocation,
                         ),
                       ],
                     ),
@@ -172,11 +176,13 @@ class _BarTabScreenState extends State<BarTabScreen> {
                     imgUrl: snapshot.data![index * 2]['imgUrl']!,
                     name: snapshot.data![index * 2]['name']!,
                     url: snapshot.data![index * 2]['url']!,
+                    geolocation: widget.geolocation,
                   ),
                   BarTabItem(
                     imgUrl: snapshot.data![index * 2 + 1]['imgUrl']!,
                     name: snapshot.data![index * 2 + 1]['name']!,
                     url: snapshot.data![index * 2 + 1]['url']!,
+                    geolocation: widget.geolocation,
                   ),
                 ],
               );

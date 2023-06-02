@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/widgets/cocktail_tab_item_widget.dart';
 import 'package:searchfield/searchfield.dart';
 
 class CocktailTabScreen extends StatelessWidget {
-  CocktailTabScreen({super.key});
+  final Geolocation geolocation;
+  CocktailTabScreen({
+    super.key,
+    required this.geolocation,
+  });
   // https://www.thecocktailproject.com/search-recipes/
   final Future<List<Map<String, String>>> cocktailList =
       CocktailProject.getCocktailList();
@@ -98,10 +103,12 @@ class CocktailTabScreen extends StatelessWidget {
                         CocktailTabItem(
                           imgUrl: snapshot.data![0]['src']!,
                           name: snapshot.data![0]['name']!,
+                          geolocation: geolocation,
                         ),
                         CocktailTabItem(
                           imgUrl: snapshot.data![1]['src']!,
                           name: snapshot.data![1]['name']!,
+                          geolocation: geolocation,
                         ),
                       ],
                     ),
@@ -114,10 +121,12 @@ class CocktailTabScreen extends StatelessWidget {
                   CocktailTabItem(
                     imgUrl: snapshot.data![index * 2]['src']!,
                     name: snapshot.data![index * 2]['name']!,
+                    geolocation: geolocation,
                   ),
                   CocktailTabItem(
                     imgUrl: snapshot.data![index * 2 + 1]['src']!,
                     name: snapshot.data![index * 2 + 1]['name']!,
+                    geolocation: geolocation,
                   ),
                 ],
               );

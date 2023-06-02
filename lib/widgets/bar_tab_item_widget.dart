@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/bar_detail_screen.dart';
 
 class BarTabItem extends StatelessWidget {
   final String imgUrl, name, url;
+  final Geolocation geolocation;
   const BarTabItem({
     super.key,
     required this.imgUrl,
     required this.name,
     required this.url,
+    required this.geolocation,
   });
 
   @override
@@ -22,6 +25,7 @@ class BarTabItem extends StatelessWidget {
               builder: (context) => BarDetailScreen(
                 name: name,
                 url: url,
+                geolocation: geolocation,
               ),
             ),
           );

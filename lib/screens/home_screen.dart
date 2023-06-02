@@ -84,8 +84,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           controller: _tabController,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            BarTabScreen(geolocation: geolocation),
-            CocktailTabScreen(),
+            BarTabScreen(
+              geolocation: geolocation,
+            ),
+            CocktailTabScreen(
+              geolocation: geolocation,
+            ),
             const BlogTabScreen(),
           ],
         ),

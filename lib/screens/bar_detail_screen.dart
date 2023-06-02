@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
+import 'package:moonshine_fe/screens/map_screen.dart';
 import 'package:moonshine_fe/widgets/bar_detail_image_widget.dart';
 
 class BarDetailScreen extends StatefulWidget {
   final String name, url;
+  final Geolocation geolocation;
   const BarDetailScreen({
     super.key,
     required this.name,
     required this.url,
+    required this.geolocation,
   });
 
   @override
@@ -141,41 +145,68 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                       ),
                     ),
                     // ***MAP***
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                      ),
-                      child: SizedBox(
-                        height: 120,
-                        // child: Container(
-                        //   color: Colors.green,
-                        //   child: const Center(
-                        //     child: Text('MAP'),
-                        //   ),
-                        // ),
-                        child: GoogleMap(
-                          initialCameraPosition: const CameraPosition(
-                            target: LatLng(
-                              37.5036383,
-                              126.9570617,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MapScreen(
+                              geolocation: widget.geolocation,
                             ),
-                            zoom: 14,
                           ),
-                          zoomGesturesEnabled: false,
-                          zoomControlsEnabled: false,
-                          mapType: MapType.normal,
-                          minMaxZoomPreference:
-                              const MinMaxZoomPreference(14, 14),
-                          myLocationButtonEnabled: false,
-                          myLocationEnabled: false,
-                          markers: {
-                            Marker(
-                              markerId: const MarkerId("1"),
-                              draggable: false,
-                              onTap: () {},
-                              position: const LatLng(37.5036383, 126.9570617),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        child: SizedBox(
+                          height: 150,
+                          // child: Container(
+                          //   color: Colors.green,
+                          //   child: const Center(
+                          //     child: Text('MAP'),
+                          //   ),
+                          // ),
+                          child: GoogleMap(
+                            initialCameraPosition: const CameraPosition(
+                              target: LatLng(
+                                37.5036383,
+                                126.9570617,
+                              ),
+                              zoom: 15,
                             ),
-                          },
+                            zoomGesturesEnabled: false,
+                            zoomControlsEnabled: false,
+                            mapType: MapType.normal,
+                            minMaxZoomPreference:
+                                const MinMaxZoomPreference(15, 15),
+                            myLocationButtonEnabled: false,
+                            myLocationEnabled: false,
+                            markers: {
+                              Marker(
+                                markerId: const MarkerId("1"),
+                                draggable: false,
+                                onTap: () {},
+                                position: const LatLng(37.5036383, 126.9570617),
+                              ),
+                            },
+                            // gestureRecognizers: {}..add(
+                            //     Factory<TapGestureRecognizer>(
+                            //       () => TapGestureRecognizer(),
+                            //     ),
+                            //   ),
+                            onTap: (Null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MapScreen(
+                                    geolocation: widget.geolocation,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),
