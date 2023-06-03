@@ -19,7 +19,7 @@ class DatabaseHelper{
   }
 
   Future<PostgreSQLConnection> connectDB() async{
-      dbConnection = PostgreSQLConnection('localhost', 5432, 'moonshine',
+      dbConnection = PostgreSQLConnection('moonshine.cwkljvfuhvs2.us-east-2.rds.amazonaws.com', 5432, 'moonshine',
           username: 'whbaek', password: 'moonshine');
       await dbConnection.open();
 
