@@ -48,3 +48,6 @@ local.properties
 
 # Rust cargo
 Cargo.*
+
+# Certificates for EC2 Instance
+*.pem
