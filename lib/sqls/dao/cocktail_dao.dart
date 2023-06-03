@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:moonshine_fe/apis/database_helper.dart';
 import 'package:moonshine_fe/sqls/dao/image_dao.dart';
 import 'package:moonshine_fe/sqls/dto/image_dto.dart';
@@ -17,7 +18,8 @@ class CocktailDAO{
     // image is defined as a foreign key in the cocktails table, row[3] is the image id
     final result = await dbConnection.query(''
         'SELECT * FROM moonshine.cocktails '
-        'INNER JOIN moonshine.images ON moonshine.cocktails.image_id = moonshine.images.id');
+        ' INNER JOIN moonshine.image '
+        ' ON moonshine.cocktails.cocktail_image = moonshine.image.image_id');
     final cocktails = result.map((row) async {
       return CocktailDTO(
         id: row[0] as int,
@@ -35,6 +37,7 @@ class CocktailDAO{
     for(var futureCocktail in cocktails){
       CocktailDTO cocktail = await futureCocktail;
       cocktailList.add(cocktail);
+      debugPrint(cocktail.name + " " + cocktail.image.filePath);
     }
 
   }
@@ -43,6 +46,7 @@ class CocktailDAO{
     List<Map<String, String>> returnList = [];
     for (var cocktail in cocktailList) {
       returnList.add({'name': cocktail.name, 'src': cocktail.image.filePath});
+      debugPrint(cocktail.name);
     }
     return returnList;
   }

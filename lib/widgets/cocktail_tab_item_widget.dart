@@ -45,7 +45,7 @@ class CocktailTabItem extends StatelessWidget {
                 child: Stack(
                   children: [
                     Image.network(
-                      baseUrl + imgUrl,
+                      imgUrl,
                       fit: BoxFit.fill,
                     ),
                     Positioned.fill(

@@ -24,7 +24,7 @@ class ImageDAO {
 
   Future<ImageDTO> getImageByID(int imageID) async {
     var dbConnection = await DatabaseHelper().connectDB();
-    final result = await dbConnection.query('SELECT * FROM moonshine.image WHERE id = $imageID');
+    final result = await dbConnection.query('SELECT * FROM moonshine.image WHERE image_id = $imageID');
     final image = result.map((row) {
       return ImageDTO(
         id: row[0] as int,

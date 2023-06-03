@@ -6,15 +6,10 @@ pub mod parser;
 mod dbcheck;
 
 fn main() {
+    let mut client = Client::connect( "host=moonshine.cwkljvfuhvs2.us-east-2.rds.amazonaws.com user=moonshine password=kzrt-moonshine dbname=moonshine port=5432", NoTls)
+        .expect("Failed to connect to database");
     let ingredients = parser::parse_ingredients();
     let cocktails = parser::parse_cocktails();
-    let mut client = Client::connect(
-        "host=moonshine.cwkljvfuhvs2.us-east-2.rds.amazonaws.com\
-         user=moonshine\
-         password=kzrt-moonshine\
-         dbname=moonshine\
-         port=5432", NoTls)
-        .expect("Failed to connect to database");
     for ingredient in ingredients.drinks {
         let ingredient = ingredient.strIngredient1;
         let query = format!("INSERT INTO moonshine.ingredient (ingredient_name) VALUES ('{}')", ingredient);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
+import 'package:moonshine_fe/sqls/dao/cocktail_dao.dart';
 import 'package:moonshine_fe/widgets/cocktail_tab_item_widget.dart';
 import 'package:searchfield/searchfield.dart';
 
@@ -13,6 +14,10 @@ class CocktailTabScreen extends StatelessWidget {
   // https://www.thecocktailproject.com/search-recipes/
   final Future<List<Map<String, String>>> cocktailList =
       CocktailProject.getCocktailList();
+
+  // CocktailDAO cocktailDAO = CocktailDAO();
+  // final Future<List<Map<String, String>>> cocktailList =
+  // CocktailDAO.getCocktailForCocktailScreen();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
