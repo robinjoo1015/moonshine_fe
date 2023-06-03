@@ -48,6 +48,8 @@ local.properties
 
 # Rust cargo
 Cargo.*
+/jsonParsing/target
+/jsonParsing/target/*
 
 # Certificates for EC2 Instance
 *.pem
