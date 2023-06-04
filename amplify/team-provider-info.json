@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-moonshine-dev-30216-authRole",
+      "UnauthRoleArn": "arn:aws:iam::012828581447:role/amplify-moonshine-dev-30216-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::012828581447:role/amplify-moonshine-dev-30216-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-moonshine-dev-30216-deployment",
+      "UnauthRoleName": "amplify-moonshine-dev-30216-unauthRole",
+      "StackName": "amplify-moonshine-dev-30216",
+      "StackId": "arn:aws:cloudformation:us-east-2:012828581447:stack/amplify-moonshine-dev-30216/c816ddf0-0238-11ee-85a4-0ac7d21d40ef",
+      "AmplifyAppId": "d6jgk67aw5d94"
+    }
+  }
+}
