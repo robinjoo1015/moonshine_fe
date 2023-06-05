@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
 use std::error::Error as E;
+use std::ptr::null;
+use reqwest::{RequestBuilder, Url};
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct strIngredient1 {
@@ -19,7 +21,7 @@ pub fn parse_ingredients() -> Ingredients {
         .expect("Failed to parse JSON")
 }
 
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, Clone)]
 pub struct Cocktails {
     pub(crate) drinks: Vec<CocktailParse>,
 }
@@ -78,8 +80,9 @@ pub struct CocktailParse {
     pub(crate) strCreativeCommonsConfirmed: Option<String>,
     pub(crate) dateModified: Option<String>,
 }
-impl CocktailParse{
-    pub fn get_ingredient(&self, i:i32) -> Option<String> {
+
+impl CocktailParse {
+    pub fn get_ingredient(&self, i: i32) -> Option<String> {
         match i {
             1 => self.strIngredient1.clone(),
             2 => self.strIngredient2.clone(),
@@ -100,7 +103,7 @@ impl CocktailParse{
         }
     }
 
-    pub fn get_quantity(&self, i:i32) -> Option<String> {
+    pub fn get_quantity(&self, i: i32) -> Option<String> {
         match i {
             1 => self.strMeasure1.clone(),
             2 => self.strMeasure2.clone(),
@@ -123,14 +126,40 @@ impl CocktailParse{
 }
 
 pub fn parse_cocktails() -> Cocktails {
-    let mut cocktail = Vec::new();
-    for i in 1..50{
-        cocktail.push(reqwest::blocking::get("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+    let mut cocktail: Vec<Cocktails> = Vec::new();
+    let base_url = Url::parse("https://www.thecocktaildb.com/api/json/v1/1/").unwrap();
+
+    for c in 'a'..='z' {
+        let site_url = base_url.join(&*("search.php?f=".to_owned() + c.to_string().as_str())).unwrap();
+        println!("{}", site_url);
+        cocktail.push(match reqwest::blocking::get(site_url)
             .expect("")
-            .json::<Cocktails>()
-            .expect("Failed to parse JSON").drinks[0].clone());
+            .json::<Cocktails>() {
+            Ok(c) => c.clone(),
+            Err(_) => continue,
+        }
+        );
     }
-    Cocktails {
-        drinks: cocktail,
+
+    for c in '0'..='9' {
+        let site_url = base_url.join(&*("search.php?f=".to_owned() + c.to_string().as_str())).unwrap();
+        println!("{}", site_url);
+        cocktail.push(match reqwest::blocking::get(site_url)
+            .expect("")
+            .json::<Cocktails>() {
+            Ok(c) => c.clone(),
+            Err(_) => continue,
+        }
+        );
     }
+
+    let mut return_cocktails: Cocktails = Cocktails {
+        drinks: Vec::new(),
+    };
+
+    for c in cocktail {
+        return_cocktails.drinks.extend(c.drinks);
+    }
+
+    return_cocktails
 }
