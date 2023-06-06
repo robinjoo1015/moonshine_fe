@@ -1,8 +1,4 @@
-const request = require('request');
 const pgConnection = require('../dbconn');
-const multer_config = require('../multer_config');
-const {response} = require("express");
-const http = require("http");
 const fs = require("fs");
 const axios = require("axios");
 
