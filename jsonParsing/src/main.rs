@@ -6,7 +6,7 @@ pub mod parser;
 mod dbcheck;
 
 fn main() {
-    let mut client = Client::connect( "host=moonshine.cwkljvfuhvs2.us-east-2.rds.amazonaws.com user=moonshine password=kzrt-moonshine dbname=moonshine port=5432", NoTls)
+    let mut client = Client::connect( "host=localhost user=whbaek password=moonshine dbname=moonshine port=5432", NoTls)
         .expect("Failed to connect to database");
     let ingredients = parser::parse_ingredients();
     let cocktails = parser::parse_cocktails();
@@ -39,14 +39,17 @@ fn main() {
             Some(cocktail_instruction) => cocktail_instruction,
             None => continue,
         };
-
-        let query = format!("INSERT INTO moonshine.cocktails (cocktail_name, cocktail_description, cocktail_instructions, cocktail_image) VALUES ('{}', '{}', '{}', {})", cocktail_name, cocktail_description, cocktail_instruction, image_id[0].get::<_, i32>(0));
+        let cocktail_non_alcoholic: bool = match &cocktailParse.strAlcoholic {
+            Some(cocktail_non_alcoholic) => if cocktail_non_alcoholic == "Alcoholic" { true } else {false},
+            None => true,
+        };
+        let query = format!("INSERT INTO moonshine.cocktails (cocktail_name, cocktail_description, cocktail_instructions, cocktail_image, cocktail_alcoholic) VALUES ('{}', '{}', '{}', {}, {})", cocktail_name, cocktail_description, cocktail_instruction, image_id[0].get::<_, i32>(0), cocktail_non_alcoholic);
         let result = match client.execute(&query, &[]){
             Ok(_) => {}
             Err(_) => {continue}
         };
         let query = format!("SELECT cocktail_id FROM moonshine.cocktails WHERE cocktail_name = '{}'", cocktail_name);
-        let cocktail_id = client.query(&query, &[]).unwrap();
+        let cocktail_id = client.query(&query, &[]).unwrap()[0].get::<_, i32>(0);
         for i in 1..16{
             let ingredient = match cocktailParse.get_ingredient(i) {
                 Some(ingredient) => ingredient,
@@ -64,9 +67,10 @@ fn main() {
                 query = format!("SELECT ingredient_id FROM moonshine.ingredient WHERE ingredient_name = '{}'", &ingredient);
             }
             let result = client.query(&query, &[]).unwrap();
+            println!("{:?}", result);
             let ingredient_id = result[0].get::<_, i32>(0);
-
-            let query = format!("INSERT INTO moonshine.cocktail_composition (cocktail_id, ingredient_id, ingredient_quantity) VALUES ({}, {}, '{}')", cocktail_id[0].get::<_, i32>(0), &ingredient_id, &quantity);
+            println!("{:?} {:?} {:?}", cocktail_id, ingredient_id, quantity);
+            let query = format!("INSERT INTO moonshine.cocktail_composition (cocktail_id, ingredient_id, ingredient_quantity) VALUES ({}, {}, '{}')", cocktail_id, &ingredient_id, &quantity);
             client.execute(&query, &[]).unwrap();
         }
     }
