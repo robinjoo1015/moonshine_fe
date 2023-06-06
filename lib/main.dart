@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:moonshine_fe/apis/database_helper.dart';
 import 'package:moonshine_fe/screens/home_screen.dart';
 
 void main() {
-  DatabaseHelper().connectDB();
+  // DatabaseHelper().connectDB();
   runApp(const MyApp());
 }
 

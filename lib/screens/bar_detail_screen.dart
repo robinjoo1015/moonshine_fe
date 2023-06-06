@@ -144,69 +144,46 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                         ],
                       ),
                     ),
-                    // ***MAP***
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MapScreen(
-                              geolocation: widget.geolocation,
+                    // Map
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                      child: SizedBox(
+                        height: 150,
+                        child: GoogleMap(
+                          initialCameraPosition: const CameraPosition(
+                            target: LatLng(
+                              37.5036383,
+                              126.9570617,
                             ),
+                            zoom: 15,
                           ),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                        ),
-                        child: SizedBox(
-                          height: 150,
-                          // child: Container(
-                          //   color: Colors.green,
-                          //   child: const Center(
-                          //     child: Text('MAP'),
-                          //   ),
-                          // ),
-                          child: GoogleMap(
-                            initialCameraPosition: const CameraPosition(
-                              target: LatLng(
-                                37.5036383,
-                                126.9570617,
-                              ),
-                              zoom: 15,
+                          zoomGesturesEnabled: false,
+                          zoomControlsEnabled: false,
+                          mapType: MapType.normal,
+                          minMaxZoomPreference:
+                              const MinMaxZoomPreference(15, 15),
+                          myLocationButtonEnabled: false,
+                          myLocationEnabled: false,
+                          markers: {
+                            Marker(
+                              markerId: const MarkerId("1"),
+                              draggable: false,
+                              onTap: () {},
+                              position: const LatLng(37.5036383, 126.9570617),
                             ),
-                            zoomGesturesEnabled: false,
-                            zoomControlsEnabled: false,
-                            mapType: MapType.normal,
-                            minMaxZoomPreference:
-                                const MinMaxZoomPreference(15, 15),
-                            myLocationButtonEnabled: false,
-                            myLocationEnabled: false,
-                            markers: {
-                              Marker(
-                                markerId: const MarkerId("1"),
-                                draggable: false,
-                                onTap: () {},
-                                position: const LatLng(37.5036383, 126.9570617),
-                              ),
-                            },
-                            // gestureRecognizers: {}..add(
-                            //     Factory<TapGestureRecognizer>(
-                            //       () => TapGestureRecognizer(),
-                            //     ),
-                            //   ),
-                            onTap: (Null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MapScreen(
-                                    geolocation: widget.geolocation,
-                                  ),
+                          },
+                          onTap: (Null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MapScreen(
+                                  geolocation: widget.geolocation,
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
