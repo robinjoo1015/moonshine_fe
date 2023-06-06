@@ -75,3 +75,7 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+#node environments
+.env
+/node/assets/*

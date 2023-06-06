@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS MOONSHINE.COCKTAILS (
     cocktail_name VARCHAR(255) NOT NULL UNIQUE,
     cocktail_description VARCHAR(255),
     cocktail_image INT,
+    cocktail_alcoholic BOOLEAN NOT NULL DEFAULT TRUE,
+    coctkail_signiture BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (cocktail_image) REFERENCES MOONSHINE.IMAGE (image_id),
-    cocktail_instructions VARCHAR(255) NOT NULL,
+    cocktail_instructions text NOT NULL,
     cocktail_created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     cocktail_updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     cocktail_deleted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -334,8 +336,8 @@ CREATE TABLE IF NOT EXISTS MOONSHINE.BAR_IMAGE_COMPOSITION (
 CREATE TABLE IF NOT EXISTS MOONSHINE.BAR_MENU_COMPOSITION (
     bar_id INT NOT NULL,
     cocktail_id INT NOT NULL,
-    bar_cocktail_score DOUBLE PRECISION NOT NULL,
-    bar_cocktail_price INT NOT NULL,
+    bar_cocktail_score DOUBLE PRECISION,
+    bar_cocktail_price INT,
     PRIMARY KEY (bar_id, cocktail_id),
     FOREIGN KEY (bar_id)
         REFERENCES MOONSHINE.BARS (bar_id)

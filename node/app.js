@@ -1,17 +1,17 @@
+require('dotenv').config({path: './config/.env'});
 const express = require("express");
-
-const mysqlConnection = require('./postgres/dbconn');
-
 const app = express();
+const mysqlConnection = require('./controller/dbconn');
 
-const port = 3000;
+const port = process.env.SERVER_PORT || 3000;
 
 app.set("port", port);
 
-app.get("/", (req, res) => {
-  res.send("Hello world!");
-});
+const indexRouter = require("./routes/index");
 
+app.use(indexRouter);
+
+app.use(express.static(process.env.FILE_PATH))
 app.listen(port, () => console.log("Listening on", port));
 
 module.exports = app;

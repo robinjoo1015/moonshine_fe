@@ -39,8 +39,11 @@ fn main() {
             Some(cocktail_instruction) => cocktail_instruction,
             None => continue,
         };
-
-        let query = format!("INSERT INTO moonshine.cocktails (cocktail_name, cocktail_description, cocktail_instructions, cocktail_image) VALUES ('{}', '{}', '{}', {})", cocktail_name, cocktail_description, cocktail_instruction, image_id[0].get::<_, i32>(0));
+        let cocktail_non_alcoholic: bool = match &cocktailParse.strAlcoholic {
+            Some(cocktail_non_alcoholic) => if cocktail_non_alcoholic == "Alcoholic" { true } else {false},
+            None => true,
+        };
+        let query = format!("INSERT INTO moonshine.cocktails (cocktail_name, cocktail_description, cocktail_instructions, cocktail_image, cocktail_alcoholic) VALUES ('{}', '{}', '{}', {}, {})", cocktail_name, cocktail_description, cocktail_instruction, image_id[0].get::<_, i32>(0), cocktail_non_alcoholic);
         let result = match client.execute(&query, &[]){
             Ok(_) => {}
             Err(_) => {continue}
