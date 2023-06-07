@@ -9,15 +9,47 @@ class BlogRecipeTabScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          child: const Center(
-            child: Text('BlogRecipeTabScreen'),
-          ),
-        ),
-        const BlogTabImageList(),
-      ],
+    return FutureBuilder(
+      future: recipeBlogList,
+      builder: ((context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.separated(
+            scrollDirection: Axis.vertical,
+            itemCount: snapshot.data!.length ~/ 2,
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 10,
+            ),
+            physics: const BouncingScrollPhysics(),
+            separatorBuilder: (context, index) {
+              return const SizedBox(
+                height: 0,
+              );
+            },
+            itemBuilder: (context, index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  BlogTabImageList(
+                    id: snapshot.data![index * 2]['id']!,
+                    imgUrl: snapshot.data![index * 2]['thumb'],
+                    name: snapshot.data![index * 2]['title'],
+                  ),
+                  BlogTabImageList(
+                    id: snapshot.data![index * 2 + 1]['id']!,
+                    imgUrl: snapshot.data![index * 2 + 1]['thumb'],
+                    name: snapshot.data![index * 2 + 1]['title'],
+                  ),
+                ],
+              );
+            },
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      }),
     );
   }
 }

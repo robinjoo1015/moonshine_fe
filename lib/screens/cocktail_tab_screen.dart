@@ -26,14 +26,13 @@ class CocktailTabScreen extends StatelessWidget {
       future: cocktailList,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<String> names = [];
-          for (var item in snapshot.data!) {
-            names.add(item['name']!);
-          }
           return ListView.separated(
             scrollDirection: Axis.vertical,
             itemCount: snapshot.data!.length ~/ 2,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 10,
+            ),
             physics: const BouncingScrollPhysics(),
             separatorBuilder: (context, index) {
               return const SizedBox(

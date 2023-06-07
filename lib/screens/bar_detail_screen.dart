@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:moonshine_fe/apis/cocktail_project.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/map_screen.dart';
 import 'package:moonshine_fe/widgets/bar_detail_image_widget.dart';
 
 class BarDetailScreen extends StatefulWidget {
-  final String name, url;
+  final int id;
+  final String name;
   final Geolocation geolocation;
   const BarDetailScreen({
     super.key,
+    required this.id,
     required this.name,
-    required this.url,
+    // required this.url,
     required this.geolocation,
   });
 
@@ -25,7 +26,7 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
   @override
   void initState() {
     super.initState();
-    detail = DiffordsGuide.getDetail(widget.url);
+    // detail = DiffordsGuide.getDetail(widget.id);
 
     setState(() {});
   }

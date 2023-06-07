@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:moonshine_fe/apis/bar_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/map_screen.dart';
 import 'package:moonshine_fe/widgets/bar_tab_item_widget.dart';
@@ -17,7 +17,8 @@ class BarTabScreen extends StatefulWidget {
 }
 
 class _BarTabScreenState extends State<BarTabScreen> {
-  final Future<List<Map<String, String>>> barList = DiffordsGuide.getBarList();
+  // final Future<List<Map<String, String>>> barList = DiffordsGuide.getBarList();
+  final Future<List<Map<String, dynamic>>> barList = BarApi.getBarList();
   String? currentAddress;
 
   void getLocation() async {
@@ -155,15 +156,17 @@ class _BarTabScreenState extends State<BarTabScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         BarTabItem(
-                          imgUrl: snapshot.data![0]['imgUrl']!,
+                          id: snapshot.data![0]['id']!,
+                          imgUrl: snapshot.data![0]['url']!,
                           name: snapshot.data![0]['name']!,
-                          url: snapshot.data![0]['url']!,
+                          // url: snapshot.data![0]['url']!,
                           geolocation: widget.geolocation,
                         ),
                         BarTabItem(
-                          imgUrl: snapshot.data![1]['imgUrl']!,
+                          id: snapshot.data![1]['id']!,
+                          imgUrl: snapshot.data![1]['url']!,
                           name: snapshot.data![1]['name']!,
-                          url: snapshot.data![1]['url']!,
+                          // url: snapshot.data![1]['url']!,
                           geolocation: widget.geolocation,
                         ),
                       ],
@@ -175,15 +178,17 @@ class _BarTabScreenState extends State<BarTabScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   BarTabItem(
-                    imgUrl: snapshot.data![index * 2]['imgUrl']!,
+                    id: snapshot.data![index * 2]['id']!,
+                    imgUrl: snapshot.data![index * 2]['url']!,
                     name: snapshot.data![index * 2]['name']!,
-                    url: snapshot.data![index * 2]['url']!,
+                    // url: snapshot.data![index * 2]['url']!,
                     geolocation: widget.geolocation,
                   ),
                   BarTabItem(
-                    imgUrl: snapshot.data![index * 2 + 1]['imgUrl']!,
+                    id: snapshot.data![index * 2 + 1]['id']!,
+                    imgUrl: snapshot.data![index * 2 + 1]['url']!,
                     name: snapshot.data![index * 2 + 1]['name']!,
-                    url: snapshot.data![index * 2 + 1]['url']!,
+                    // url: snapshot.data![index * 2 + 1]['url']!,
                     geolocation: widget.geolocation,
                   ),
                 ],

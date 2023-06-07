@@ -3,13 +3,14 @@ import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/bar_detail_screen.dart';
 
 class BarTabItem extends StatelessWidget {
-  final String imgUrl, name, url;
+  final int id;
+  final String imgUrl, name;
   final Geolocation geolocation;
   const BarTabItem({
     super.key,
+    required this.id,
     required this.imgUrl,
     required this.name,
-    required this.url,
     required this.geolocation,
   });
 
@@ -23,8 +24,9 @@ class BarTabItem extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => BarDetailScreen(
+                id: id,
                 name: name,
-                url: url,
+                // url: url,
                 geolocation: geolocation,
               ),
             ),
@@ -42,8 +44,9 @@ class BarTabItem extends StatelessWidget {
                 ),
                 child: Stack(
                   children: [
-                    Image.network(
-                      imgUrl,
+                    Image(
+                      // imgUrl,
+                      image: AssetImage('assets/image/$imgUrl'),
                       fit: BoxFit.fill,
                     ),
                     Positioned.fill(
