@@ -156,37 +156,21 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                                 horizontal: 10,
                               ),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Ingredient1',
-                                    style: TextStyle(
-                                      fontFamily: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Ingredient2',
-                                    style: TextStyle(
-                                      fontFamily: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Ingredient3',
-                                    style: TextStyle(
-                                      fontFamily: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    for (var item
+                                        in snapshot.data!['ingredients'])
+                                      Text(
+                                        '${item["name"].trim()} - ${item["quantity"].trim()}',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontFamily: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .fontFamily,
+                                        ),
+                                      ),
+                                  ]),
                             ),
                           ),
                           const VerticalDivider(
@@ -204,26 +188,9 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '1. Recipe1Recipe1Recipe1Recipe1Recipe1Recipe1',
+                                    snapshot.data!['recipe'],
                                     style: TextStyle(
-                                      fontFamily: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                  Text(
-                                    '2. Recipe2Recipe2Recipe2Recipe2Recipe2Recipe2',
-                                    style: TextStyle(
-                                      fontFamily: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .fontFamily,
-                                    ),
-                                  ),
-                                  Text(
-                                    '3. Recipe3Recipe3Recipe3Recipe3Recipe3Recipe3',
-                                    style: TextStyle(
+                                      fontSize: 16,
                                       fontFamily: Theme.of(context)
                                           .textTheme
                                           .bodySmall!

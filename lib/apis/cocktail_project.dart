@@ -78,10 +78,11 @@ class DiffordsGuide {
         // print(url);
         barList.add({'name': name, 'imgUrl': imgUrl, 'url': url});
       }
-      return barList;
+      // return barList;
     } else {
       throw Error();
     }
+    return barList;
   }
 
   static Future<Map<String, dynamic>> getDetail(String url) async {

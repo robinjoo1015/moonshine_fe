@@ -20,7 +20,7 @@ class CocktailApi {
     if (response.statusCode == 200) {
       details = jsonDecode(response.body) as Map<String, dynamic>;
     }
-    print(details);
+    // print(details);
     return details;
   }
 }
