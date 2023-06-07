@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
-import 'package:moonshine_fe/widgets/cocktail_detail_bar_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_chart_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_cocktail_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_image_widget.dart';
@@ -224,9 +223,9 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                       ],
                     ),
                     // Bars List
-                    CocktailDetailBarList(
-                      geolocation: widget.geolocation,
-                    ),
+                    // CocktailDetailBarList(
+                    //   geolocation: widget.geolocation,
+                    // ),
                     // Similar Cocktails Title
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
