@@ -250,6 +250,82 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                         ],
                       ),
                     ),
+                    // Menus Title
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                          child: Text(
+                            '메뉴',
+                            style: TextStyle(
+                              fontFamily: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .fontFamily,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // Menus
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20,
+                              ),
+                              child: Text('Menu 1'),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 20,
+                              ),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.star,
+                                    size: 16,
+                                    // color: Colors.yellow,
+                                  ),
+                                  Text(
+                                    '3.6 / 5.0',
+                                    // style: TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    // Blogs Title
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                          child: Text(
+                            '블로그',
+                            style: TextStyle(
+                              fontFamily: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .fontFamily,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               );
