@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
+import 'package:moonshine_fe/screens/account_setting_screen.dart';
 
 import 'package:moonshine_fe/screens/bar_tab_screen.dart';
 import 'package:moonshine_fe/screens/blog_tab_screen.dart';
@@ -96,34 +97,44 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
       endDrawer: Drawer(
         child: Column(
-          children: const [
-            UserAccountsDrawerHeader(
+          children: [
+            const UserAccountsDrawerHeader(
               accountName: Text('AccountName'),
               accountEmail: Text('AccountEmail'),
               currentAccountPicture: CircleAvatar(),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 20,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AccountSettingScreen(),
+                  ),
+                );
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 20,
+                  horizontal: 20,
+                ),
+                child: Text('Account Settings'),
               ),
-              child: Text('Account Settings'),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 20,
               ),
               child: Text('Favorite Bars'),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 20,
               ),
               child: Text('Favorite Cocktails'),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 20,
