@@ -74,8 +74,9 @@ class _CocktailDetailImageState extends State<CocktailDetailImage> {
                             return SizedBox(
                               height: size,
                               width: size,
-                              child: Image.network(
-                                item,
+                              child: Image(
+                                // item,
+                                image: AssetImage(item),
                                 width: size,
                                 height: size,
                                 fit: BoxFit.fitHeight,

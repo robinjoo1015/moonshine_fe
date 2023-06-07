@@ -6,12 +6,14 @@ import 'package:moonshine_fe/widgets/cocktail_detail_cocktail_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_image_widget.dart';
 
 class CocktailDetailScreen extends StatefulWidget {
+  final int id;
   final String name;
   final String imgUrl;
   final Geolocation geolocation;
 
   const CocktailDetailScreen({
     super.key,
+    required this.id,
     required this.name,
     required this.imgUrl,
     required this.geolocation,
@@ -28,7 +30,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
   void initState() {
     super.initState();
     // detail = CocktailProject.getDetail(widget.name);
-    detail = CocktailApi.getDetail(widget.imgUrl.split('.')[0].trim());
+    detail = CocktailApi.getDetail(widget.id);
     setState(() {});
   }
 
@@ -65,7 +67,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                     // Image
                     CocktailDetailImage(
                       // imgList: snapshot.data!['imgList'],
-                      imgList: ['${CocktailApi.baseUrl}/${widget.imgUrl}'],
+                      imgList: ['assets/image/${widget.imgUrl}'],
                     ),
                     // Name
                     Row(
@@ -155,7 +157,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                                 horizontal: 10,
                               ),
                               child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     for (var item
                                         in snapshot.data!['ingredients'])

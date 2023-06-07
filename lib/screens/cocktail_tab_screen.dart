@@ -107,11 +107,13 @@ class CocktailTabScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CocktailTabItem(
+                          id: snapshot.data![0]['id']!,
                           imgUrl: snapshot.data![0]['url']!,
                           name: snapshot.data![0]['name']!,
                           geolocation: geolocation,
                         ),
                         CocktailTabItem(
+                          id: snapshot.data![1]['id']!,
                           imgUrl: snapshot.data![1]['url']!,
                           name: snapshot.data![1]['name']!,
                           geolocation: geolocation,
@@ -125,11 +127,13 @@ class CocktailTabScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CocktailTabItem(
+                    id: snapshot.data![index * 2]['id']!,
                     imgUrl: snapshot.data![index * 2]['url']!,
                     name: snapshot.data![index * 2]['name']!,
                     geolocation: geolocation,
                   ),
                   CocktailTabItem(
+                    id: snapshot.data![index * 2 + 1]['id']!,
                     imgUrl: snapshot.data![index * 2 + 1]['url']!,
                     name: snapshot.data![index * 2 + 1]['name']!,
                     geolocation: geolocation,

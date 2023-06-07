@@ -6,11 +6,13 @@ import 'package:moonshine_fe/screens/cocktail_detail_screen.dart';
 class CocktailTabItem extends StatelessWidget {
   // final baseUrl = CocktailProject.baseUrl;
   final baseUrl = CocktailApi.baseUrl;
+  final int id;
   final String imgUrl, name;
   final Geolocation geolocation;
 
   const CocktailTabItem({
     super.key,
+    required this.id,
     required this.imgUrl,
     required this.name,
     required this.geolocation,
@@ -27,6 +29,7 @@ class CocktailTabItem extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => CocktailDetailScreen(
+                id: id,
                 name: name,
                 imgUrl: imgUrl,
                 geolocation: geolocation,
@@ -46,8 +49,12 @@ class CocktailTabItem extends StatelessWidget {
                 ),
                 child: Stack(
                   children: [
-                    Image.network(
-                      '$baseUrl/$imgUrl',
+                    // Image.network(
+                    //   '$baseUrl/$imgUrl',
+                    //   fit: BoxFit.fill,
+                    // ),
+                    Image(
+                      image: AssetImage('assets/image/$imgUrl'),
                       fit: BoxFit.fill,
                     ),
                     Positioned.fill(

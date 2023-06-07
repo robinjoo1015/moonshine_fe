@@ -47,6 +47,7 @@ class CocktailDetailCocktailList extends StatelessWidget {
                               direction: Axis.horizontal,
                               children: [
                                 CocktailTabItem(
+                                  id: item['id']!,
                                   imgUrl: item['url']!,
                                   name: item['name']!,
                                   geolocation: geolocation,

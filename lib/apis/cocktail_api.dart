@@ -14,7 +14,7 @@ class CocktailApi {
     return cocktailList;
   }
 
-  static Future<Map<String, dynamic>> getDetail(String id) async {
+  static Future<Map<String, dynamic>> getDetail(int id) async {
     final response = await http.get(Uri.parse('$baseUrl/cocktails/get/$id'));
     Map<String, dynamic> details = {};
     if (response.statusCode == 200) {
