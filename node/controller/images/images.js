@@ -98,6 +98,7 @@ async function _downloadOneImage(component) {
     if (loading_path === "") {
         console.log("No image path for image_id " + component.name);
     }
+    ending = ending.toLowerCase();
     if (ending !== "jpg" && ending !== "png" && ending !== "jpeg" && ending !== "webp") {
         console.log("Not an image: " + loading_path + " from image_id " + component.name);
     }
