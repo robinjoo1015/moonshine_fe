@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
+import 'package:moonshine_fe/screens/cocktail_detail_screen.dart';
 import 'package:moonshine_fe/widgets/cocktail_tab_item_widget.dart';
 import 'package:searchfield/searchfield.dart';
 
@@ -73,19 +74,35 @@ class CocktailTabScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              suggestions: names
+                              suggestions: snapshot.data!
                                   .map(
-                                    (name) => SearchFieldListItem(
-                                      name,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: 10,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Text(name),
-                                          ],
+                                    (item) => SearchFieldListItem(
+                                      item['name'],
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CocktailDetailScreen(
+                                                id: item['id'],
+                                                name: item['name'],
+                                                imgUrl: item['url'],
+                                                geolocation: geolocation,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 10,
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Text(item['name']),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
