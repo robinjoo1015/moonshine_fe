@@ -13,7 +13,7 @@ async function _getBlogList(blogType) {
         'SELECT blog_post_id, blog_post_title, image_path FROM moonshine.blog_posts ' +
         'INNER JOIN moonshine.image ' +
         '   ON blog_posts.blog_post_image = image.image_id ' +
-        'WHERE blog_type = ' + blogType;
+        'WHERE blog_post_type = ' + blogType;
 
     let result = await pgConnection.query(query);
     let response = [];
