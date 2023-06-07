@@ -1,3 +1,32 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:moonshine_fe/config.dart' as globals;
+
+class BlogApi {
+  static final baseUrl = '${globals.baseUrl}/blog';
+
+  static Future<List<Map<String, dynamic>>> getBlogList(int type) async {
+    final response = await http.get(Uri.parse('$baseUrl/$type'));
+    List<Map<String, dynamic>> blogList = [];
+    if (response.statusCode == 200) {
+      blogList = (jsonDecode(response.body) as List<dynamic>).cast();
+    }
+    print(blogList);
+    return blogList;
+  }
+
+  static Future<Map<String, dynamic>> getDetail(int type, int id) async {
+    final response = await http.get(Uri.parse('$baseUrl/get/$type/$id'));
+    Map<String, dynamic> detail = {};
+    if (response.statusCode == 200) {
+      detail = jsonDecode(response.body) as Map<String, dynamic>;
+    }
+    print(detail);
+    return detail;
+  }
+}
+
 class BlogDummyApi {
   static Future<List<Map<String, dynamic>>> getBarBlogList() async {
     List<Map<String, dynamic>> barBlogList = [];
@@ -57,5 +86,15 @@ class BlogDummyApi {
       'id': 1,
     });
     return freeBlogList;
+  }
+
+  static Future<Map<String, dynamic>> getDetail(int id) async {
+    Map<String, dynamic> detail = {};
+    detail['title'] = 'DummyTitle123';
+    detail['user'] = 'DummyUser123';
+    detail['timestamp'] = '2023.06.08 04:49';
+    detail['content'] =
+        'DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123DummyContent123';
+    return detail;
   }
 }

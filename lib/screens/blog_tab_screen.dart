@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moonshine_fe/screens/blog_bar_tab_screen.dart';
-import 'package:moonshine_fe/screens/blog_cocktail_tab_screen.dart';
+import 'package:moonshine_fe/screens/blog_tab_image_screen.dart';
 import 'package:moonshine_fe/screens/blog_free_tab_screen.dart';
-import 'package:moonshine_fe/screens/blog_recipe_tab_screen.dart';
 
 class BlogTabScreen extends StatefulWidget {
   const BlogTabScreen({super.key});
@@ -96,9 +94,15 @@ class _BlogTabScreenState extends State<BlogTabScreen>
             controller: _tabController,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              BlogBarTabScreen(),
-              BlogCocktailTabScreen(),
-              BlogRecipeTabScreen(),
+              BlogTabImageScreen(
+                type: 1,
+              ),
+              BlogTabImageScreen(
+                type: 2,
+              ),
+              BlogTabImageScreen(
+                type: 3,
+              ),
               BlogFreeTabScreen(),
             ],
           ),

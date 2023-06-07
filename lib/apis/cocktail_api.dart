@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:moonshine_fe/config.dart' as globals;
 
 class CocktailApi {
-  static const baseUrl = 'http://3.135.207.29:3000';
+  // static const baseUrl = 'http://3.135.207.29:3000';
+  static final baseUrl = globals.baseUrl;
 
   static Future<List<Map<String, dynamic>>> getCocktailList() async {
     final response = await http.get(Uri.parse('$baseUrl/cocktails'));

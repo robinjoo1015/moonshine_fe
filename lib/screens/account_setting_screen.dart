@@ -9,7 +9,8 @@ import 'package:crypto/crypto.dart';
 class AccountSettingScreen extends StatelessWidget {
   const AccountSettingScreen({super.key});
   // static const baseUrl = 'http://3.135.207.29:3000/user';
-  static const baseUrl = 'http://10.210.61.107:3000/user';
+  // static const baseUrl = 'http://10.210.61.107:3000/user';
+  static final baseUrl = '${globals.baseUrl}/user';
 
   Future<String?> _authUser(LoginData data) async {
     // print('${data.name} ${data.password}');

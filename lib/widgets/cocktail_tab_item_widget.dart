@@ -10,7 +10,7 @@ class CocktailTabItem extends StatelessWidget {
   final String imgUrl, name;
   final Geolocation geolocation;
 
-  const CocktailTabItem({
+  CocktailTabItem({
     super.key,
     required this.id,
     required this.imgUrl,

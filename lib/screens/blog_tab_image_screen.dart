@@ -2,15 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/blog_api.dart';
 import 'package:moonshine_fe/widgets/blog_tab_image_list_widget.dart';
 
-class BlogCocktailTabScreen extends StatelessWidget {
-  BlogCocktailTabScreen({super.key});
-  final Future<List<Map<String, dynamic>>> cocktailBlogList =
-      BlogDummyApi.getCocktailBlogList();
+class BlogTabImageScreen extends StatefulWidget {
+  final int type;
+  const BlogTabImageScreen({
+    super.key,
+    required this.type,
+  });
+
+  @override
+  State<BlogTabImageScreen> createState() => _BlogTabImageScreenState();
+}
+
+class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
+  late Future<List<Map<String, dynamic>>> blogList;
+
+  @override
+  void initState() {
+    super.initState();
+    blogList = BlogApi.getBlogList(widget.type);
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: cocktailBlogList,
+      future: blogList,
       builder: ((context, snapshot) {
         if (snapshot.hasData) {
           return ListView.separated(
@@ -32,13 +49,15 @@ class BlogCocktailTabScreen extends StatelessWidget {
                 children: [
                   BlogTabImageList(
                     id: snapshot.data![index * 2]['id']!,
-                    imgUrl: snapshot.data![index * 2]['thumb'],
+                    imgUrl: snapshot.data![index * 2]['url'],
                     name: snapshot.data![index * 2]['title'],
+                    type: widget.type,
                   ),
                   BlogTabImageList(
                     id: snapshot.data![index * 2 + 1]['id']!,
-                    imgUrl: snapshot.data![index * 2 + 1]['thumb'],
+                    imgUrl: snapshot.data![index * 2 + 1]['url'],
                     name: snapshot.data![index * 2 + 1]['title'],
+                    type: widget.type,
                   ),
                 ],
               );
