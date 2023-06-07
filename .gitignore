@@ -83,3 +83,7 @@ amplifytools.xcconfig
 #assets
 /assets/images
 /assets/images/*
+/assets/images/*.jpg
+/assets/images/*.png
+/assets/images/*.webp
+/assets/images/*.jpeg
