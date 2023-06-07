@@ -4,27 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:moonshine_fe/config.dart' as globals;
 import 'package:http/http.dart' as http;
+import 'package:crypto/crypto.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   const AccountSettingScreen({super.key});
   static const baseUrl = 'http://3.135.207.29:3000/user';
+  // static const baseUrl = 'http://10.210.61.107:3000/user';
 
   Future<String?> _authUser(LoginData data) async {
     // print('${data.name} ${data.password}');
     // jsonEncode({'id': data.name, 'password': data.password});
     print(jsonEncode({
       'email': data.name,
-      'password': data.password,
+      'password': sha256.convert(utf8.encode(data.password)).toString(),
     }));
-    var response = await http.post(
+    final response = await http.post(
       Uri.parse('$baseUrl/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
       body: jsonEncode({
         'email': data.name,
-        'password': data.password,
+        'password': sha256.convert(utf8.encode(data.password)).toString(),
       }),
     );
     if (response.statusCode == 200) {
       globals.userId = jsonDecode(response.body)['id'];
+      print(jsonDecode(response.body)['id']);
+      print(globals.userId);
       return 'Success';
     } else if (response.statusCode == 401) {
       return 'Failed';
@@ -39,21 +46,24 @@ class AccountSettingScreen extends StatelessWidget {
     print(
       jsonEncode({
         'email': data.name,
-        'password': data.password,
+        'password': sha256.convert(utf8.encode(data.password!)).toString(),
         'name': data.additionalSignupData!['name'],
       }),
     );
     var response = await http.post(
       Uri.parse('$baseUrl/create'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
       body: jsonEncode({
         'email': data.name,
-        'password': data.password,
+        'password': sha256.convert(utf8.encode(data.password!)).toString(),
         'name': data.additionalSignupData!['name'],
       }),
     );
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       return 'Success';
-    } else if (response.statusCode == 402) {
+    } else if (response.statusCode == 401) {
       return 'Failed';
     } else {
       return 'Network Error';
