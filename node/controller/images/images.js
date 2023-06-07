@@ -39,6 +39,14 @@ exports.updateOneImage = function (req, res) {
     });
 }
 
+exports.updateRangeImage = function (req, res) {
+    _updateRangeImage(req.params.from, req.params.to).then((response) => {
+        res.send(response);
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
 async function _updateOneImage(id) {
     const query = '' +
         'SELECT image_path FROM moonshine.image ' +
@@ -66,6 +74,17 @@ const downloadUrl = (url, image_path) =>
                     .on('error', e => reject(e));
             }),
     );
+
+async function _updateRangeImage(from, to) {
+    results = [];
+    for (let i = from; i <= to; i++) {
+        results.push(_updateOneImage(i).then((response) => {
+        }).catch((err) => {
+            console.log(err);
+        }));
+    }
+    return results;
+}
 
 
 async function _downloadFullImage() {
