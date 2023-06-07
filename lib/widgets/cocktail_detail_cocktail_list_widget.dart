@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:moonshine_fe/apis/cocktail_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/widgets/cocktail_tab_item_widget.dart';
 
@@ -10,8 +10,10 @@ class CocktailDetailCocktailList extends StatelessWidget {
     super.key,
     required this.geolocation,
   });
-  final Future<List<Map<String, String>>> cocktailList =
-      CocktailProject.getCocktailList();
+  // final Future<List<Map<String, String>>> cocktailList =
+  //     CocktailProject.getCocktailList();
+  final Future<List<Map<String, dynamic>>> cocktailList =
+      CocktailApi.getCocktailList();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class CocktailDetailCocktailList extends StatelessWidget {
                               direction: Axis.horizontal,
                               children: [
                                 CocktailTabItem(
-                                  imgUrl: item['src']!,
+                                  imgUrl: item['url']!,
                                   name: item['name']!,
                                   geolocation: geolocation,
                                 ),

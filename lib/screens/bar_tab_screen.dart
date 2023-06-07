@@ -24,7 +24,9 @@ class _BarTabScreenState extends State<BarTabScreen> {
     await widget.geolocation.getAddressFromLatLng().then((address) {
       currentAddress = address;
     });
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override

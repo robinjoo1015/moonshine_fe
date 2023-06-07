@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moonshine_fe/apis/cocktail_project.dart';
+import 'package:moonshine_fe/apis/cocktail_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_bar_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_chart_widget.dart';
@@ -8,11 +8,13 @@ import 'package:moonshine_fe/widgets/cocktail_detail_image_widget.dart';
 
 class CocktailDetailScreen extends StatefulWidget {
   final String name;
+  final String imgUrl;
   final Geolocation geolocation;
 
   const CocktailDetailScreen({
     super.key,
     required this.name,
+    required this.imgUrl,
     required this.geolocation,
   });
 
@@ -26,8 +28,8 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
   @override
   void initState() {
     super.initState();
-    detail = CocktailProject.getDetail(widget.name);
-
+    // detail = CocktailProject.getDetail(widget.name);
+    detail = CocktailApi.getDetail(widget.imgUrl.split('.')[0].trim());
     setState(() {});
   }
 
@@ -63,7 +65,8 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                   children: [
                     // Image
                     CocktailDetailImage(
-                      imgList: snapshot.data!['imgList'],
+                      // imgList: snapshot.data!['imgList'],
+                      imgList: ['${CocktailApi.baseUrl}/${widget.imgUrl}'],
                     ),
                     // Name
                     Row(
