@@ -73,12 +73,12 @@ async function _getBarById(id) {
 
     var blog_query = '' +
         'SELECT blog_posts.blog_post_id, blog_post_title, image_path ' +
-    'FROM moonshine.blog_post_bar_composition ' +
+        'FROM moonshine.blog_posts_bar_cocktail_composition ' +
         'INNER JOIN moonshine.blog_posts ' +
-            'ON blog_post_bar_composition.blog_post_id = blog_posts.blog_post_id ' +
+            'ON blog_posts_bar_cocktail_composition.blog_post_id = blog_posts.blog_post_id ' +
         'INNER JOIN moonshine.image ' +
             'ON blog_posts.blog_post_image = image.image_id ' +
-    'WHERE bar_id = ' + String(bar_id);
+        'WHERE bar_id = ' + String(bar_id);
     let blog_result = await pgConnection.query(blog_query);
     var blog_list = [];
 

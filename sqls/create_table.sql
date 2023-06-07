@@ -232,7 +232,7 @@ create table moonshine.blog_post_bar_composition
     primary key (blog_post_id, bar_id)
 );
 
-alter table moonshine.blog_post_bar_composition
+alter table moonshine.blog_post_bar_cocktail_composition
     owner to moonshine;
 
 create table moonshine.blog_post_comments
