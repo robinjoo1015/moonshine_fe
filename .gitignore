@@ -79,3 +79,6 @@ amplifytools.xcconfig
 #node environments
 .env
 /node/assets/*
+
+#assets
+/assets/images

@@ -7,8 +7,10 @@ router.get("/", (req, res) => {
 
 const CocktailRouter = require("./cocktails/cocktails");
 const ImageRouter = require("./images/images");
+const BarRouter = require("./bars/bars");
 
 router.use("/cocktails", CocktailRouter);
 router.use("/images", ImageRouter);
+router.use("/bars", BarRouter);
 
 module.exports = router;

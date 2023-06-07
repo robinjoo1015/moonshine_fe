@@ -12,13 +12,14 @@ exports.getCocktailList = function (req, res) {
 
 async function getCocktailList() {
     var query = '' +
-        'SELECT cocktail_name, image_path FROM cocktails ' +
+        'SELECT cocktail_id, cocktail_name, image_path FROM cocktails ' +
         'INNER JOIN image ' +
         '   ON cocktails.cocktail_image = image.image_id';
     let result = await pgConnection.query(query);
     let response = [];
     for (let row of result.rows) {
         let component = {
+            id: row.cocktail_id,
             name: row.cocktail_name,
             url: row.image_path,
         }
