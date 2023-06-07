@@ -42,6 +42,7 @@ class CocktailTabItem extends StatelessWidget {
             final size = constraints.maxWidth;
             return SizedBox(
               width: size,
+              height: size,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 5,
@@ -55,7 +56,9 @@ class CocktailTabItem extends StatelessWidget {
                     // ),
                     Image(
                       image: AssetImage('assets/image/$imgUrl'),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
+                      width: size,
+                      height: size,
                     ),
                     Positioned.fill(
                       child: Column(

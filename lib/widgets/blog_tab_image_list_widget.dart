@@ -21,6 +21,7 @@ class BlogTabImageList extends StatelessWidget {
             final size = constraints.maxWidth;
             return SizedBox(
               width: size,
+              height: size,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 5,
@@ -30,7 +31,9 @@ class BlogTabImageList extends StatelessWidget {
                   children: [
                     Image(
                       image: AssetImage(imgUrl),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
+                      width: size,
+                      height: size,
                     ),
                     Positioned.fill(
                       child: Column(

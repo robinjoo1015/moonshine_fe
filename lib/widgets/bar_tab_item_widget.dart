@@ -37,6 +37,7 @@ class BarTabItem extends StatelessWidget {
             final size = constraints.maxWidth;
             return SizedBox(
               width: size,
+              height: size,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 5,
@@ -47,7 +48,14 @@ class BarTabItem extends StatelessWidget {
                     Image(
                       // imgUrl,
                       image: AssetImage('assets/image/$imgUrl'),
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
+                      // centerSlice: Rect.fromCenter(
+                      //   center: Offset(size / 2, size / 2),
+                      //   width: size,
+                      //   height: size,
+                      // ),
+                      width: size,
+                      height: size,
                     ),
                     Positioned.fill(
                       child: Column(

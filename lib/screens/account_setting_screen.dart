@@ -8,16 +8,18 @@ import 'package:crypto/crypto.dart';
 
 class AccountSettingScreen extends StatelessWidget {
   const AccountSettingScreen({super.key});
-  static const baseUrl = 'http://3.135.207.29:3000/user';
-  // static const baseUrl = 'http://10.210.61.107:3000/user';
+  // static const baseUrl = 'http://3.135.207.29:3000/user';
+  static const baseUrl = 'http://10.210.61.107:3000/user';
 
   Future<String?> _authUser(LoginData data) async {
     // print('${data.name} ${data.password}');
     // jsonEncode({'id': data.name, 'password': data.password});
-    print(jsonEncode({
-      'email': data.name,
-      'password': sha256.convert(utf8.encode(data.password)).toString(),
-    }));
+    print(
+      jsonEncode({
+        'email': data.name,
+        'password': sha256.convert(utf8.encode(data.password)).toString(),
+      }),
+    );
     final response = await http.post(
       Uri.parse('$baseUrl/login'),
       headers: <String, String>{
@@ -29,12 +31,14 @@ class AccountSettingScreen extends StatelessWidget {
       }),
     );
     if (response.statusCode == 200) {
-      globals.userId = jsonDecode(response.body)['id'];
-      print(jsonDecode(response.body)['id']);
-      print(globals.userId);
-      return 'Success';
-    } else if (response.statusCode == 401) {
-      return 'Failed';
+      var decode = jsonDecode(response.body);
+      if (decode['status'] == 200) {
+        globals.userId = decode['id'];
+        globals.userName = decode['name'];
+        return 'Success';
+      } else {
+        return 'Failed';
+      }
     } else {
       return 'Network Error';
     }
@@ -62,9 +66,14 @@ class AccountSettingScreen extends StatelessWidget {
       }),
     );
     if (response.statusCode == 200) {
-      return 'Success';
-    } else if (response.statusCode == 401) {
-      return 'Failed';
+      var decode = jsonDecode(response.body);
+      if (decode['status'] == 200) {
+        globals.userId = decode['id'];
+        globals.userName = data.additionalSignupData!['name']!;
+        return 'Success';
+      } else {
+        return 'Failed';
+      }
     } else {
       return 'Network Error';
     }
@@ -138,9 +147,14 @@ class AccountSettingScreen extends StatelessWidget {
         ),
       );
     } else {
-      return Container(
-        child: Center(
-          child: Text('${globals.userId}'),
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Account Setting'),
+        ),
+        body: Container(
+          child: Center(
+            child: Text('${globals.userId}'),
+          ),
         ),
       );
     }
