@@ -7,18 +7,53 @@ import 'package:http/http.dart' as http;
 
 class AccountSettingScreen extends StatelessWidget {
   const AccountSettingScreen({super.key});
-  static const baseUrl = 'http://3.135.207.29:3000';
+  static const baseUrl = 'http://3.135.207.29:3000/user';
 
   Future<String?> _authUser(LoginData data) async {
     // print('${data.name} ${data.password}');
     // jsonEncode({'id': data.name, 'password': data.password});
-    print(jsonEncode({'name': data.name, 'password': data.password}));
-    var response = await http.post(Uri.parse(baseUrl),
-        body: jsonEncode({'name': data.name, 'password': data.password}));
+    print(jsonEncode({
+      'email': data.name,
+      'password': data.password,
+    }));
+    var response = await http.post(
+      Uri.parse('$baseUrl/login'),
+      body: jsonEncode({
+        'email': data.name,
+        'password': data.password,
+      }),
+    );
     if (response.statusCode == 200) {
       globals.userId = jsonDecode(response.body)['id'];
       return 'Success';
     } else if (response.statusCode == 401) {
+      return 'Failed';
+    } else {
+      return 'Network Error';
+    }
+  }
+
+  Future<String?> _signupUser(SignupData data) async {
+    // print('Signup Name: ${data.name}, Password: ${data.password}');
+    // data.additionalSignupData!['name'];
+    print(
+      jsonEncode({
+        'email': data.name,
+        'password': data.password,
+        'name': data.additionalSignupData!['name'],
+      }),
+    );
+    var response = await http.post(
+      Uri.parse('$baseUrl/create'),
+      body: jsonEncode({
+        'email': data.name,
+        'password': data.password,
+        'name': data.additionalSignupData!['name'],
+      }),
+    );
+    if (response.statusCode == 201) {
+      return 'Success';
+    } else if (response.statusCode == 402) {
       return 'Failed';
     } else {
       return 'Network Error';
@@ -38,7 +73,7 @@ class AccountSettingScreen extends StatelessWidget {
             onLogin: _authUser,
             onRecoverPassword: (_) => Future(() => null),
             hideForgotPasswordButton: true,
-            onSignup: (_) => Future(() => null),
+            onSignup: _signupUser,
             onSwitchToAdditionalFields: (_) => Future(() => null),
             loginAfterSignUp: true,
             additionalSignupFields: const [
