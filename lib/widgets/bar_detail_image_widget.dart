@@ -52,8 +52,14 @@ class _BarDetailImageState extends State<BarDetailImage> {
                           return SizedBox(
                             height: size,
                             width: size,
-                            child: Image.network(
-                              item,
+                            // child: Image.network(
+                            //   item,
+                            //   width: size,
+                            //   height: size,
+                            //   fit: BoxFit.fitHeight,
+                            // ),
+                            child: Image(
+                              image: AssetImage(item),
                               width: size,
                               height: size,
                               fit: BoxFit.fitHeight,

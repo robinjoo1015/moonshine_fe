@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:moonshine_fe/apis/bar_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/map_screen.dart';
 import 'package:moonshine_fe/widgets/bar_detail_image_widget.dart';
@@ -27,7 +28,7 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
   void initState() {
     super.initState();
     // detail = DiffordsGuide.getDetail(widget.id);
-
+    detail = BarApi.getDetail(widget.id);
     setState(() {});
   }
 
@@ -63,7 +64,8 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                 child: Column(
                   children: [
                     // Image
-                    BarDetailImage(imgList: snapshot.data!['imgList']),
+                    BarDetailImage(
+                        imgList: ['assets/image/${snapshot.data!["url"]}']),
                     // Name, Rating
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -92,24 +94,62 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                             vertical: 10,
                           ),
                           child: Row(
-                            children: const [
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.star,
                                 size: 16,
                                 // color: Colors.yellow,
                               ),
                               Text(
-                                '4.8 / 5.0',
-                                style: TextStyle(fontSize: 16),
+                                '${snapshot.data!["score"].toString()} / 5.0',
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
                         ),
                       ],
                     ),
-                    // Address
+                    // description
                     const SizedBox(
                       height: 10,
+                    ),
+                    IntrinsicHeight(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            width: 20,
+                            height: 20,
+                          ),
+                          // Text(
+                          //   "소개",
+                          //   style: TextStyle(
+                          //     fontWeight: FontWeight.w600,
+                          //     fontFamily: Theme.of(context)
+                          //         .textTheme
+                          //         .bodyMedium!
+                          //         .fontFamily,
+                          //   ),
+                          // ),
+                          // const VerticalDivider(
+                          //   color: Colors.black38,
+                          //   thickness: 1,
+                          // ),
+                          Expanded(
+                            child: Text(
+                              snapshot.data!['description'],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Address
+                    const SizedBox(
+                      height: 20,
                     ),
                     IntrinsicHeight(
                       child: Row(
@@ -153,10 +193,10 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                       child: SizedBox(
                         height: 150,
                         child: GoogleMap(
-                          initialCameraPosition: const CameraPosition(
+                          initialCameraPosition: CameraPosition(
                             target: LatLng(
-                              37.5036383,
-                              126.9570617,
+                              snapshot.data!['latitude'],
+                              snapshot.data!['longitude'],
                             ),
                             zoom: 15,
                           ),
@@ -172,7 +212,10 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                               markerId: const MarkerId("1"),
                               draggable: false,
                               onTap: () {},
-                              position: const LatLng(37.5036383, 126.9570617),
+                              position: LatLng(
+                                snapshot.data!['latitude'],
+                                snapshot.data!['longitude'],
+                              ),
                             ),
                           },
                           onTap: (Null) {
@@ -210,7 +253,7 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                             color: Colors.black38,
                             thickness: 1,
                           ),
-                          Text(snapshot.data!['tel']),
+                          Text(snapshot.data!['contact']),
                           const SizedBox(
                             width: 20,
                             // height: 20,
@@ -243,7 +286,7 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                             color: Colors.black38,
                             thickness: 1,
                           ),
-                          Text(snapshot.data!['hours']),
+                          Text(snapshot.data!['opening_hours']),
                           const SizedBox(
                             width: 20,
                             // height: 20,
