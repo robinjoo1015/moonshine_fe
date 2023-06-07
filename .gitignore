@@ -81,7 +81,6 @@ amplifytools.xcconfig
 /node/assets/*
 
 #assets
-/assets/images
 /assets/image
 /assets/image/*
 /assets/image/*.jpg
