@@ -318,38 +318,46 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                       children: [
                         for (var menu in snapshot.data!["menu"])
                           Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 20,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 20,
+                                ),
+                                child: Text(menu["name"]),
                               ),
-                              child: Text(menu["name"]),
-                            ),
-                            Expanded(
-                              child: Container(),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 20,
+                              Expanded(
+                                child: Container(),
                               ),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.star,
-                                    size: 16,
-                                    // color: Colors.yellow,
-                                  ),
-                                  Text(
-                                    '$menu["score"] / 5.0',
-                                    // style: TextStyle(fontSize: 16),
-                                  ),
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 20,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                      ),
+                                      child: Text('${menu["price"]}₩'),
+                                    ),
+                                    const Icon(
+                                      Icons.star,
+                                      size: 16,
+                                      // color: Colors.yellow,
+                                    ),
+                                    Text(
+                                      menu["score"] == null
+                                          ? '- / 5.0'
+                                          : '${menu["score"]} / 5.0',
+                                      // style: TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        )
+                            ],
+                          )
                       ],
                     ),
                     // Blogs Title
