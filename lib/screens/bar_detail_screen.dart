@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:moonshine_fe/apis/bar_api.dart';
+import 'package:moonshine_fe/apis/favorite_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/map_screen.dart';
 import 'package:moonshine_fe/widgets/bar_detail_image_widget.dart';
@@ -9,12 +10,14 @@ class BarDetailScreen extends StatefulWidget {
   final int id;
   final String name;
   final Geolocation geolocation;
+  final bool isFavorite;
   const BarDetailScreen({
     super.key,
     required this.id,
     required this.name,
     // required this.url,
     required this.geolocation,
+    required this.isFavorite,
   });
 
   @override
@@ -23,12 +26,14 @@ class BarDetailScreen extends StatefulWidget {
 
 class _BarDetailScreenState extends State<BarDetailScreen> {
   late Future<Map<String, dynamic>> detail;
+  bool currentFavorite = false;
 
   @override
   void initState() {
     super.initState();
     // detail = DiffordsGuide.getDetail(widget.id);
     detail = BarApi.getDetail(widget.id);
+    currentFavorite = widget.isFavorite;
     setState(() {});
   }
 
@@ -46,8 +51,14 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
               forceElevated: innerBoxIsScrolled,
               actions: [
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.bookmark_border_outlined),
+                  onPressed: () async {
+                    var result = await FavoriteApi.toggleBarFavorite(widget.id);
+                    currentFavorite = result;
+                    setState(() {});
+                  },
+                  icon: Icon(currentFavorite
+                      ? Icons.bookmark
+                      : Icons.bookmark_border_outlined),
                 ),
               ],
             ),

@@ -161,6 +161,7 @@ class _BarTabScreenState extends State<BarTabScreen> {
                           name: snapshot.data![0]['name']!,
                           // url: snapshot.data![0]['url']!,
                           geolocation: widget.geolocation,
+                          isFavorite: snapshot.data![0]['is_favorite']!,
                         ),
                         BarTabItem(
                           id: (snapshot.data!.length == 1)
@@ -174,6 +175,9 @@ class _BarTabScreenState extends State<BarTabScreen> {
                               : snapshot.data![1]['name']!,
                           // url: snapshot.data![1]['url']!,
                           geolocation: widget.geolocation,
+                          isFavorite: (snapshot.data!.length == 1)
+                              ? false
+                              : snapshot.data![1]['is_favorite']!,
                         ),
                       ],
                     ),
@@ -189,6 +193,7 @@ class _BarTabScreenState extends State<BarTabScreen> {
                     name: snapshot.data![index * 2]['name']!,
                     // url: snapshot.data![index * 2]['url']!,
                     geolocation: widget.geolocation,
+                    isFavorite: snapshot.data![index * 2]['is_favorite']!,
                   ),
                   BarTabItem(
                     id: (index * 2 + 1 == snapshot.data!.length)
@@ -202,6 +207,9 @@ class _BarTabScreenState extends State<BarTabScreen> {
                         : snapshot.data![index * 2 + 1]['name']!,
                     // url: snapshot.data![index * 2 + 1]['url']!,
                     geolocation: widget.geolocation,
+                    isFavorite: (index * 2 + 1 == snapshot.data!.length)
+                        ? ''
+                        : snapshot.data![index * 2 + 1]['is_favorite']!,
                   ),
                 ],
               );
