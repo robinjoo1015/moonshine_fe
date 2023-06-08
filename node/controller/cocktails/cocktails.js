@@ -3,61 +3,114 @@ const request = require('request');
 const pgConnection = require('../dbconn');
 
 exports.getCocktailList = function (req, res) {
-    getCocktailList().then((response) => {
+    _getCocktailList(req.params.user_id).then((response) => {
         res.send(response);
     }).catch((err) => {
         console.log(err);
     });
 };
 
-async function getCocktailList() {
+exports.getCocktailByID = function (req, res) {
+    _getCocktail(req.params.user_id, req.params.id).then((response) => {
+        res.send(response);
+    }).catch((err) => {
+        console.log(err);
+    });
+};
+
+
+async function _getCocktailList(user_id) {
     var query = '' +
         'SELECT cocktail_id, cocktail_name, image_path FROM cocktails ' +
         'INNER JOIN image ' +
         '   ON cocktails.cocktail_image = image.image_id';
     let result = await pgConnection.query(query);
     let response = [];
+    var taste_query = '' +
+        'SELECT gentle, boozy, sweet, dry, alcohol FROM moonshine.cocktail_taste_composition ' +
+        'INNER JOIN tastes ' +
+        'ON cocktail_taste_composition.taste_id = tastes.taste_id ' +
+        'WHERE cocktail_id = $1';
+    var favorite_query = '' +
+        'SELECT cocktail_id FROM moonshine.cocktail_favorites ' +
+        'WHERE user_id = ' + user_id;
+    let favorite_result = await pgConnection.query(favorite_query);
+    let favorite_response = [];
+    for (let row of favorite_result.rows) {
+        favorite_response.push(row.cocktail_id);
+    }
+
     for (let row of result.rows) {
+        let cocktail_id = row.cocktail_id;
+        let is_favorite = false;
+        if (favorite_response.includes(cocktail_id)) {
+            is_favorite = true;
+        }
+        let taste_result = await pgConnection.query(taste_query, [cocktail_id]);
+        let taste_response = taste_result.rows[0];
+        let taste = {
+            gentle: taste_response.gentle,
+            boozy: taste_response.boozy,
+            sweet: taste_response.sweet,
+            dry: taste_response.dry,
+            alcohol: taste_response.alcohol,
+        }
         let component = {
             id: row.cocktail_id,
             name: row.cocktail_name,
             url: row.image_path,
+            taste: taste,
+            is_favorite: is_favorite,
         }
         response.push(component);
     }
     return response;
 }
 
-exports.getCocktailByID = function (req, res) {
-    getCocktail(req.params.id).then((response) => {
-        console.log(response);
-        res.send(response);
-    }).catch((err) => {
-        console.log(err);
-    });
-};
-
-async function getCocktail(id) {
-    var query = '' +
+async function _getCocktail(user_id, id) {
+    const query = '' +
         'SELECT * FROM moonshine.cocktails ' +
         'WHERE cocktail_id = ' + id;
     let cocktail_result = await pgConnection.query(query);
     let cocktail = cocktail_result.rows[0];
     let cocktail_id = cocktail.cocktail_id;
-    var images_query = '' +
+    const images_query = '' +
         'SELECT image_id FROM moonshine.cocktail_image_composition ' +
         'WHERE cocktail_id = ' + String(cocktail_id);
     let image_result = await pgConnection.query(images_query);
-    var image_list = [];
+    const image_list = [];
 
-    var ingredients_query = '' +
+    const ingredients_query = '' +
         'SELECT ingredient_name, ingredient_quantity ' +
         'FROM moonshine.ingredient, moonshine.cocktail_composition ' +
         'WHERE ingredient.ingredient_id = cocktail_composition.ingredient_id ' +
         '   AND cocktail_composition.cocktail_id = ' + String(cocktail_id);
     let ingredient_result = await pgConnection.query(ingredients_query);
     let ingredient_list = [];
-    let response = [];
+
+    const taste_query = '' +
+        'SELECT gentle, boozy, sweet, dry, alcohol FROM moonshine.cocktail_taste_composition ' +
+        'INNER JOIN tastes ' +
+        'ON cocktail_taste_composition.taste_id = tastes.taste_id ' +
+        'WHERE cocktail_id = ' + String(cocktail_id);
+    let taste_result = await pgConnection.query(taste_query);
+    let taste_response = taste_result.rows[0];
+    let taste = {
+        gentle: taste_response.gentle,
+        boozy: taste_response.boozy,
+        sweet: taste_response.sweet,
+        dry: taste_response.dry,
+        alcohol: taste_response.alcohol,
+    }
+
+    const favorite_query = '' +
+        'SELECT cocktail_id FROM moonshine.cocktail_favorites ' +
+        'WHERE user_id = ' + user_id + ' AND cocktail_id = ' + String(cocktail_id);
+    let favorite_result = await pgConnection.query(favorite_query);
+    let is_favorite = false;
+    if (favorite_result.rows.length > 0) {
+        is_favorite = true;
+    }
 
     for (let row of image_result.rows) {
         let component = {
@@ -73,12 +126,14 @@ async function getCocktail(id) {
         }
         ingredient_list.push(component);
     }
-    let response_component = {
+
+    return {
         name: cocktail.cocktail_name,
         images: image_list,
         ingredients: ingredient_list,
+        tastes: taste,
         recipe: cocktail.cocktail_instructions,
-    }
-    console.log(response_component);
-    return response_component;
+        is_favorite: is_favorite,
+    };
 }
+

@@ -5,7 +5,7 @@ import 'package:moonshine_fe/config.dart' as globals;
 
 class CocktailApi {
   // static const baseUrl = 'http://3.135.207.29:3000';
-  static final baseUrl = globals.baseUrl;
+  static final baseUrl = '${globals.baseUrl}/${globals.userId}';
 
   static Future<List<Map<String, dynamic>>> getCocktailList() async {
     final response = await http.get(Uri.parse('$baseUrl/cocktails'));

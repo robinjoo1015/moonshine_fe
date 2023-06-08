@@ -17,18 +17,8 @@ fn main() {
         println!("cocktail_id: {}", cocktail_id);
         cocktail_id_list.push(cocktail_id);
     }
-    let count_query = "SELECT COUNT(*) FROM moonshine.cocktails";
-    let count : i64 = client.query(
-        count_query,
-        &[],
-    ).unwrap()[0].get(0);
-    let composition_count_query = "SELECT COUNT(*) FROM moonshine.cocktail_taste_composition";
-    let mut composition_count : i64 = client.query(
-        composition_count_query,
-        &[],
-    ).unwrap()[0].get(0);
-    composition_count += 1;
-    for i in 1..=count{
+    let mut composition_count = 564;
+    for i in 1..=660{
         if cocktail_id_list.contains(&(i as i32)) {
             continue;
         } else {

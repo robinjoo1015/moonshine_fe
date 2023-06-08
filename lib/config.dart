@@ -1,6 +1,6 @@
 library config.globals;
 
-int userId = 0;
+int userId = 1;
 String userName = '';
 
 // String baseUrl = 'http://10.210.61.192:3000'; // CAU localhost
