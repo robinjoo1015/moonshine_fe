@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/config.dart' as globals;
 
 class BlogDetailImage extends StatefulWidget {
   final List<dynamic> imgList;
@@ -52,8 +53,9 @@ class _BlogDetailImageState extends State<BlogDetailImage> {
                           return SizedBox(
                             height: size,
                             width: size,
-                            child: Image(
-                              image: AssetImage('assets/image/${item["url"]}'),
+                            child: Image.network(
+                              // image: AssetImage('assets/image/${item["url"]}'),
+                              '${globals.baseUrl}/${item["url"]}',
                               width: size,
                               height: size,
                               fit: BoxFit.fitHeight,

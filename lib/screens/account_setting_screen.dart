@@ -93,7 +93,7 @@ class AccountSettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (globals.userId == 0) {
+    if (globals.userId <= 1) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Account Setting'),

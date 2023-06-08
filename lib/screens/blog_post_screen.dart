@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:moonshine_fe/apis/blog_api.dart';
 import 'package:moonshine_fe/widgets/blog_post_select_widget.dart';
 
@@ -19,6 +20,8 @@ class _BlogPostScreenState extends State<BlogPostScreen> {
   Map<String, dynamic> selectionData = {};
   String title = '';
   String content = '';
+  final ImagePicker _picker = ImagePicker();
+  List<String> imagePathList = [];
 
   void updateData(Map<String, dynamic> dataChild) {
     setState(() {
@@ -35,31 +38,43 @@ class _BlogPostScreenState extends State<BlogPostScreen> {
         actions: [
           IconButton(
             onPressed: () async {
-              Map<String, String> postData = {};
-              postData['title'] = title;
-              postData['content'] = content;
-              Map<String, String> selectionDataNew = {
-                'mainSelection':
-                    selectionData['mainSelection']['id'].toString(),
-              };
-              List<Map<String, String>> ratingListNew = [];
-              for (var rating in selectionData['ratingList']) {
-                ratingListNew.add({
-                  'id': rating.keys.first['id'].toString(),
-                  'rating': rating[rating.keys.first].toString(),
-                });
+              if (imagePathList.isEmpty || imagePathList.length > 10) {
+                return;
               }
-              selectionDataNew['ratingList'] = jsonEncode(ratingListNew);
-              postData['selectionData'] = jsonEncode(selectionDataNew);
-
-              final responseDecode =
-                  await BlogApi.createPost(widget.type, postData);
-              // print(responseDecode);
-              if (responseDecode == -1) {
-                print(responseDecode);
+              print(imagePathList);
+              var imageResponse = await BlogApi.createImage(imagePathList);
+              if (imageResponse.isEmpty) {
+                return;
               } else {
-                if (responseDecode['status'] == 200) {
-                  Navigator.pop(context, responseDecode['blogId']);
+                Map<String, String> postData = {};
+                postData['title'] = title;
+                postData['content'] = content;
+                Map<String, String> selectionDataNew = {
+                  'mainSelection':
+                      selectionData['mainSelection']['id'].toString(),
+                };
+                List<Map<String, String>> ratingListNew = [];
+                for (var rating in selectionData['ratingList']) {
+                  ratingListNew.add({
+                    'id': rating.keys.first['id'].toString(),
+                    'rating': rating[rating.keys.first].toString(),
+                  });
+                }
+                selectionDataNew['ratingList'] = jsonEncode(ratingListNew);
+                postData['selectionData'] = jsonEncode(selectionDataNew);
+                postData['images'] = imageResponse;
+                postData['thumbnail'] =
+                    imageResponse.split(',')[0].substring(1);
+
+                final responseDecode =
+                    await BlogApi.createPost(widget.type, postData);
+                // print(responseDecode);
+                if (responseDecode == -1) {
+                  print(responseDecode);
+                } else {
+                  if (responseDecode['status'] == 200) {
+                    Navigator.pop(context, responseDecode['blogId']);
+                  }
                 }
               }
             },
@@ -131,13 +146,25 @@ class _BlogPostScreenState extends State<BlogPostScreen> {
                 ),
                 child: Row(
                   children: [
-                    SizedBox(
-                      height: 50,
-                      width: 100,
-                      child: Container(
-                        color: Colors.black12,
-                        child: const Center(
-                          child: Text('사진 추가'),
+                    GestureDetector(
+                      onTap: () async {
+                        final List<XFile> images =
+                            await _picker.pickMultiImage();
+                        // print(images[0].path);
+                        imagePathList = [];
+                        for (var image in images) {
+                          imagePathList.add(image.path);
+                        }
+                        setState(() {});
+                      },
+                      child: SizedBox(
+                        height: 50,
+                        width: 100,
+                        child: Container(
+                          color: Colors.black12,
+                          child: const Center(
+                            child: Text('사진 추가'),
+                          ),
                         ),
                       ),
                     ),

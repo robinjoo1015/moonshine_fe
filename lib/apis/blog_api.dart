@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:path/path.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:moonshine_fe/config.dart' as globals;
@@ -44,6 +46,50 @@ class BlogApi {
     }
     print(detail);
     return detail;
+  }
+
+  static Future<String> createImage(List<String> pathList) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${globals.baseUrl}/images/upload'));
+
+    for (var path in pathList) {
+      // var path = pathList[0];
+      var file = File(path);
+      var stream = http.ByteStream(file.openRead());
+      stream.cast();
+      var length = await file.length();
+
+      var multipartFile = http.MultipartFile(
+        'file',
+        stream,
+        length,
+        filename: basename(file.path),
+      );
+      // print(basename(file.path));
+      request.files.add(multipartFile);
+    }
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+    // var response = await streamedResponse.stream.bytesToString();
+    // print(response.stream);
+    // print(response.contentLength);
+    // print(response.headers);
+    // print(response.isRedirect);
+    // print(response.persistentConnection);
+    // print(response.reasonPhrase);
+    // print(response.request);
+    // print(streamedResponse.statusCode);
+    if (response.statusCode == 200) {
+      // print(response.stream);
+      print(response.body);
+      // print(jsonDecode(response.body));
+      // print(response);
+
+      // return streamedResponse.statusCode;
+      return response.body;
+    } else {
+      return '';
+    }
   }
 
   static Future<dynamic> createPost(
