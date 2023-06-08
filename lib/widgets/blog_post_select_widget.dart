@@ -25,6 +25,9 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
   List<Map<dynamic, double>> ratingList = [];
 
   void _showDialog(bool isBar) {
+    if (ratingList.length == 10) {
+      return;
+    }
     if (isBar) {
       // Bar Select Dialog
       showDialog(
@@ -278,6 +281,38 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                 }
               }),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Column(
+              children: [
+                for (var rating in ratingList)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 10,
+                    ),
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(rating.keys.first['name']),
+                        Expanded(
+                          child: Container(),
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              size: 14,
+                            ),
+                            Text('${rating.values.first.toString()} / 5.0'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
             SizedBox(
               height: 70,
               child: Padding(
@@ -350,6 +385,38 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                 }
               }),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Column(
+              children: [
+                for (var rating in ratingList)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 10,
+                    ),
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(rating.keys.first['name']),
+                        Expanded(
+                          child: Container(),
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              size: 14,
+                            ),
+                            Text('${rating.values.first.toString()} / 5.0'),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
             SizedBox(
               height: 70,
               child: Padding(
@@ -421,6 +488,9 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                   return Container();
                 }
               }),
+            ),
+            const SizedBox(
+              height: 10,
             ),
           ],
         );
