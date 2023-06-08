@@ -316,14 +316,15 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                     // Menus
                     Column(
                       children: [
-                        Row(
+                        for (var menu in snapshot.data!["menu"])
+                          Row(
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
                                 vertical: 10,
                                 horizontal: 20,
                               ),
-                              child: Text('Menu 1'),
+                              child: Text(menu["name"]),
                             ),
                             Expanded(
                               child: Container(),
@@ -334,14 +335,14 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                                 horizontal: 20,
                               ),
                               child: Row(
-                                children: const [
-                                  Icon(
+                                children: [
+                                  const Icon(
                                     Icons.star,
                                     size: 16,
                                     // color: Colors.yellow,
                                   ),
                                   Text(
-                                    '3.6 / 5.0',
+                                    '$menu["score"] / 5.0',
                                     // style: TextStyle(fontSize: 16),
                                   ),
                                 ],

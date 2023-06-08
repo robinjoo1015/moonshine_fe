@@ -102,6 +102,10 @@ async function _getBlogByIdTypeBarBlog(blogId) {
         'WHERE blog_post_id = ' + blogId;
     let image_result = await pgConnection.query(image_query);
     let images = [];
+    images.push({
+        url: result.image_path,
+        comment: "thumbnail"
+    });
 
     let cocktails_query = '' +
         'SELECT bar_id, blog_posts_bar_cocktail_composition.cocktail_id, bar_cocktail_score, cocktail_name, image_path ' +
@@ -162,6 +166,10 @@ async function _getBlogByIdTypeCocktailBlog(blogId) {
         'WHERE blog_post_id = ' + blogId;
     let image_result = await pgConnection.query(image_query);
     let images = [];
+    images.push({
+        url: result.image_path,
+        comment: "thumbnail"
+    });
 
     let bar_query = '' +
         'SELECT cocktail_id, moonshine.blog_posts_bar_cocktail_composition.bar_id, bar_name, bar_cocktail_score, image_path ' +
@@ -180,6 +188,8 @@ async function _getBlogByIdTypeCocktailBlog(blogId) {
         images.push(component);
     }
 
+    let cocktail_id = bar_result.rows[0].cocktail_id;
+
     for (let row of bar_result.rows) {
         var component = {
             id: row.bar_id,
@@ -188,9 +198,8 @@ async function _getBlogByIdTypeCocktailBlog(blogId) {
             score: row.bar_cocktail_score,
         };
         bars.push(component);
-    }
 
-    let cocktail_id = bar_result.rows[0].cocktail_id;
+    }
 
     return {
         title: result.blog_post_title,
@@ -223,6 +232,10 @@ async function _getBlogByIdTypeCustomBlog(blogId){
         'WHERE blog_post_id = ' + blogId;
     let image_result = await pgConnection.query(image_query);
     let images = [];
+    images.push({
+        url: result.image_path,
+        comment: "thumbnail"
+    });
 
     let cocktail_query = '' +
         'SELECT moonshine.blog_posts_bar_cocktail_composition.cocktail_id, cocktail_name, image_path ' +
