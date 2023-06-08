@@ -35,7 +35,7 @@ class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
             children: [
               ListView.separated(
                 scrollDirection: Axis.vertical,
-                itemCount: snapshot.data!.length ~/ 2,
+                itemCount: (snapshot.data!.length + 1) ~/ 2,
                 padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 10,
@@ -57,9 +57,15 @@ class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
                         type: widget.type,
                       ),
                       BlogTabImageList(
-                        id: snapshot.data![index * 2 + 1]['id']!,
-                        imgUrl: snapshot.data![index * 2 + 1]['url'],
-                        name: snapshot.data![index * 2 + 1]['title'],
+                        id: (index * 2 + 1 == snapshot.data!.length)
+                            ? -1
+                            : snapshot.data![index * 2 + 1]['id']!,
+                        imgUrl: (index * 2 + 1 == snapshot.data!.length)
+                            ? ''
+                            : snapshot.data![index * 2 + 1]['url'],
+                        name: (index * 2 + 1 == snapshot.data!.length)
+                            ? ''
+                            : snapshot.data![index * 2 + 1]['title'],
                         type: widget.type,
                       ),
                     ],

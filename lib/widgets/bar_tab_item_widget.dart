@@ -20,17 +20,19 @@ class BarTabItem extends StatelessWidget {
       flex: 1,
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BarDetailScreen(
-                id: id,
-                name: name,
-                // url: url,
-                geolocation: geolocation,
+          if (id != -1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BarDetailScreen(
+                  id: id,
+                  name: name,
+                  // url: url,
+                  geolocation: geolocation,
+                ),
               ),
-            ),
-          );
+            );
+          }
         },
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -45,18 +47,20 @@ class BarTabItem extends StatelessWidget {
                 ),
                 child: Stack(
                   children: [
-                    Image(
-                      // imgUrl,
-                      image: AssetImage('assets/image/$imgUrl'),
-                      fit: BoxFit.cover,
-                      // centerSlice: Rect.fromCenter(
-                      //   center: Offset(size / 2, size / 2),
-                      //   width: size,
-                      //   height: size,
-                      // ),
-                      width: size,
-                      height: size,
-                    ),
+                    (id == -1)
+                        ? Container()
+                        : Image(
+                            // imgUrl,
+                            image: AssetImage('assets/image/$imgUrl'),
+                            fit: BoxFit.cover,
+                            // centerSlice: Rect.fromCenter(
+                            //   center: Offset(size / 2, size / 2),
+                            //   width: size,
+                            //   height: size,
+                            // ),
+                            width: size,
+                            height: size,
+                          ),
                     Positioned.fill(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,13 +68,15 @@ class BarTabItem extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.bookmark_border_outlined,
-                                ),
-                                color: Colors.white,
-                              ),
+                              (id == -1)
+                                  ? Container()
+                                  : IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.bookmark_border_outlined,
+                                      ),
+                                      color: Colors.white,
+                                    ),
                             ],
                           ),
                           Row(
@@ -81,16 +87,18 @@ class BarTabItem extends StatelessWidget {
                                   horizontal: 10,
                                   vertical: 10,
                                 ),
-                                child: Text(
-                                  name.length > 16
-                                      ? name.substring(0, 16)
-                                      : name,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                child: (id == -1)
+                                    ? Container()
+                                    : Text(
+                                        name.length > 16
+                                            ? name.substring(0, 16)
+                                            : name,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
                               ),
                             ],
                           ),

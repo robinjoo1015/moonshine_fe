@@ -28,7 +28,7 @@ class CocktailTabScreen extends StatelessWidget {
         if (snapshot.hasData) {
           return ListView.separated(
             scrollDirection: Axis.vertical,
-            itemCount: snapshot.data!.length ~/ 2,
+            itemCount: (snapshot.data!.length + 1) ~/ 2,
             padding: const EdgeInsets.symmetric(
               vertical: 10,
               horizontal: 10,
@@ -129,9 +129,15 @@ class CocktailTabScreen extends StatelessWidget {
                           geolocation: geolocation,
                         ),
                         CocktailTabItem(
-                          id: snapshot.data![1]['id']!,
-                          imgUrl: snapshot.data![1]['url']!,
-                          name: snapshot.data![1]['name']!,
+                          id: (snapshot.data!.length == 1)
+                              ? -1
+                              : snapshot.data![1]['id']!,
+                          imgUrl: (snapshot.data!.length == 1)
+                              ? ''
+                              : snapshot.data![1]['url']!,
+                          name: (snapshot.data!.length == 1)
+                              ? ''
+                              : snapshot.data![1]['name']!,
                           geolocation: geolocation,
                         ),
                       ],
@@ -149,9 +155,15 @@ class CocktailTabScreen extends StatelessWidget {
                     geolocation: geolocation,
                   ),
                   CocktailTabItem(
-                    id: snapshot.data![index * 2 + 1]['id']!,
-                    imgUrl: snapshot.data![index * 2 + 1]['url']!,
-                    name: snapshot.data![index * 2 + 1]['name']!,
+                    id: (index * 2 + 1 == snapshot.data!.length)
+                        ? -1
+                        : snapshot.data![index * 2 + 1]['id']!,
+                    imgUrl: (index * 2 + 1 == snapshot.data!.length)
+                        ? ''
+                        : snapshot.data![index * 2 + 1]['url']!,
+                    name: (index * 2 + 1 == snapshot.data!.length)
+                        ? ''
+                        : snapshot.data![index * 2 + 1]['name']!,
                     geolocation: geolocation,
                   ),
                 ],

@@ -25,17 +25,19 @@ class CocktailTabItem extends StatelessWidget {
       // fit: FlexFit.loose,
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CocktailDetailScreen(
-                id: id,
-                name: name,
-                imgUrl: imgUrl,
-                geolocation: geolocation,
+          if (id != -1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CocktailDetailScreen(
+                  id: id,
+                  name: name,
+                  imgUrl: imgUrl,
+                  geolocation: geolocation,
+                ),
               ),
-            ),
-          );
+            );
+          }
         },
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -54,12 +56,14 @@ class CocktailTabItem extends StatelessWidget {
                     //   '$baseUrl/$imgUrl',
                     //   fit: BoxFit.fill,
                     // ),
-                    Image(
-                      image: AssetImage('assets/image/$imgUrl'),
-                      fit: BoxFit.cover,
-                      width: size,
-                      height: size,
-                    ),
+                    (id == -1)
+                        ? Container()
+                        : Image(
+                            image: AssetImage('assets/image/$imgUrl'),
+                            fit: BoxFit.cover,
+                            width: size,
+                            height: size,
+                          ),
                     Positioned.fill(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,13 +71,15 @@ class CocktailTabItem extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.bookmark_border_outlined,
-                                ),
-                                color: Colors.white,
-                              ),
+                              (id == -1)
+                                  ? Container()
+                                  : IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.bookmark_border_outlined,
+                                      ),
+                                      color: Colors.white,
+                                    ),
                             ],
                           ),
                           Row(
@@ -84,16 +90,18 @@ class CocktailTabItem extends StatelessWidget {
                                   horizontal: 10,
                                   vertical: 10,
                                 ),
-                                child: Text(
-                                  name.length > 20
-                                      ? name.substring(0, 20)
-                                      : name,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                child: (id == -1)
+                                    ? Container()
+                                    : Text(
+                                        name.length > 20
+                                            ? name.substring(0, 20)
+                                            : name,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
                               ),
                             ],
                           ),
