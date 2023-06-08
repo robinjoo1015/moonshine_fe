@@ -81,8 +81,8 @@ class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
                           width: 120,
                           height: 50,
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
+                            onTap: () async {
+                              final blogId = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => BlogPostScreen(
@@ -90,6 +90,9 @@ class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
                                   ),
                                 ),
                               );
+                              print('New blogId = $blogId');
+                              blogList = BlogApi.getBlogList(widget.type);
+                              setState(() {});
                             },
                             child: Container(
                               decoration: BoxDecoration(

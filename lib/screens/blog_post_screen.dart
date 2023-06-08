@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/apis/blog_api.dart';
 import 'package:moonshine_fe/widgets/blog_post_select_widget.dart';
 
-class BlogPostScreen extends StatelessWidget {
+class BlogPostScreen extends StatefulWidget {
   final int type;
   const BlogPostScreen({
     super.key,
@@ -9,14 +12,57 @@ class BlogPostScreen extends StatelessWidget {
   });
 
   @override
+  State<BlogPostScreen> createState() => _BlogPostScreenState();
+}
+
+class _BlogPostScreenState extends State<BlogPostScreen> {
+  Map<String, dynamic> selectionData = {};
+  String title = '';
+  String content = '';
+
+  void updateData(Map<String, dynamic> dataChild) {
+    setState(() {
+      selectionData = dataChild;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print(type);
+    print(widget.type);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Post'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              Map<String, String> postData = {};
+              postData['title'] = title;
+              postData['content'] = content;
+              Map<String, String> selectionDataNew = {
+                'mainSelection':
+                    selectionData['mainSelection']['id'].toString(),
+              };
+              List<Map<String, String>> ratingListNew = [];
+              for (var rating in selectionData['ratingList']) {
+                ratingListNew.add({
+                  'id': rating.keys.first['id'].toString(),
+                  'rating': rating[rating.keys.first].toString(),
+                });
+              }
+              selectionDataNew['ratingList'] = jsonEncode(ratingListNew);
+              postData['selectionData'] = jsonEncode(selectionDataNew);
+
+              final responseDecode =
+                  await BlogApi.createPost(widget.type, postData);
+              // print(responseDecode);
+              if (responseDecode == -1) {
+                print(responseDecode);
+              } else {
+                if (responseDecode['status'] == 200) {
+                  Navigator.pop(context, responseDecode['blogId']);
+                }
+              }
+            },
             icon: const Icon(
               Icons.send,
               color: Colors.white,
@@ -29,31 +75,41 @@ class BlogPostScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(
+            Padding(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 10,
               ),
               child: SizedBox(
                 height: 50,
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '제목',
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      title = value;
+                    });
+                  },
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(
+            Padding(
+              padding: const EdgeInsets.symmetric(
                 // vertical: 10,
                 horizontal: 10,
               ),
               child: TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: '내용',
                 ),
                 // expands: true,
                 maxLines: null,
+                onChanged: (value) {
+                  setState(() {
+                    content = value;
+                  });
+                },
               ),
             ),
             Padding(
@@ -62,7 +118,8 @@ class BlogPostScreen extends StatelessWidget {
                 horizontal: 10,
               ),
               child: BlogPostSelect(
-                type: type,
+                type: widget.type,
+                callback: updateData,
               ),
             ),
             SizedBox(

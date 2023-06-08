@@ -45,6 +45,29 @@ class BlogApi {
     print(detail);
     return detail;
   }
+
+  static Future<dynamic> createPost(
+      int type, Map<String, dynamic> postData) async {
+    // final userId = globals.userId;
+    postData['userId'] = globals.userId.toString();
+    print(json.encode(postData));
+    var response = await http.post(
+      Uri.parse('$baseUrl/$type/create'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode(postData),
+    );
+    if (response.statusCode == 200) {
+      var decode = jsonDecode(response.body);
+      // if (decode['status'] == 200) {
+      //   print(decode.toString());
+      // }
+      return decode;
+    } else {
+      return -1;
+    }
+  }
 }
 
 class BlogDummyApi {

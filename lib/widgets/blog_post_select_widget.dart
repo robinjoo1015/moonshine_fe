@@ -6,9 +6,11 @@ import 'package:searchfield/searchfield.dart';
 
 class BlogPostSelect extends StatefulWidget {
   final int type;
+  final Function(Map<String, dynamic>) callback;
   const BlogPostSelect({
     super.key,
     required this.type,
+    required this.callback,
   });
 
   @override
@@ -22,10 +24,11 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
   double _tempRating = 3.0;
   Map<String, dynamic> _mainSelection = {};
   Map<String, dynamic> _tempSelection = {};
-  List<Map<dynamic, double>> ratingList = [];
+  final List<Map<dynamic, double>> _ratingList = [];
+  Map<String, dynamic> selectionData = {};
 
   void _showDialog(bool isBar) {
-    if (ratingList.length == 10) {
+    if (_ratingList.length == 10) {
       return;
     }
     if (isBar) {
@@ -106,7 +109,7 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                   _tempSelection = {};
                   _tempRating = 3.0;
                 });
-                print(ratingList);
+                print(_ratingList);
                 Navigator.pop(context);
               },
             ),
@@ -116,13 +119,15 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
               onPressed: () {
                 if (_tempSelection.isNotEmpty) {
                   setState(() {
-                    ratingList.add({
+                    _ratingList.add({
                       _tempSelection: _tempRating,
                     });
+                    selectionData['ratingList'] = _ratingList;
                     _tempSelection = {};
                     _tempRating = 3.0;
                   });
-                  print(ratingList);
+                  print(_ratingList);
+                  widget.callback(selectionData);
                   Navigator.pop(context);
                 }
               },
@@ -208,7 +213,7 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                   _tempSelection = {};
                   _tempRating = 3.0;
                 });
-                print(ratingList);
+                print(_ratingList);
                 Navigator.pop(context);
               },
             ),
@@ -218,13 +223,15 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
               onPressed: () {
                 if (_tempSelection.isNotEmpty) {
                   setState(() {
-                    ratingList.add({
+                    _ratingList.add({
                       _tempSelection: _tempRating,
                     });
+                    selectionData['ratingList'] = _ratingList;
                     _tempSelection = {};
                     _tempRating = 3.0;
                   });
-                  print(ratingList);
+                  print(_ratingList);
+                  widget.callback(selectionData);
                   Navigator.pop(context);
                 }
               },
@@ -252,8 +259,10 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                     onSuggestionTap: (value) {
                       setState(() {
                         _mainSelection = value.item!;
+                        selectionData['mainSelection'] = _mainSelection;
                       });
                       print(_mainSelection);
+                      widget.callback(selectionData);
                     },
                     suggestionAction: SuggestionAction.unfocus,
                     suggestions: snapshot.data!
@@ -286,7 +295,7 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
             ),
             Column(
               children: [
-                for (var rating in ratingList)
+                for (var rating in _ratingList)
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,
@@ -356,8 +365,10 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                     onSuggestionTap: (value) {
                       setState(() {
                         _mainSelection = value.item!;
+                        selectionData['mainSelection'] = _mainSelection;
                       });
                       print(_mainSelection);
+                      widget.callback(selectionData);
                     },
                     suggestionAction: SuggestionAction.unfocus,
                     suggestions: snapshot.data!
@@ -390,7 +401,7 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
             ),
             Column(
               children: [
-                for (var rating in ratingList)
+                for (var rating in _ratingList)
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 10,
@@ -460,8 +471,10 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                     onSuggestionTap: (value) {
                       setState(() {
                         _mainSelection = value.item!;
+                        selectionData['mainSelection'] = _mainSelection;
                       });
                       print(_mainSelection);
+                      widget.callback(selectionData);
                     },
                     suggestionAction: SuggestionAction.unfocus,
                     suggestions: snapshot.data!
