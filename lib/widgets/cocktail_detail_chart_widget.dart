@@ -1,13 +1,27 @@
+import 'dart:core';
 import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/config.dart' as globals;
 
 class CocktailDetailChart extends StatefulWidget {
-  final String name;
-
-  const CocktailDetailChart({super.key, required this.name});
+  final String cocktail_name;
+  final double cocktail_gentle;
+  final double cocktail_boozy;
+  final double cocktail_sweet;
+  final double cocktail_dry;
+  final double cocktail_alcohol;
+  const CocktailDetailChart({
+    super.key,
+    required this.cocktail_name,
+    required this.cocktail_gentle,
+    required this.cocktail_boozy,
+    required this.cocktail_sweet,
+    required this.cocktail_dry,
+    required this.cocktail_alcohol,
+  });
 
   @override
   State<CocktailDetailChart> createState() => _CocktailDetailChartState();
@@ -252,22 +266,22 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                       ),
                                       RadarDataSet(
                                         dataEntries: [
-                                          const RadarEntry(value: 2),
-                                          const RadarEntry(value: 3),
-                                          const RadarEntry(value: 4),
-                                          const RadarEntry(value: 3),
-                                          const RadarEntry(value: 2),
+                                          RadarEntry(value: globals.user_gentle),
+                                          RadarEntry(value: globals.user_boozy),
+                                          RadarEntry(value: globals.user_sweet),
+                                          RadarEntry(value: globals.user_dry),
+                                          RadarEntry(value: globals.user_alcohol),
                                         ],
                                         fillColor: Colors.blue.withOpacity(0.3),
                                         borderColor: Colors.blue,
                                       ),
                                       RadarDataSet(
                                         dataEntries: [
-                                          const RadarEntry(value: 4),
-                                          const RadarEntry(value: 4),
-                                          const RadarEntry(value: 1),
-                                          const RadarEntry(value: 4),
-                                          const RadarEntry(value: 4),
+                                          RadarEntry(value: widget.cocktail_gentle),
+                                          RadarEntry(value: widget.cocktail_boozy),
+                                          RadarEntry(value: widget.cocktail_sweet),
+                                          RadarEntry(value: widget.cocktail_dry),
+                                          RadarEntry(value: widget.cocktail_alcohol),
                                         ],
                                         fillColor: Colors.red.withOpacity(0.3),
                                         borderColor: Colors.red,
@@ -293,7 +307,7 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                         'Boozy',
                                         'Sweet',
                                         'Dry',
-                                        'Sour',
+                                        'Alcohol',
                                       ];
                                       return RadarChartTitle(
                                         text: title[index],
@@ -340,10 +354,10 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                             getTitlesWidget: (value, meta) {
                                               var title = [
                                                 'Gentle',
-                                                'Boozt',
+                                                'Boozy',
                                                 'Sweet',
                                                 'Dry',
-                                                'Sour',
+                                                'Alcohol',
                                               ];
                                               return SideTitleWidget(
                                                 axisSide: meta.axisSide,
@@ -415,11 +429,11 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                           x: 1,
                                           barRods: [
                                             BarChartRodData(
-                                              toY: 5,
+                                              toY: globals.user_gentle,
                                               color: Colors.blue,
                                             ),
                                             BarChartRodData(
-                                              toY: 4,
+                                              toY: widget.cocktail_gentle,
                                               color: Colors.red,
                                             ),
                                           ],
@@ -430,11 +444,11 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                           x: 2,
                                           barRods: [
                                             BarChartRodData(
-                                              toY: 2,
+                                              toY: globals.user_boozy,
                                               color: Colors.blue,
                                             ),
                                             BarChartRodData(
-                                              toY: 3.5,
+                                              toY: widget.cocktail_boozy,
                                               color: Colors.red,
                                             ),
                                           ],
@@ -445,11 +459,11 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                           x: 3,
                                           barRods: [
                                             BarChartRodData(
-                                              toY: 2.5,
+                                              toY: globals.user_sweet,
                                               color: Colors.blue,
                                             ),
                                             BarChartRodData(
-                                              toY: 4,
+                                              toY: widget.cocktail_sweet,
                                               color: Colors.red,
                                             ),
                                           ],
@@ -460,11 +474,11 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                           x: 4,
                                           barRods: [
                                             BarChartRodData(
-                                              toY: 1.5,
+                                              toY: globals.user_dry,
                                               color: Colors.blue,
                                             ),
                                             BarChartRodData(
-                                              toY: 3,
+                                              toY: widget.cocktail_dry,
                                               color: Colors.red,
                                             ),
                                           ],
@@ -475,11 +489,11 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                           x: 5,
                                           barRods: [
                                             BarChartRodData(
-                                              toY: 4,
+                                              toY: globals.user_alcohol,
                                               color: Colors.blue,
                                             ),
                                             BarChartRodData(
-                                              toY: 1,
+                                              toY: widget.cocktail_alcohol,
                                               color: Colors.red,
                                             ),
                                           ],
@@ -997,7 +1011,7 @@ class _CocktailDetailChartState extends State<CocktailDetailChart> {
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 10,
                                     ),
-                                    child: Text(widget.name),
+                                    child: Text(widget.cocktail_name),
                                   ),
                                   const SizedBox(
                                     width: 20,

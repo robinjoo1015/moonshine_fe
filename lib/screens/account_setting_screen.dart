@@ -36,6 +36,17 @@ class AccountSettingScreen extends StatelessWidget {
       if (decode['status'] == 200) {
         globals.userId = decode['id'];
         globals.userName = decode['name'];
+        final preferenceResponse = await http.get(
+          Uri.parse('$baseUrl/${globals.userId}/preference'),
+        );
+        if (preferenceResponse.statusCode == 200) {
+          var preferenceDecode = jsonDecode(preferenceResponse.body);
+          globals.user_gentle = preferenceDecode['gentle'].toDouble();
+          globals.user_boozy = preferenceDecode['boozy'].toDouble();
+          globals.user_sweet = preferenceDecode['sweet'].toDouble();
+          globals.user_dry = preferenceDecode['dry'].toDouble();
+          globals.user_alcohol = preferenceDecode['alcohol'].toDouble() / 10.0;
+        }
         return 'Success';
       } else {
         return 'Failed';

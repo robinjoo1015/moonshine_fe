@@ -103,7 +103,16 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                       ],
                     ),
                     // Chart
-                    CocktailDetailChart(name: widget.name),
+                    CocktailDetailChart(
+                        cocktail_name: widget.name,
+                        cocktail_gentle: snapshot.data!['tastes']['gentle'].toDouble(),
+                        cocktail_boozy: snapshot.data!['tastes']['boozy'].toDouble(),
+                      cocktail_sweet: snapshot.data!['tastes']['sweet'].toDouble(),
+                      cocktail_dry: snapshot.data!['tastes']['dry'].toDouble(),
+                      cocktail_alcohol: snapshot.data!['tastes']['alcohol'].toDouble() / 10.0,
+
+
+                    ),
                     // Ingredients, Recipe Title
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
