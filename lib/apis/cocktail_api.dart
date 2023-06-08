@@ -5,10 +5,10 @@ import 'package:moonshine_fe/config.dart' as globals;
 
 class CocktailApi {
   // static const baseUrl = 'http://3.135.207.29:3000';
-  static final baseUrl = '${globals.baseUrl}/${globals.userId}';
+  static final baseUrl = globals.baseUrl;
 
   static Future<List<Map<String, dynamic>>> getCocktailList() async {
-    final response = await http.get(Uri.parse('$baseUrl/cocktails'));
+    final response = await http.get(Uri.parse('$baseUrl/cocktails/${globals.userId}'));
     List<Map<String, dynamic>> cocktailList = [];
     if (response.statusCode == 200) {
       cocktailList = (jsonDecode(response.body) as List<dynamic>).cast();
@@ -17,7 +17,7 @@ class CocktailApi {
   }
 
   static Future<Map<String, dynamic>> getDetail(int id) async {
-    final response = await http.get(Uri.parse('$baseUrl/cocktails/get/$id'));
+    final response = await http.get(Uri.parse('$baseUrl/cocktails/${globals.userId}/get/$id'));
     Map<String, dynamic> details = {};
     if (response.statusCode == 200) {
       details = jsonDecode(response.body) as Map<String, dynamic>;
