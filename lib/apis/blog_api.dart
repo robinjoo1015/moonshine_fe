@@ -25,6 +25,26 @@ class BlogApi {
     print(detail);
     return detail;
   }
+
+  static Future<List<Map<String, dynamic>>> getFreeBlogList() async {
+    final response = await http.get(Uri.parse('$baseUrl/4'));
+    List<Map<String, dynamic>> detail = [];
+    if (response.statusCode == 200) {
+      detail = (jsonDecode(response.body) as List<dynamic>).cast();
+    }
+    print(detail);
+    return detail;
+  }
+
+  static Future<Map<String, dynamic>> getFreeBlogDetails(int id) async {
+    final response = await http.get(Uri.parse('$baseUrl/get/4/$id'));
+    Map<String, dynamic> detail = {};
+    if (response.statusCode == 200) {
+      detail = jsonDecode(response.body) as Map<String, dynamic>;
+    }
+    print(detail);
+    return detail;
+  }
 }
 
 class BlogDummyApi {

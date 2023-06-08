@@ -103,7 +103,9 @@ class _BlogTabScreenState extends State<BlogTabScreen>
               BlogTabImageScreen(
                 type: 3,
               ),
-              BlogFreeTabScreen(),
+              BlogFreeTabScreen(
+                type: 4,
+              ),
             ],
           ),
         ),
