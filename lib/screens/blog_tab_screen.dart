@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/blog_tab_image_screen.dart';
 import 'package:moonshine_fe/screens/blog_free_tab_screen.dart';
 
 class BlogTabScreen extends StatefulWidget {
-  const BlogTabScreen({super.key});
+  final Geolocation geolocation;
+  const BlogTabScreen({
+    super.key,
+    required this.geolocation,
+  });
 
   @override
   State<BlogTabScreen> createState() => _BlogTabScreenState();
@@ -93,17 +98,20 @@ class _BlogTabScreenState extends State<BlogTabScreen>
           child: TabBarView(
             controller: _tabController,
             physics: const NeverScrollableScrollPhysics(),
-            children: const [
+            children: [
               BlogTabImageScreen(
                 type: 1,
+                geolocation: widget.geolocation,
               ),
               BlogTabImageScreen(
                 type: 2,
+                geolocation: widget.geolocation,
               ),
               BlogTabImageScreen(
                 type: 3,
+                geolocation: widget.geolocation,
               ),
-              BlogFreeTabScreen(
+              const BlogFreeTabScreen(
                 type: 4,
               ),
             ],

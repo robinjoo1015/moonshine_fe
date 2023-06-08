@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/blog_detail_image_screen.dart';
 import 'package:moonshine_fe/config.dart' as globals;
 
 class BlogTabImageList extends StatelessWidget {
   final int id, type;
   final String imgUrl, name;
+  final Geolocation geolocation;
   const BlogTabImageList({
     super.key,
     required this.id,
     required this.imgUrl,
     required this.name,
     required this.type,
+    required this.geolocation,
   });
 
   @override
@@ -26,6 +29,7 @@ class BlogTabImageList extends StatelessWidget {
                 builder: (context) => BlogDetailImageScreen(
                   id: id,
                   type: type,
+                  geolocation: geolocation,
                 ),
               ),
             );

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/blog_api.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
+import 'package:moonshine_fe/widgets/blog_detail_image_lists_widget.dart';
 import 'package:moonshine_fe/widgets/blog_detail_image_widget.dart';
 
 class BlogDetailImageScreen extends StatefulWidget {
   final int id, type;
+  final Geolocation geolocation;
   const BlogDetailImageScreen({
     super.key,
     required this.id,
     required this.type,
+    required this.geolocation,
   });
 
   @override
@@ -136,6 +140,11 @@ class _BlogDetailImageScreenState extends State<BlogDetailImageScreen> {
                           ),
                         ],
                       ),
+                    ),
+                    BlogDetailImageLists(
+                      type: widget.type,
+                      detail: snapshot.data!,
+                      geolocation: widget.geolocation,
                     ),
                   ],
                 ),

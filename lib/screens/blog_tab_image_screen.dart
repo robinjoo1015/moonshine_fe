@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/blog_api.dart';
+import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/blog_post_screen.dart';
 import 'package:moonshine_fe/widgets/blog_tab_image_list_widget.dart';
 
 class BlogTabImageScreen extends StatefulWidget {
   final int type;
+  final Geolocation geolocation;
   const BlogTabImageScreen({
     super.key,
     required this.type,
+    required this.geolocation,
   });
 
   @override
@@ -55,6 +58,7 @@ class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
                         imgUrl: snapshot.data![index * 2]['url'],
                         name: snapshot.data![index * 2]['title'],
                         type: widget.type,
+                        geolocation: widget.geolocation,
                       ),
                       BlogTabImageList(
                         id: (index * 2 + 1 == snapshot.data!.length)
@@ -67,6 +71,7 @@ class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
                             ? ''
                             : snapshot.data![index * 2 + 1]['title'],
                         type: widget.type,
+                        geolocation: widget.geolocation,
                       ),
                     ],
                   );
