@@ -17,7 +17,6 @@ exports.userCreate = function (req, res) {
 }
 
 exports.getUserPreference = function (req, res) {
-    console.log(req.params.user_id);
     _getUserPreference(req.params.user_id).then((response) => {
         res.send(response);
     }).catch((err) => {

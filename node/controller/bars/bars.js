@@ -4,42 +4,56 @@
 // id, name, images,
 const pgConnection = require("../dbconn");
 exports.getBarList = function (req, res) {
-    console.log("getBarList");
-    _getBarList().then((response) => {
+    _getBarList(req.params.user_id).then((response) => {
         res.send(response);
     }).catch((err) => {
         console.log(err);
     });
 }
 
-async function _getBarList() {
+exports.getBarById = function (req, res) {
+    _getBarById(req.params.user_id, req.params.id).then((response) => {
+        res.send(response);
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+async function _getBarList(user_id) {
     var query = '' +
         'SELECT bar_id, bar_name, image_path FROM moonshine.bars ' +
         'INNER JOIN moonshine.image ' +
         '   ON bars.bar_image = image.image_id';
+
+    var favorite_query = '' +
+        'SELECT bar_id FROM moonshine.bar_favorites ' +
+        'WHERE user_id = ' + user_id;
+    let favorite_result = await pgConnection.query(favorite_query);
+    let favorite_response = [];
+    for (let row of favorite_result.rows) {
+        favorite_response.push(row.bar_id);
+    }
+
     let result = await pgConnection.query(query);
     let response = [];
     for (let row of result.rows) {
+        let bar_id = row.bar_id;
+        let is_favorite = false;
+        if (favorite_response.includes(bar_id)) {
+            is_favorite = true;
+        }
         let component = {
-            id: row.bar_id,
+            id: bar_id,
             name: row.bar_name,
             url: row.image_path,
+            is_favorite: is_favorite,
         }
         response.push(component);
     }
     return response;
 }
 
-exports.getBarById = function (req, res) {
-    _getBarById(req.params.id).then((response) => {
-        console.log(response);
-        res.send(response);
-    }).catch((err) => {
-        console.log(err);
-    });
-}
-
-async function _getBarById(id) {
+async function _getBarById(user_id, id) {
     var query = '' +
         'SELECT * FROM moonshine.bars ' +
         'WHERE bar_id = ' + id;
@@ -81,6 +95,15 @@ async function _getBarById(id) {
         'WHERE bar_id = ' + String(bar_id);
     let blog_result = await pgConnection.query(blog_query);
     var blog_list = [];
+
+    var favorite_query = '' +
+        'SELECT bar_id FROM moonshine.bar_favorites ' +
+        'WHERE user_id = ' + user_id + ' AND bar_id = ' + String(bar_id);
+    let favorite_result = await pgConnection.query(favorite_query);
+    let is_favorite = false;
+    if (favorite_result.rows.length > 0) {
+        is_favorite = true;
+    }
 
 
     for (let row of image_result.rows) {
@@ -125,7 +148,8 @@ async function _getBarById(id) {
         score: bar.bar_score,
         images: image_list,
         menu: menu_list,
-        blog: blog_list
+        blog: blog_list,
+        is_favorite: is_favorite,
     }
     return response;
 }

@@ -8,7 +8,7 @@ class BarApi {
   static final baseUrl = '${globals.baseUrl}/bars';
 
   static Future<List<Map<String, dynamic>>> getBarList() async {
-    final response = await http.get(Uri.parse(baseUrl));
+    final response = await http.get(Uri.parse('$baseUrl/${globals.userId}'));
     List<Map<String, dynamic>> barList = [];
     if (response.statusCode == 200) {
       barList = (jsonDecode(response.body) as List<dynamic>).cast();
@@ -18,7 +18,7 @@ class BarApi {
   }
 
   static Future<Map<String, dynamic>> getDetail(int id) async {
-    final response = await http.get(Uri.parse('$baseUrl/get/$id'));
+    final response = await http.get(Uri.parse('$baseUrl/${globals.userId}/get/$id'));
     Map<String, dynamic> detail = {};
     if (response.statusCode == 200) {
       detail = jsonDecode(response.body) as Map<String, dynamic>;
