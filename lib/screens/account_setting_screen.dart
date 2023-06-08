@@ -47,7 +47,7 @@ class AccountSettingScreen extends StatelessWidget {
           globals.user_dry = preferenceDecode['dry'].toDouble();
           globals.user_alcohol = preferenceDecode['alcohol'].toDouble() / 10.0;
         }
-        return 'Success';
+        return null;
       } else {
         return 'Failed';
       }
@@ -82,7 +82,8 @@ class AccountSettingScreen extends StatelessWidget {
       if (decode['status'] == 200) {
         globals.userId = decode['id'];
         globals.userName = data.additionalSignupData!['name']!;
-        return 'Success';
+        // return 'Success';
+        return null;
       } else {
         return 'Failed';
       }
@@ -101,6 +102,9 @@ class AccountSettingScreen extends StatelessWidget {
         body: Center(
           child: FlutterLogin(
             // onLogin: (_) => Future(() => null),
+            onSubmitAnimationCompleted: () {
+              Navigator.pop(context);
+            },
             onLogin: _authUser,
             onRecoverPassword: (_) => Future(() => null),
             hideForgotPasswordButton: true,

@@ -5,6 +5,7 @@ import 'package:moonshine_fe/screens/account_setting_screen.dart';
 import 'package:moonshine_fe/screens/bar_tab_screen.dart';
 import 'package:moonshine_fe/screens/blog_tab_screen.dart';
 import 'package:moonshine_fe/screens/cocktail_tab_screen.dart';
+import 'package:moonshine_fe/config.dart' as globals;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -100,19 +101,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       endDrawer: Drawer(
         child: Column(
           children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text('AccountName'),
-              accountEmail: Text('AccountEmail'),
-              currentAccountPicture: CircleAvatar(),
+            UserAccountsDrawerHeader(
+              accountName: Text(globals.userName),
+              accountEmail: const Text(''),
+              // currentAccountPicture: const CircleAvatar(),
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(
+              onTap: () async {
+                await Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const AccountSettingScreen(),
                   ),
                 );
+                setState(() {});
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(
