@@ -120,6 +120,28 @@ async function _getCocktail(user_id, id) {
         is_favorite = true;
     }
 
+    const bar_query = '' +
+        'SELECT bars.bar_id, bar_name, image_path FROM moonshine.bar_menu_composition ' +
+        'INNER JOIN moonshine.bars ' +
+        '    ON bar_menu_composition.bar_id = bars.bar_id ' +
+        'INNER JOIN moonshine.image ' +
+        '    ON bars.bar_image = image.image_id ' +
+        'WHERE bar_menu_composition.cocktail_id = ' + String(cocktail_id);
+    let bar_result = await pgConnection.query(bar_query);
+    let bar_list = [];
+
+    const blog_query = '' +
+        'SELECT blog_posts.blog_post_id, blog_post_title, image_path, blog_post_type ' +
+        'FROM moonshine.blog_posts_bar_cocktail_composition ' +
+        'INNER JOIN moonshine.blog_posts ' +
+        'ON blog_posts_bar_cocktail_composition.blog_post_id = blog_posts.blog_post_id ' +
+        'INNER JOIN moonshine.image ' +
+        'ON blog_posts.blog_post_image = image.image_id ' +
+        'WHERE cocktail_id = ' + String(cocktail_id);
+    let blog_result = await pgConnection.query(blog_query);
+    var blog_list = [];
+
+
     for (let row of image_result.rows) {
         let component = {
             url: row.image_path,
@@ -135,12 +157,33 @@ async function _getCocktail(user_id, id) {
         ingredient_list.push(component);
     }
 
+    for (let row of bar_result.rows) {
+        let component = {
+            id: row.bar_id,
+            name: row.bar_name,
+            url: row.image_path,
+        }
+        bar_list.push(component);
+    }
+
+    for (let row of blog_result.rows) {
+        let component = {
+            id: row.blog_post_id,
+            name: row.blog_post_title,
+            url: row.image_path,
+            type: row.blog_post_type,
+        }
+        blog_list.push(component);
+    }
+
     return {
         name: cocktail.cocktail_name,
         images: image_list,
         ingredients: ingredient_list,
         tastes: taste,
         recipe: cocktail.cocktail_instructions,
+        bars: bar_list,
+        blogs: blog_list,
         is_favorite: is_favorite,
     };
 }

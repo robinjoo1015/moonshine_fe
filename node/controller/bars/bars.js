@@ -62,14 +62,15 @@ async function _getBarList(user_id) {
 }
 
 async function _updateFavorite(user_id, id) {
+    console.log(user_id, id)
     let select_query = '' +
         'SELECT * FROM moonshine.bar_favorites ' +
-        'WHERE user_id = ' + userId + ' AND bar_id = ' + id;
+        'WHERE user_id = ' + user_id + ' AND bar_id = ' + id;
     let select_result = await pgConnection.query(select_query);
     if (select_result.rows.length > 0) {
         let delete_query = '' +
             'DELETE FROM moonshine.bar_favorites ' +
-            'WHERE user_id = ' + userId + ' AND bar_id = ' + id;
+            'WHERE user_id = ' + user_id + ' AND bar_id = ' + id;
         let delete_result = await pgConnection.query(delete_query);
         return {
             is_favorite: false,
@@ -77,7 +78,7 @@ async function _updateFavorite(user_id, id) {
     } else {
         let insert_query = '' +
             'INSERT INTO moonshine.bar_favorites (user_id, bar_id) ' +
-            'VALUES (' + userId + ', ' + id + ')';
+            'VALUES (' + user_id + ', ' + id + ')';
         let insert_result = await pgConnection.query(insert_query);
         return {
             is_favorite: true,
@@ -118,7 +119,7 @@ async function _getBarById(user_id, id) {
     var menu_list = [];
 
     var blog_query = '' +
-        'SELECT blog_posts.blog_post_id, blog_post_title, image_path ' +
+        'SELECT blog_posts.blog_post_id, blog_post_title, image_path, blog_post_type ' +
         'FROM moonshine.blog_posts_bar_cocktail_composition ' +
         'INNER JOIN moonshine.blog_posts ' +
             'ON blog_posts_bar_cocktail_composition.blog_post_id = blog_posts.blog_post_id ' +
@@ -162,6 +163,7 @@ async function _getBarById(user_id, id) {
             id: row.blog_post_id,
             title: row.blog_post_title,
             url: row.image_path,
+            type: row.blog_post_type,
         }
         blog_list.push(component);
         console.log(component);
@@ -180,7 +182,7 @@ async function _getBarById(user_id, id) {
         score: bar.bar_score,
         images: image_list,
         menu: menu_list,
-        blog: blog_list,
+        blogs: blog_list,
         is_favorite: is_favorite,
     }
     return response;
