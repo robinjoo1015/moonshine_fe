@@ -19,6 +19,14 @@ exports.getBarById = function (req, res) {
     });
 }
 
+exports.updateFavorite = function (req, res) {
+    _updateFavorite(req.params.user_id, req.params.id).then((response) => {
+        res.send(response);
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
 async function _getBarList(user_id) {
     var query = '' +
         'SELECT bar_id, bar_name, image_path FROM moonshine.bars ' +
@@ -51,6 +59,30 @@ async function _getBarList(user_id) {
         response.push(component);
     }
     return response;
+}
+
+async function _updateFavorite(user_id, id) {
+    let select_query = '' +
+        'SELECT * FROM moonshine.bar_favorites ' +
+        'WHERE user_id = ' + userId + ' AND bar_id = ' + id;
+    let select_result = await pgConnection.query(select_query);
+    if (select_result.rows.length > 0) {
+        let delete_query = '' +
+            'DELETE FROM moonshine.bar_favorites ' +
+            'WHERE user_id = ' + userId + ' AND bar_id = ' + id;
+        let delete_result = await pgConnection.query(delete_query);
+        return {
+            is_favorite: false,
+        }
+    } else {
+        let insert_query = '' +
+            'INSERT INTO moonshine.bar_favorites (user_id, bar_id) ' +
+            'VALUES (' + userId + ', ' + id + ')';
+        let insert_result = await pgConnection.query(insert_query);
+        return {
+            is_favorite: true,
+        }
+    }
 }
 
 async function _getBarById(user_id, id) {

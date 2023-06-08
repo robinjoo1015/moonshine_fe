@@ -53,13 +53,13 @@ async function _userCreate(body) {
     const email = body.email;
     const password = body.password;
 
-    let query = '' +
+    let insert_query = '' +
         'INSERT INTO moonshine.users (user_name, user_email, user_password) ' +
         'VALUES ($1, $2, $3)';
 
     let result = null;
     try{
-        result = await pgConnection.query(query, [name, email, password]);
+        result = await pgConnection.query(insert_query, [name, email, password]);
     } catch (err) {
         return {
             status: 404,
@@ -71,11 +71,11 @@ async function _userCreate(body) {
     let preference_result = await pgConnection.query(preference_insert_query);
     let preference_id = preference_result.rows[0].taste_id;
 
-    query = '' +
+    let select_query = '' +
         'SELECT user_id FROM moonshine.users ' +
         'WHERE user_email = $1';
 
-    result = await pgConnection.query(query, [email]);
+    result = await pgConnection.query(select_query, [email]);
 
     let preference_composition_query = '' +
         'INSERT INTO moonshine.user_taste_composition (user_id, taste_id) VALUES ' +
