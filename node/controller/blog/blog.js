@@ -51,11 +51,29 @@ exports.createBlog = function (req, res) {
             }).catch((err) => {
                 console.log(err);
             });
+            break;
+        case '2':
+            console.log(req.body);
+            break;
+        case '3':
+            console.log(req.body);
+            break;
+        case '4':
+            console.log(req.body);
+            break;
     }
 
     return {
         status: 200,
     };
+}
+
+exports.createComment = function (req, res) {
+    _createSmallBlogComment(req.params.blogId, req.body).then((response) => {
+        res.send(response);
+    }).catch((err) => {
+        console.log(err);
+    });
 }
 
 async function _getBlogList(blogType) {
@@ -111,7 +129,7 @@ async function _getBlogByIdTypeBarBlog(blogId) {
     result = result.rows[0];
 
     let image_query = '' +
-        'SELECT image_path, blog_post_image_comment FROM moonshine.blog_post_image_composition ' +
+        'SELECT image_path FROM moonshine.blog_post_image_composition ' +
         'INNER JOIN moonshine.image ' +
         '   ON blog_post_image_composition.image_id = image.image_id ' +
         'WHERE blog_post_id = ' + blogId;
@@ -119,7 +137,6 @@ async function _getBlogByIdTypeBarBlog(blogId) {
     let images = [];
     images.push({
         url: result.image_path,
-        comment: "thumbnail"
     });
 
     let cocktails_query = '' +
@@ -134,7 +151,6 @@ async function _getBlogByIdTypeBarBlog(blogId) {
     for (let row of image_result.rows) {
         var component = {
             url: row.image_path,
-            comment: row.blog_post_image_comment,
         };
         images.push(component);
     }
@@ -175,7 +191,7 @@ async function _getBlogByIdTypeCocktailBlog(blogId) {
     result = result.rows[0];
 
     let image_query = '' +
-        'SELECT image_path, blog_post_image_comment FROM moonshine.blog_post_image_composition ' +
+        'SELECT image_path FROM moonshine.blog_post_image_composition ' +
         'INNER JOIN moonshine.image ' +
         '   ON blog_post_image_composition.image_id = image.image_id ' +
         'WHERE blog_post_id = ' + blogId;
@@ -183,7 +199,6 @@ async function _getBlogByIdTypeCocktailBlog(blogId) {
     let images = [];
     images.push({
         url: result.image_path,
-        comment: "thumbnail"
     });
 
     let bar_query = '' +
@@ -198,7 +213,6 @@ async function _getBlogByIdTypeCocktailBlog(blogId) {
     for (let row of image_result.rows) {
         var component = {
             url: row.image_path,
-            comment: row.blog_post_image_comment,
         };
         images.push(component);
     }
@@ -241,7 +255,7 @@ async function _getBlogByIdTypeCustomBlog(blogId) {
     result = result.rows[0];
 
     let image_query = '' +
-        'SELECT image_path, blog_post_image_comment FROM moonshine.blog_post_image_composition ' +
+        'SELECT image_path FROM moonshine.blog_post_image_composition ' +
         'INNER JOIN moonshine.image ' +
         '   ON blog_post_image_composition.image_id = image.image_id ' +
         'WHERE blog_post_id = ' + blogId;
@@ -249,7 +263,6 @@ async function _getBlogByIdTypeCustomBlog(blogId) {
     let images = [];
     images.push({
         url: result.image_path,
-        comment: "thumbnail"
     });
 
     let cocktail_query = '' +
@@ -263,7 +276,6 @@ async function _getBlogByIdTypeCustomBlog(blogId) {
     for (let row of image_result.rows) {
         var component = {
             url: row.image_path,
-            comment: row.blog_post_image_comment,
         };
         images.push(component);
     }
@@ -322,8 +334,51 @@ async function _createBarBlog(body) {
     const title = body.title;
     const content = body.content;
     const userId = body.userId;
+    const thumbnail = body.thumbnail;
+    const imageList = JSON.parse(body.images);
     const selectionData = JSON.parse(body.selectionData);
     const bar_id = selectionData.mainSelection;
+    const ratingList = JSON.parse(selectionData.ratingList);
+    console.log(thumbnail);
+    console.log(imageList);
+
+    let blog_insert_query = '' +
+        'INSERT INTO moonshine.blog_posts (blog_post_title, blog_post_content, blog_post_user_id, blog_post_image, blog_post_type) ' +
+        'VALUES ($1, $2, $3, $4, $5) RETURNING blog_post_id';
+
+    let blog_insert_result = await pgConnection.query(blog_insert_query, [title, content, userId, bar_id, 1]);
+    let blogId = blog_insert_result.rows[0].blog_post_id;
+
+    let blog_bar_cocktail_insert_query = '' +
+        'INSERT INTO moonshine.blog_posts_bar_cocktail_composition (blog_post_id, bar_id, cocktail_id, bar_cocktail_score) ' +
+        'VALUES (' + blogId + ', ' + bar_id + ', ' + '$1, $2)';
+
+    let blog_image_insert_query = '' +
+        'INSERT INTO moonshine.blog_post_image_composition (blog_post_id, image_id) ' +
+        'VALUES (' + blogId + ', $1)';
+
+
+    for (let row of ratingList) {
+        await pgConnection.query(blog_bar_cocktail_insert_query, [row.id, row.rating]);
+    }
+
+    for (let id of imageList) {
+        await pgConnection.query(blog_image_insert_query, [id]);
+    }
+
+    return {
+        status: 200,
+        blogId: blogId,
+    };
+}
+
+async function _createCocktailBlog(body) {
+    console.log(body);
+    const title = body.title;
+    const content = body.content;
+    const userId = body.userId;
+    const selectionData = JSON.parse(body.selectionData);
+    const cocktail_id = selectionData.mainSelection;
     const ratingList = JSON.parse(selectionData.ratingList);
     console.log(ratingList);
 
@@ -331,12 +386,12 @@ async function _createBarBlog(body) {
     //     'INSERT INTO moonshine.blog_posts (blog_post_title, blog_post_content, blog_post_user_id, blog_post_image, blog_post_type) ' +
     //     'VALUES ($1, $2, $3, $4, $5) RETURNING blog_post_id';
     //
-    // let blog_insert_result = await pgConnection.query(blog_insert_query, [title, content, userId, bar_id, 1]);
+    // let blog_insert_result = await pgConnection.query(blog_insert_query, [title, content, userId, bar_id, 2]);
     // let blogId = blog_insert_result.rows[0].blog_post_id;
     //
     // let blog_bar_cocktail_insert_query = '' +
     //     'INSERT INTO moonshine.blog_posts_bar_cocktail_composition (blog_post_id, bar_id, cocktail_id, bar_cocktail_score) ' +
-    //     'VALUES (' + blogId + ', ' + bar_id + ', ' + '$1, $2)';
+    //     'VALUES (' + blogId + ', $1, ' + cocktail_id + ', $2)';
 
     // for (let row of ratingList) {
     //     await pgConnection.query(blog_bar_cocktail_insert_query, [row.id, row.rating]);
@@ -346,4 +401,26 @@ async function _createBarBlog(body) {
         status: 200,
         blogId: blogId,
     };
+}
+
+async function _createSmallBlog(body) {
+    console.log(body);
+    const content = body.content;
+    const userId = body.userId;
+
+    let blog_insert_query = '' +
+        'INSERT INTO moonshine.blog_small_post (blog_small_post_content, blog_small_post_user_id) ' +
+        'VALUES ($1, $2) RETURNING blog_small_post_id';
+
+    let blog_insert_result = await pgConnection.query(blog_insert_query, [content, userId]);
+    let blogId = blog_insert_result.rows[0].blog_small_post_id;
+
+    return {
+        status: 200,
+        blogId: blogId,
+    };
+}
+
+async function _createSmallBlogComment(blog_id, body) {
+    console.log(body);
 }

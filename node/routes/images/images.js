@@ -6,6 +6,7 @@ const controller = require("../../controller/images/images");
 // router.get("/", controller.getImageList);
 
 router.get("/get/:id", controller.getImageById);
+router.post("/upload", controller.uploadImage);
 router.get("/DEBUG/download", controller.downloadFullImage);
 router.get("/DEBUG/update/:id", controller.updateOneImage);
 router.get("/DEBUG/update/from/:from/to/:to", controller.updateRangeImage);

@@ -11,6 +11,7 @@ exports.getImageById = function (req, res) {
         console.log(err);
     });
 }
+
 async function _getImageById(imageId) {
     const query = '' +
         'SELECT image_path FROM moonshine.image ' +
@@ -47,6 +48,54 @@ exports.updateRangeImage = function (req, res) {
     });
 }
 
+
+let image_id_list = [];
+
+exports.uploadImage = async function (req, res) {
+    image_id_list = [];
+    let ending = "";
+    let insert_query = '' +
+        'INSERT INTO moonshine.image (image_path) ' +
+        'VALUES ($1) ' +
+        'RETURNING image_id';
+
+    let update_query = '' +
+        'UPDATE moonshine.image ' +
+        'SET image_path = $1 ' +
+        'WHERE image_id = $2';
+
+    await multer({
+        storage: multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, process.env.FILE_PATH);
+            },
+            filename: async function (req, file, cb) {
+                let name = file.originalname.split('.')[0];
+                ending = file.originalname.split('.')[file.originalname.split('.').length - 1];
+                ending = ending.toLowerCase();
+                if (ending !== "jpg" && ending !== "png" && ending !== "jpeg" && ending !== "webp") {
+                    console.log("Not an image: " + name);
+                    req.fileValidationError = 'Not an image';
+                }
+                let result = await pgConnection.query(insert_query, [name + '.' + ending]);
+                let image_id = result.rows[0].image_id;
+                image_id_list.push(image_id);
+
+                let image_path = image_id + '.' + ending;
+                await pgConnection.query(update_query, [image_path, image_id]);
+                cb(null, image_path);
+            },
+        }),
+    }
+    ).any('file')(req, res, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(image_id_list);
+        }
+    });
+}
+
 async function _updateOneImage(id) {
     const query = '' +
         'SELECT image_path FROM moonshine.image ' +
@@ -61,6 +110,7 @@ async function _updateOneImage(id) {
         console.log(err);
     });
 }
+
 const downloadUrl = (url, image_path) =>
     axios({
         url,
@@ -120,8 +170,7 @@ async function _downloadOneImage(component) {
     ending = ending.toLowerCase();
     if (ending !== "jpg" && ending !== "png" && ending !== "jpeg" && ending !== "webp") {
         console.log("Not an image: " + loading_path + " from image_id " + component.name);
-    }
-    else save_path += "." + ending;
+    } else save_path += "." + ending;
     if (fs.existsSync(save_path)) {
         let path = component.name + "." + ending;
         result = updatePath(component.name, path);
@@ -150,3 +199,11 @@ async function updatePath(imageId, path) {
     let result = await pgConnection.query(query, [path, imageId]);
     return result;
 }
+
+const multer = require('multer');
+//
+// async function _uploadImage(req, res) {
+//
+//
+//     return result;
+// }
