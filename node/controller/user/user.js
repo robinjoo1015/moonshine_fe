@@ -1,6 +1,4 @@
 const pgConnection = require('../dbconn');
-const fs = require("fs");
-const axios = require("axios");
 
 exports.userLogin = function (req, res) {
     _userLogin(req.body).then((response) => {
@@ -18,6 +16,15 @@ exports.userCreate = function (req, res) {
     });
 }
 
+exports.getUserPreference = function (req, res) {
+    console.log(req.params.user_id);
+    _getUserPreference(req.params.user_id).then((response) => {
+        res.send(response);
+    }).catch((err) => {
+        console.log(err);
+    });
+
+}
 async function _userLogin(body) {
     const email = body.email;
     const password = body.password;
@@ -39,7 +46,7 @@ async function _userLogin(body) {
         status: 200,
         id: result.rows[0].user_id,
         name: result.rows[0].user_name,
-    }
+    };
 }
 
 async function _userCreate(body) {
@@ -70,5 +77,34 @@ async function _userCreate(body) {
     return {
         status: 200,
         id: result.rows[0].user_id,
+    };
+}
+
+async function _getUserPreference(user_id) {
+    let query = '' +
+        'SELECT gentle, boozy, sweet, dry, alcohol ' +
+        'FROM moonshine.user_taste_composition ' +
+        '         INNER JOIN moonshine.tastes ' +
+        '                    ON user_taste_composition.taste_id = tastes.taste_id ' +
+        'WHERE user_id = ' + user_id;
+
+    let result = await pgConnection.query(query);
+
+    if (result.length === 0) {
+        return {
+            gentle: 0,
+            boozy: 0,
+            sweet: 0,
+            dry: 0,
+            alcohol: 0,
+        }
     }
+
+    return {
+        gentle: result.rows[0].gentle,
+        boozy: result.rows[0].boozy,
+        sweet: result.rows[0].sweet,
+        dry: result.rows[0].dry,
+        alcohol: result.rows[0].alcohol,
+    };
 }

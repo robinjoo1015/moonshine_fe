@@ -5,9 +5,6 @@ const pgConnection = new Client({
 })
 
 pgConnection.connect();
-pgConnection.query("SELECT NOW()", (err, res) => {
-    console.log(err, res);
-});
 
 pgConnection.query("SET search_path = \"moonshine\"", (err, res) => {
     console.log(err, res);
