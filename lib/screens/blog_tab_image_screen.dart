@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/blog_api.dart';
+import 'package:moonshine_fe/screens/blog_post_screen.dart';
 import 'package:moonshine_fe/widgets/blog_tab_image_list_widget.dart';
 
 class BlogTabImageScreen extends StatefulWidget {
@@ -79,30 +80,42 @@ class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
                         child: SizedBox(
                           width: 120,
                           height: 50,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.red.shade700,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.edit_document,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  '글 작성하기',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlogPostScreen(
+                                    type: widget.type,
                                   ),
                                 ),
-                              ],
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.red.shade700,
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(
+                                    Icons.edit_document,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    '글 작성하기',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

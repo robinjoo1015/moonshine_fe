@@ -93,7 +93,7 @@ class _BlogTabScreenState extends State<BlogTabScreen>
           child: TabBarView(
             controller: _tabController,
             physics: const NeverScrollableScrollPhysics(),
-            children: [
+            children: const [
               BlogTabImageScreen(
                 type: 1,
               ),
