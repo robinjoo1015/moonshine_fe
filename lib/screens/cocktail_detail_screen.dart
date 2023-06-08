@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
+import 'package:moonshine_fe/widgets/cocktail_detail_blog_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_chart_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_cocktail_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_image_widget.dart';
@@ -104,14 +105,16 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                     ),
                     // Chart
                     CocktailDetailChart(
-                        cocktail_name: widget.name,
-                        cocktail_gentle: snapshot.data!['tastes']['gentle'].toDouble(),
-                        cocktail_boozy: snapshot.data!['tastes']['boozy'].toDouble(),
-                      cocktail_sweet: snapshot.data!['tastes']['sweet'].toDouble(),
+                      cocktail_name: widget.name,
+                      cocktail_gentle:
+                          snapshot.data!['tastes']['gentle'].toDouble(),
+                      cocktail_boozy:
+                          snapshot.data!['tastes']['boozy'].toDouble(),
+                      cocktail_sweet:
+                          snapshot.data!['tastes']['sweet'].toDouble(),
                       cocktail_dry: snapshot.data!['tastes']['dry'].toDouble(),
-                      cocktail_alcohol: snapshot.data!['tastes']['alcohol'].toDouble() / 10.0,
-
-
+                      cocktail_alcohol:
+                          snapshot.data!['tastes']['alcohol'].toDouble() / 10.0,
                     ),
                     // Ingredients, Recipe Title
                     Padding(
@@ -260,35 +263,35 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                     CocktailDetailCocktailList(
                       geolocation: widget.geolocation,
                     ),
-                    // User Recipes Title
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                          child: Text(
-                            'User Recipes',
-                            style: TextStyle(
-                              fontFamily: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .fontFamily,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // User Recipes List
-                    Row(
-                      children: const [
-                        Expanded(
-                          child: Center(
-                            child: Text('User Recipes List'),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // // User Recipes Title
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   children: [
+                    //     Padding(
+                    //       padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    //       child: Text(
+                    //         'User Recipes',
+                    //         style: TextStyle(
+                    //           fontFamily: Theme.of(context)
+                    //               .textTheme
+                    //               .bodyMedium!
+                    //               .fontFamily,
+                    //           fontSize: 20,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // // User Recipes List
+                    // Row(
+                    //   children: const [
+                    //     Expanded(
+                    //       child: Center(
+                    //         child: Text('User Recipes List'),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     // Blogs Title
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -309,14 +312,18 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                       ],
                     ),
                     // Blogs List
-                    Row(
-                      children: const [
-                        Expanded(
-                          child: Center(
-                            child: Text('Blogs List'),
-                          ),
-                        ),
-                      ],
+                    // Row(
+                    //   children: const [
+                    //     Expanded(
+                    //       child: Center(
+                    //         child: Text('Blogs List'),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    CocktailDetailBlogList(
+                      blogList: snapshot.data!['blogs'],
+                      geolocation: widget.geolocation,
                     ),
                     // SizedBox
                     const SizedBox(
