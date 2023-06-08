@@ -30,38 +30,88 @@ class _BlogTabImageScreenState extends State<BlogTabImageScreen> {
       future: blogList,
       builder: ((context, snapshot) {
         if (snapshot.hasData) {
-          return ListView.separated(
-            scrollDirection: Axis.vertical,
-            itemCount: snapshot.data!.length ~/ 2,
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 10,
-            ),
-            physics: const BouncingScrollPhysics(),
-            separatorBuilder: (context, index) {
-              return const SizedBox(
-                height: 0,
-              );
-            },
-            itemBuilder: (context, index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          return Stack(
+            children: [
+              ListView.separated(
+                scrollDirection: Axis.vertical,
+                itemCount: snapshot.data!.length ~/ 2,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 10,
+                ),
+                physics: const BouncingScrollPhysics(),
+                separatorBuilder: (context, index) {
+                  return const SizedBox(
+                    height: 0,
+                  );
+                },
+                itemBuilder: (context, index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      BlogTabImageList(
+                        id: snapshot.data![index * 2]['id']!,
+                        imgUrl: snapshot.data![index * 2]['url'],
+                        name: snapshot.data![index * 2]['title'],
+                        type: widget.type,
+                      ),
+                      BlogTabImageList(
+                        id: snapshot.data![index * 2 + 1]['id']!,
+                        imgUrl: snapshot.data![index * 2 + 1]['url'],
+                        name: snapshot.data![index * 2 + 1]['title'],
+                        type: widget.type,
+                      ),
+                    ],
+                  );
+                },
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  BlogTabImageList(
-                    id: snapshot.data![index * 2]['id']!,
-                    imgUrl: snapshot.data![index * 2]['url'],
-                    name: snapshot.data![index * 2]['title'],
-                    type: widget.type,
+                  Expanded(
+                    child: Container(),
                   ),
-                  BlogTabImageList(
-                    id: snapshot.data![index * 2 + 1]['id']!,
-                    imgUrl: snapshot.data![index * 2 + 1]['url'],
-                    name: snapshot.data![index * 2 + 1]['title'],
-                    type: widget.type,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(30),
+                        child: SizedBox(
+                          width: 120,
+                          height: 50,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.red.shade700,
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.edit_document,
+                                  color: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '글 작성하기',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
-              );
-            },
+              )
+            ],
           );
         } else {
           return const Center(

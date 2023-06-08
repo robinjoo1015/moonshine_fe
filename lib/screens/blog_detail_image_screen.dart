@@ -55,8 +55,8 @@ class _BlogDetailImageScreenState extends State<BlogDetailImageScreen> {
                 child: Column(
                   children: [
                     // Image
-                    const BlogDetailImage(
-                      imgList: [],
+                    BlogDetailImage(
+                      imgList: snapshot.data!['images']!,
                     ),
                     // Title
                     Row(
@@ -68,7 +68,7 @@ class _BlogDetailImageScreenState extends State<BlogDetailImageScreen> {
                             vertical: 10,
                           ),
                           child: Text(
-                            'Title',
+                            snapshot.data!['title'],
                             style: TextStyle(
                               fontFamily: Theme.of(context)
                                   .textTheme
@@ -91,7 +91,7 @@ class _BlogDetailImageScreenState extends State<BlogDetailImageScreen> {
                             vertical: 10,
                           ),
                           child: Text(
-                            'User',
+                            snapshot.data!['author'],
                             style: TextStyle(
                               fontFamily: Theme.of(context)
                                   .textTheme
@@ -108,7 +108,9 @@ class _BlogDetailImageScreenState extends State<BlogDetailImageScreen> {
                             vertical: 10,
                           ),
                           child: Text(
-                            'Timestamp',
+                            snapshot.data!['timestamp'].substring(0, 10) +
+                                ' ' +
+                                snapshot.data!['timestamp'].substring(11, 16),
                             style: TextStyle(
                               fontFamily: Theme.of(context)
                                   .textTheme
@@ -128,9 +130,9 @@ class _BlogDetailImageScreenState extends State<BlogDetailImageScreen> {
                         vertical: 20,
                       ),
                       child: Row(
-                        children: const [
+                        children: [
                           Expanded(
-                            child: Text('Content'),
+                            child: Text(snapshot.data!['content']),
                           ),
                         ],
                       ),

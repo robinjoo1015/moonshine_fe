@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class BlogDetailImage extends StatefulWidget {
-  final List<String> imgList;
+  final List<dynamic> imgList;
   const BlogDetailImage({
     super.key,
     required this.imgList,
@@ -53,7 +53,7 @@ class _BlogDetailImageState extends State<BlogDetailImage> {
                             height: size,
                             width: size,
                             child: Image(
-                              image: AssetImage(item),
+                              image: AssetImage('assets/image/${item["url"]}'),
                               width: size,
                               height: size,
                               fit: BoxFit.fitHeight,
