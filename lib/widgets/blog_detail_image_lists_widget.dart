@@ -222,7 +222,7 @@ class BlogDetailImageLists extends StatelessWidget {
                                     return Flex(
                                       direction: Axis.horizontal,
                                       children: [
-                                        BarTabItem(
+                                        CocktailTabItem(
                                           id: item['id']!,
                                           imgUrl: item['url']!,
                                           name: item['name']!,
@@ -291,7 +291,7 @@ class BlogDetailImageLists extends StatelessWidget {
                                 // height: size / 2,
                                 // width: size / 2,
                                 children: [
-                                  CocktailTabItem(
+                                  BarTabItem(
                                     id: item['id'],
                                     imgUrl: item['url']!,
                                     name: item['name']!,
