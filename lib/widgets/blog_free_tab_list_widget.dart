@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/screens/blog_free_detail_screen.dart';
-import 'package:moonshine_fe/screens/blog_free_tab_screen.dart';
 
 class BlogFreeTabList extends StatelessWidget {
   final int id;
@@ -28,7 +27,9 @@ class BlogFreeTabList extends StatelessWidget {
             );
           },
           child: LayoutBuilder(builder: (context, constraints) {
-            return Text(content);
+            return Text(
+              content.length > 40 ? '${content.substring(0, 40)}...' : content,
+            );
           }),
         ));
   }
