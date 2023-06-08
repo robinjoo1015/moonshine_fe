@@ -7,4 +7,6 @@ router.get("/:user_id", controller.getBarList);
 
 router.get("/:user_id/get/:id", controller.getBarById);
 
+
+
 module.exports = router;

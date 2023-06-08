@@ -18,6 +18,14 @@ exports.getCocktailByID = function (req, res) {
     });
 };
 
+exports.updateFavorite = function (req, res) {
+    _updateFavorite(req.params.user_id, req.params.id).then((response) => {
+        res.send(response);
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
 
 async function _getCocktailList(user_id) {
     var query = '' +
@@ -137,3 +145,26 @@ async function _getCocktail(user_id, id) {
     };
 }
 
+async function _updateFavorite(userId, id){
+    let select_query = '' +
+        'SELECT * FROM moonshine.cocktail_favorites ' +
+        'WHERE user_id = ' + userId + ' AND cocktail_id = ' + id;
+    let select_result = await pgConnection.query(select_query);
+    if (select_result.rows.length > 0) {
+        let delete_query = '' +
+            'DELETE FROM moonshine.cocktail_favorites ' +
+            'WHERE user_id = ' + userId + ' AND cocktail_id = ' + id;
+        let delete_result = await pgConnection.query(delete_query);
+        return {
+            is_favorite: false,
+        }
+    } else {
+        let insert_query = '' +
+            'INSERT INTO moonshine.cocktail_favorites (user_id, cocktail_id) ' +
+            'VALUES (' + userId + ', ' + id + ')';
+        let insert_result = await pgConnection.query(insert_query);
+        return {
+            is_favorite: true,
+        }
+    }
+}
