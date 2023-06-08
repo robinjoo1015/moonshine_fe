@@ -4,6 +4,7 @@ import 'package:moonshine_fe/apis/bar_api.dart';
 import 'package:moonshine_fe/apis/favorite_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/map_screen.dart';
+import 'package:moonshine_fe/widgets/bar_detail_blog_list_widget.dart';
 import 'package:moonshine_fe/widgets/bar_detail_image_widget.dart';
 
 class BarDetailScreen extends StatefulWidget {
@@ -389,6 +390,11 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                           ),
                         ),
                       ],
+                    ),
+                    // Blogs
+                    BarDetailBlogList(
+                      blogList: snapshot.data!['blogs'],
+                      geolocation: widget.geolocation,
                     ),
                   ],
                 ),
