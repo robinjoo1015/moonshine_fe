@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moonshine_fe/widgets/blog_post_select_widget.dart';
 
 class BlogPostScreen extends StatelessWidget {
   final int type;
@@ -23,61 +24,72 @@ class BlogPostScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
-            ),
-            child: SizedBox(
-              height: 50,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: '제목',
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 10,
+              ),
+              child: SizedBox(
+                height: 50,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: '제목',
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final height = constraints.maxHeight;
-                return SizedBox(
-                  height: height - 200,
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      // vertical: 10,
-                      horizontal: 10,
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: '내용',
-                      ),
-                      expands: true,
-                      maxLines: null,
-                    ),
-                  ),
-                );
-              },
+            const Padding(
+              padding: EdgeInsets.symmetric(
+                // vertical: 10,
+                horizontal: 10,
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: '내용',
+                ),
+                // expands: true,
+                maxLines: null,
+              ),
             ),
-          ),
-          Expanded(
-            child: Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 10,
                 horizontal: 10,
               ),
-              child: Column(
-                children: const [],
+              child: BlogPostSelect(
+                type: type,
               ),
             ),
-          ),
-          const SizedBox(
-            height: 100,
-          ),
-        ],
+            SizedBox(
+              height: 70,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 20,
+                ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      height: 50,
+                      width: 100,
+                      child: Container(
+                        color: Colors.black12,
+                        child: const Center(
+                          child: Text('사진 추가'),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
