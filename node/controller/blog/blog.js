@@ -274,9 +274,29 @@ async function _getSmallBlogById(blogId){
     let result = await pgConnection.query(query);
     result = result.rows[0];
 
+    let comment_query = '' +
+        'SELECT user_name, blog_small_post_comment_content, blog_small_post_comment_updated_at ' +
+        'FROM moonshine.blog_small_post_comment ' +
+        'INNER JOIN moonshine.users ' +
+        'ON moonshine.blog_small_post_comment.user_id = moonshine.users.user_id ' +
+        'WHERE blog_small_post_id = ' + blogId;
+
+    let comment_result = await pgConnection.query(comment_query);
+    let comments = [];
+
+    for (let row of comment_result.rows) {
+        const component = {
+            author: row.user_name,
+            content: row.blog_small_post_comment_content,
+            timestamp: row.blog_small_post_comment_updated_at,
+        }
+        comments.push(component);
+    }
+
     return {
         content: result.blog_small_post_content,
         author: result.user_name,
         timestamp: result.blog_small_post_updated_at,
+        comments: comments,
     };
 }

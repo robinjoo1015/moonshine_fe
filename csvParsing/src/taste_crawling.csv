@@ -1,0 +1,172 @@
+,name,alcohol,gentle,boozy,sweet,dry
+0,A1,28,0,0,0,0
+1,ABC,22,3,3,3,3
+2,Ace,30,0,0,0,0
+3,ACID,26,3,3,3,3
+4,Adam,31,1,1,1,1
+5,AT&T,33,0,0,0,0
+6,A. J.,14,3,3,3,3
+7,Affair,11,4,4,4,4
+8,Addison,24,0,0,0,0
+9,Acapulco,12,4,4,4,4
+10,Affinity,20,2,2,2,2
+11,Aviation,19,3,3,3,3
+12,Applejack,30,0,0,0,0
+13,Afternoon,12,2,2,2,2
+14,Alexander,19,5,5,5,5
+15,Allegheny,19,4,4,4,4
+16,Americano,19,3,3,3,3
+17,B-52,24,0,0,0,0
+18,B-53,24,0,0,0,0
+19,Bijou,29,1,1,1,1
+20,Boxcar,20,4,4,4,4
+21,Bellini,5,6,6,6,6
+22,Bramble,16,0,0,0,0
+23,Brooklyn,25,1,1,1,1
+24,Bora Bora,0,0,0,0,0
+25,Boomerang,17,0,0,0,0
+26,Barracuda,15,3,3,3,3
+27,Blackthorn,25,3,3,3,3
+28,Boston Sour,17,3,3,3,3
+29,Bahama Mama,8,4,4,4,4
+30,Casino,25,2,2,2,2
+31,Caipirinha,31,6,6,6,6
+32,Cream Soda,0,0,0,0,0
+33,Cuba Libre,11,4,4,4,4
+34,Clover Club,20,4,4,4,4
+35,Chicago Fizz,11,5,5,5,5
+36,Cosmopolitan,16,0,0,0,0
+37,Corpse Reviver,17,0,0,0,0
+38,Coffee Liqueur,29,0,0,0,0
+39,Derby,17,4,4,4,4
+40,Daiquiri,18,3,3,3,3
+41,Dry Martini,35,9,9,9,9
+42,Dubonnet Cocktail,21,3,3,3,3
+43,Death in the Afternoon,12,2,2,2,2
+44,Espresso Martini,20,4,4,4,4
+45,Espresso Rumtini,19,4,4,4,4
+46,Foxy Lady,16,0,0,0,0
+47,French 75,16,3,3,3,3
+48,Frisco Sour,19,3,3,3,3
+49,French Martini,17,4,4,4,4
+50,Flying Dutchman,25,1,1,1,1
+51,Frozen Daiquiri,16,4,4,4,4
+52,French Connection,30,3,3,3,3
+53,GG,21,2,2,2,2
+54,Gimlet,20,2,2,2,2
+55,Godchild,32,3,3,3,3
+56,Gin Fizz,0,5,5,5,5
+57,Gin Sour,18,3,3,3,3
+58,Godmother,30,3,3,3,3
+59,Godfather,27,1,1,1,1
+60,Gin Tonic,10,4,4,4,4
+61,Gin Toddy,11,0,0,0,0
+62,Gin Smash,22,2,2,2,2
+63,Gin Daisy,28,0,0,0,0
+64,Gin Sling,0,0,0,0,0
+65,Greyhound,15,4,4,4,4
+66,Gin Rickey,18,4,4,4,4
+67,Grasshopper,15,6,6,6,6
+68,H.D.,0,0,0,0,0
+69,Honey Bee,19,2,2,2,2
+70,Harvey Wallbanger,15,3,3,3,3
+71,Hawaiian Cocktail,19,3,3,3,3
+72,Hemingway Special,19,2,2,2,2
+73,Iced Coffee,5,8,8,8,8
+74,Irish Cream,25,0,0,0,0
+75,Irish Coffee,7,5,5,5,5
+76,Jelly Bean,18,6,6,6,6
+77,John Collins,13,3,3,3,3
+78,Jack Rose Cocktail,17,2,2,2,2
+79,Kir,26,3,3,3,3
+80,Kamikaze,16,0,0,0,0
+81,Kir Royale,11,6,6,6,6
+82,Kentucky Colonel,33,1,1,1,1
+83,Limeade,0,10,10,10,10
+84,Lemon Drop,21,0,0,0,0
+85,Long Island Iced Tea,10,6,6,6,6
+86,Mojito,14,2,2,2,2
+87,Mimosa,5,8,8,8,8
+88,Mai Tai,15,2,2,2,2
+89,Martini,33,0,0,0,0
+90,Michelada,0,7,7,7,7
+91,Manhattan,20,2,2,2,2
+92,Mint Julep,23,3,3,3,3
+93,Moscow Mule,11,5,5,5,5
+94,Mulled Wine,0,0,0,0,0
+95,Monkey Gland,24,2,2,2,2
+96,Mary Pickford,17,4,4,4,4
+97,Monkey Wrench,0,0,0,0,0
+98,Negroni,26,3,3,3,3
+99,New York Sour,15,4,4,4,4
+100,Orgasm,14,4,4,4,4
+101,Old Pal,0,0,0,0,0
+102,Old Fashioned,28,0,0,0,0
+103,Paloma,9,4,4,4,4
+104,Paradise,16,4,4,4,4
+105,Pink Gin,22,2,2,2,2
+106,Pegu Club,24,3,3,3,3
+107,Pink Lady,18,2,2,2,2
+108,Penicillin,18,2,2,2,2
+109,Pisco Sour,16,3,3,3,3
+110,Pina Colada,12,4,4,4,4
+111,Pornstar Martini,16,4,4,4,4
+112,Planter’s Punch,14,2,2,2,2
+113,Port And Starboard,10,0,0,0,0
+114,Port Wine Cocktail,22,3,3,3,3
+115,Passion Fruit Martini,24,6,6,6,6
+116,Queen Bee,19,3,3,3,3
+117,Queen Elizabeth,31,2,2,2,2
+118,Rose,0,0,0,0,0
+119,Rum Sour,12,3,3,3,3
+120,Rum Punch,13,3,3,3,3
+121,Rum Cooler,0,0,0,0,0
+122,Rum Runner,13,2,2,2,2
+123,Rusty Nail,37,1,1,1,1
+124,Red Snapper,10,5,5,5,5
+125,Rum Old-fashioned,28,2,2,2,2
+126,Russian Spring Punch,15,5,5,5,5
+127,Spritz,8,7,7,7,7
+128,Sangria,9,4,4,4,4
+129,Stinger,30,0,0,0,0
+130,Sidecar,22,2,2,2,2
+131,Snowball,10,7,7,7,7
+132,Salty Dog,17,4,4,4,4
+133,Stone Sour,12,4,4,4,4
+134,Sea breeze,10,4,4,4,4
+135,Scotch Sour,16,3,3,3,3
+136,Screwdriver,0,0,0,0,0
+137,San Francisco,14,2,2,2,2
+138,Thriller,22,3,3,3,3
+139,Tipperary,27,2,2,2,2
+140,Tom Collins,8,5,5,5,5
+141,Tequila Fizz,0,0,0,0,0
+142,Tequila Sour,16,3,3,3,3
+143,The Last Word,24,1,1,1,1
+144,Turf Cocktail,25,1,1,1,1
+145,Tequila Slammer,23,0,0,0,0
+146,Tequila Sunrise,9,4,4,4,4
+147,Tuxedo Cocktail,24,3,3,3,3
+148,Vesper,29,1,1,1,1
+149,Victor,22,2,2,2,2
+150,Vodka Martini,26,4,4,4,4
+151,Vodka And Tonic,11,4,4,4,4
+152,Valencia Cocktail,13,6,6,6,6
+153,Whisky Mac,26,3,3,3,3
+154,White Lady,18,2,2,2,2
+155,Wine Cooler,7,0,0,0,0
+156,White Russian,20,3,3,3,3
+157,Yellow Bird,13,5,5,5,5
+158,Black Russian,30,2,2,2,2
+159,50/50,18,4,4,4,4
+160,Midori Sour,18,0,0,0,0
+161,Whiskey Sour,18,3,3,3,3
+162,Blue Hawaiian,11,7,7,7,7
+163,Margarita,18,4,4,4,4
+164,Blue Margarita,16,0,0,0,0
+165,Apple Martini,30,0,0,0,0
+166,Long Beach Iced Tea,12,4,4,4,4
+167,June Bug,10,0,0,0,0
+168,A.M.F (Adios Mother Fucker),13,3,3,3,3
+169,Sex on The Beach,15,6,6,6,6
+170,Gee,24,4,4,4,4

@@ -50,6 +50,8 @@ local.properties
 Cargo.*
 /jsonParsing/target
 /jsonParsing/target/*
+/csvParsing/target
+/csvParsing/target/*
 
 # Certificates for EC2 Instance
 *.pem
