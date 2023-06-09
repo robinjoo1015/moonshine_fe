@@ -474,7 +474,6 @@ async function _createCustomCocktailBlog(body) {
 }
 
 async function _createSmallBlog(body) {
-    console.log(body);
     const content = body.content;
     const userId = body.user_id;
 
