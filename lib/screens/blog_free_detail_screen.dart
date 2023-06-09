@@ -252,36 +252,45 @@ class _BlogFreeDetailScreen extends State<BlogFreeDetailScreen> {
                           ],
                         ),
                       ),
-                      Container(),
-                      Container(
-                        alignment: Alignment.bottomCenter,
-                        padding: const EdgeInsets.all(5),
-                        child: Row(
-                          children: <Widget>[
-                            Flexible(
-                              child: TextField(
-                                controller: myController,
-                                maxLines: 2,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Comment',
-                                ),
+                      (globals.userId == 1)
+                          ? Container()
+                          : Container(
+                              alignment: Alignment.bottomCenter,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 20,
+                                horizontal: 20,
                               ),
-                            ),
-                            FloatingActionButton(
-                                onPressed: () {
-                                  FocusScope.of(context).unfocus();
-                                  setState(() {
-                                    content = myController.text;
-                                    uploadcontent();
-                                    myController.clear();
-                                    _refreshIndicatorKey.currentState?.show();
-                                  });
-                                },
-                                child: const Icon(Icons.send)),
-                          ],
-                        ),
-                      )
+                              child: Row(
+                                children: <Widget>[
+                                  Flexible(
+                                    child: TextField(
+                                      controller: myController,
+                                      maxLines: 2,
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Comment',
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10),
+                                    child: FloatingActionButton(
+                                        onPressed: () {
+                                          FocusScope.of(context).unfocus();
+                                          setState(() {
+                                            content = myController.text;
+                                            uploadcontent();
+                                            myController.clear();
+                                            _refreshIndicatorKey.currentState
+                                                ?.show();
+                                          });
+                                        },
+                                        child: const Icon(Icons.send)),
+                                  ),
+                                ],
+                              ),
+                            )
                     ],
                   ),
                 );
