@@ -169,7 +169,7 @@ async function _getCocktail(user_id, id) {
     for (let row of blog_result.rows) {
         let component = {
             id: row.blog_post_id,
-            name: row.blog_post_title,
+            title: row.blog_post_title,
             url: row.image_path,
             type: row.blog_post_type,
         }

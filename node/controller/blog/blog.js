@@ -60,10 +60,18 @@ exports.createBlog = function (req, res) {
             });
             break;
         case '3':
-            console.log(req.body);
+            _createCustomCocktailBlog(req.body).then((response) => {
+                res.send(response);
+            }).catch((err) => {
+                console.log(err);
+            });
             break;
         case '4':
-            console.log(req.body);
+            _createSmallBlog(req.body).then((response) => {
+                res.send(response);
+            }).catch((err) => {
+                console.log(err);
+            });
             break;
     }
 
@@ -468,7 +476,7 @@ async function _createCustomCocktailBlog(body) {
 async function _createSmallBlog(body) {
     console.log(body);
     const content = body.content;
-    const userId = body.userId;
+    const userId = body.user_id;
 
     let blog_insert_query = '' +
         'INSERT INTO moonshine.blog_small_post (blog_small_post_content, blog_small_post_user_id) ' +
