@@ -76,8 +76,8 @@ class _BlogFreeTabScreenState extends State<BlogFreeTabScreen> {
                           width: 120,
                           height: 50,
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
+                            onTap: () async {
+                              await Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => BlogFreePostScreen(
@@ -85,6 +85,8 @@ class _BlogFreeTabScreenState extends State<BlogFreeTabScreen> {
                                   ),
                                 ),
                               );
+                              blogList = BlogApi.getBlogList(widget.type);
+                              setState(() {});
                             },
                             child: Container(
                               decoration: BoxDecoration(
