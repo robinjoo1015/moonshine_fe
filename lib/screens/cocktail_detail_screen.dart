@@ -104,7 +104,7 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
                           ),
                         ),
                         Text(
-                          '40%',
+                          '${snapshot.data!["tastes"]["alcohol"]}%',
                           style: TextStyle(
                             fontFamily: Theme.of(context)
                                 .textTheme
