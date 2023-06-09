@@ -16,4 +16,17 @@ class FavoriteApi {
       return false;
     }
   }
+
+  static Future<bool> toggleCocktailFavorite(int cocktailId) async {
+    final response = await http.get(Uri.parse(
+        '${globals.baseUrl}/cocktails/${globals.userId}/update/$cocktailId'));
+    print(response.statusCode);
+    var result = jsonDecode(response.body);
+    print(result['is_favorite']);
+    if (response.statusCode == 200) {
+      return result['is_favorite'];
+    } else {
+      return false;
+    }
+  }
 }

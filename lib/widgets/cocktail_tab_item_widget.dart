@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_api.dart';
+import 'package:moonshine_fe/apis/favorite_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/screens/cocktail_detail_screen.dart';
 
-class CocktailTabItem extends StatelessWidget {
-  // final baseUrl = CocktailProject.baseUrl;
-  final baseUrl = CocktailApi.baseUrl;
+class CocktailTabItem extends StatefulWidget {
   final int id;
   final String imgUrl, name;
   final Geolocation geolocation;
+  final bool isFavorite;
 
-  CocktailTabItem({
+  const CocktailTabItem({
     super.key,
     required this.id,
     required this.imgUrl,
     required this.name,
     required this.geolocation,
+    required this.isFavorite,
   });
+
+  @override
+  State<CocktailTabItem> createState() => _CocktailTabItemState();
+}
+
+class _CocktailTabItemState extends State<CocktailTabItem> {
+  // final baseUrl = CocktailProject.baseUrl;
+  final baseUrl = CocktailApi.baseUrl;
+  bool currentFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    currentFavorite = widget.isFavorite;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +42,16 @@ class CocktailTabItem extends StatelessWidget {
       // fit: FlexFit.loose,
       child: GestureDetector(
         onTap: () {
-          if (id != -1) {
+          if (widget.id != -1) {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => CocktailDetailScreen(
-                  id: id,
-                  name: name,
-                  imgUrl: imgUrl,
-                  geolocation: geolocation,
+                  id: widget.id,
+                  name: widget.name,
+                  imgUrl: widget.imgUrl,
+                  geolocation: widget.geolocation,
+                  isFavorite: widget.isFavorite,
                 ),
               ),
             );
@@ -56,10 +74,10 @@ class CocktailTabItem extends StatelessWidget {
                     //   '$baseUrl/$imgUrl',
                     //   fit: BoxFit.fill,
                     // ),
-                    (id == -1)
+                    (widget.id == -1)
                         ? Container()
                         : Image(
-                            image: AssetImage('assets/image/$imgUrl'),
+                            image: AssetImage('assets/image/${widget.imgUrl}'),
                             fit: BoxFit.cover,
                             width: size,
                             height: size,
@@ -71,12 +89,19 @@ class CocktailTabItem extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              (id == -1)
+                              (widget.id == -1)
                                   ? Container()
                                   : IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.bookmark_border_outlined,
+                                      onPressed: () async {
+                                        var result = await FavoriteApi
+                                            .toggleCocktailFavorite(widget.id);
+                                        currentFavorite = result;
+                                        setState(() {});
+                                      },
+                                      icon: Icon(
+                                        currentFavorite
+                                            ? Icons.bookmark
+                                            : Icons.bookmark_border_outlined,
                                       ),
                                       color: Colors.white,
                                     ),
@@ -90,12 +115,12 @@ class CocktailTabItem extends StatelessWidget {
                                   horizontal: 10,
                                   vertical: 10,
                                 ),
-                                child: (id == -1)
+                                child: (widget.id == -1)
                                     ? Container()
                                     : Text(
-                                        name.length > 20
-                                            ? name.substring(0, 20)
-                                            : name,
+                                        widget.name.length > 20
+                                            ? widget.name.substring(0, 20)
+                                            : widget.name,
                                         style: const TextStyle(
                                           fontSize: 16,
                                           color: Colors.white,

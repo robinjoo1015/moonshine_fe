@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/cocktail_api.dart';
+import 'package:moonshine_fe/apis/favorite_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_blog_list_widget.dart';
 import 'package:moonshine_fe/widgets/cocktail_detail_chart_widget.dart';
@@ -11,6 +12,7 @@ class CocktailDetailScreen extends StatefulWidget {
   final String name;
   final String imgUrl;
   final Geolocation geolocation;
+  final bool isFavorite;
 
   const CocktailDetailScreen({
     super.key,
@@ -18,6 +20,7 @@ class CocktailDetailScreen extends StatefulWidget {
     required this.name,
     required this.imgUrl,
     required this.geolocation,
+    required this.isFavorite,
   });
 
   @override
@@ -26,12 +29,14 @@ class CocktailDetailScreen extends StatefulWidget {
 
 class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
   late Future<Map<String, dynamic>> detail;
+  bool currentFavorite = false;
 
   @override
   void initState() {
     super.initState();
     // detail = CocktailProject.getDetail(widget.name);
     detail = CocktailApi.getDetail(widget.id);
+    currentFavorite = widget.isFavorite;
     setState(() {});
   }
 
@@ -49,8 +54,15 @@ class _CocktailDetailScreenState extends State<CocktailDetailScreen> {
               forceElevated: innerBoxIsScrolled,
               actions: [
                 IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.bookmark_border_outlined),
+                  onPressed: () async {
+                    var result =
+                        await FavoriteApi.toggleCocktailFavorite(widget.id);
+                    currentFavorite = result;
+                    setState(() {});
+                  },
+                  icon: Icon(currentFavorite
+                      ? Icons.bookmark
+                      : Icons.bookmark_border_outlined),
                 ),
               ],
             ),

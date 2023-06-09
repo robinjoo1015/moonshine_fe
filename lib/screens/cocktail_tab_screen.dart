@@ -88,6 +88,7 @@ class CocktailTabScreen extends StatelessWidget {
                                                 name: item['name'],
                                                 imgUrl: item['url'],
                                                 geolocation: geolocation,
+                                                isFavorite: item['is_favorite'],
                                               ),
                                             ),
                                           );
@@ -127,6 +128,7 @@ class CocktailTabScreen extends StatelessWidget {
                           imgUrl: snapshot.data![0]['url']!,
                           name: snapshot.data![0]['name']!,
                           geolocation: geolocation,
+                          isFavorite: snapshot.data![0]['is_favorite'],
                         ),
                         CocktailTabItem(
                           id: (snapshot.data!.length == 1)
@@ -139,6 +141,9 @@ class CocktailTabScreen extends StatelessWidget {
                               ? ''
                               : snapshot.data![1]['name']!,
                           geolocation: geolocation,
+                          isFavorite: (snapshot.data!.length == 1)
+                              ? false
+                              : snapshot.data![1]['is_favorite']!,
                         ),
                       ],
                     ),
@@ -153,6 +158,7 @@ class CocktailTabScreen extends StatelessWidget {
                     imgUrl: snapshot.data![index * 2]['url']!,
                     name: snapshot.data![index * 2]['name']!,
                     geolocation: geolocation,
+                    isFavorite: snapshot.data![index * 2]['is_favorite']!,
                   ),
                   CocktailTabItem(
                     id: (index * 2 + 1 == snapshot.data!.length)
@@ -165,6 +171,9 @@ class CocktailTabScreen extends StatelessWidget {
                         ? ''
                         : snapshot.data![index * 2 + 1]['name']!,
                     geolocation: geolocation,
+                    isFavorite: (index * 2 + 1 == snapshot.data!.length)
+                        ? false
+                        : snapshot.data![index * 2 + 1]['is_favorite']!,
                   ),
                 ],
               );

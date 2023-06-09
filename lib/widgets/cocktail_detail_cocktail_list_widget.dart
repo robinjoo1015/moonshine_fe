@@ -51,6 +51,7 @@ class CocktailDetailCocktailList extends StatelessWidget {
                                   imgUrl: item['url']!,
                                   name: item['name']!,
                                   geolocation: geolocation,
+                                  isFavorite: item['is_favorite'],
                                 ),
                               ],
                             );

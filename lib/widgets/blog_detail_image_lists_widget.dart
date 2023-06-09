@@ -154,6 +154,7 @@ class BlogDetailImageLists extends StatelessWidget {
                                     name: item['name']!,
                                     // url: item['url']!,
                                     geolocation: geolocation,
+                                    isFavorite: item['is_favorite'],
                                   ),
                                 ],
                               );
@@ -228,6 +229,7 @@ class BlogDetailImageLists extends StatelessWidget {
                                           imgUrl: item['url']!,
                                           name: item['name']!,
                                           geolocation: geolocation,
+                                          isFavorite: item['is_favorite'],
                                         ),
                                       ],
                                     );
