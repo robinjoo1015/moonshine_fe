@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moonshine_fe/apis/bar_api.dart';
 import 'package:moonshine_fe/apis/geolocation.dart';
+import 'package:moonshine_fe/screens/bar_detail_screen.dart';
 import 'package:moonshine_fe/screens/map_screen.dart';
 import 'package:moonshine_fe/widgets/bar_tab_item_widget.dart';
 import 'package:searchfield/searchfield.dart';
@@ -42,10 +43,10 @@ class _BarTabScreenState extends State<BarTabScreen> {
       future: barList,
       builder: ((context, snapshot) {
         if (snapshot.hasData) {
-          List<String> names = [];
-          for (var item in snapshot.data!) {
-            names.add(item['name']!);
-          }
+          // List<String> names = [];
+          // for (var item in snapshot.data!) {
+          //   names.add(item['name']!);
+          // }
           return ListView.separated(
             scrollDirection: Axis.vertical,
             itemCount: (snapshot.data!.length + 1) ~/ 2,
@@ -66,13 +67,13 @@ class _BarTabScreenState extends State<BarTabScreen> {
                   children: [
                     Row(
                       children: [
-                        const SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Center(
-                            child: Text('추천순'),
-                          ),
-                        ),
+                        // const SizedBox(
+                        //   width: 40,
+                        //   height: 40,
+                        //   child: Center(
+                        //     child: Text('추천순'),
+                        //   ),
+                        // ),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
@@ -95,18 +96,36 @@ class _BarTabScreenState extends State<BarTabScreen> {
                                   ),
                                 ),
                               ),
-                              suggestions: names
-                                  .map((name) => SearchFieldListItem(
-                                        name,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 20,
-                                            vertical: 10,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Text(name),
-                                            ],
+                              suggestions: snapshot.data!
+                                  .map((item) => SearchFieldListItem(
+                                        item['name'],
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BarDetailScreen(
+                                                  id: item['id'],
+                                                  name: item['name'],
+                                                  geolocation:
+                                                      widget.geolocation,
+                                                  isFavorite:
+                                                      item['is_favorite'],
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 20,
+                                              vertical: 10,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text(item['name']),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ))

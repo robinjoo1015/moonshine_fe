@@ -45,11 +45,11 @@ class CocktailTabScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Center(child: Text('이름순')),
-                        ),
+                        // const SizedBox(
+                        //   width: 40,
+                        //   height: 40,
+                        //   child: Center(child: Text('이름순')),
+                        // ),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
