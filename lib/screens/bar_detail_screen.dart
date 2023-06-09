@@ -236,6 +236,8 @@ class _BarDetailScreenState extends State<BarDetailScreen> {
                               MaterialPageRoute(
                                 builder: (context) => MapScreen(
                                   geolocation: widget.geolocation,
+                                  lat: snapshot.data!['latitude'],
+                                  lon: snapshot.data!['longitude'],
                                 ),
                               ),
                             );

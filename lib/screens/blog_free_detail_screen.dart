@@ -20,7 +20,7 @@ class BlogFreeDetailScreen extends StatefulWidget {
 
 class _BlogFreeDetailScreen extends State<BlogFreeDetailScreen> {
   late Future<Map<String, dynamic>> detail;
-  static final baseUrl = "${globals.baseUrl}/blog/4/";
+  static final baseUrl = "${globals.baseUrl}/blog/4";
   TextEditingController myController = TextEditingController();
   String content = '';
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =

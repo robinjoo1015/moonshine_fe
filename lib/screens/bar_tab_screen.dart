@@ -162,6 +162,8 @@ class _BarTabScreenState extends State<BarTabScreen> {
                                 MaterialPageRoute(
                                   builder: (context) => MapScreen(
                                     geolocation: widget.geolocation,
+                                    lat: 0.0,
+                                    lon: 0.0,
                                   ),
                                 ),
                               );

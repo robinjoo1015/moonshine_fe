@@ -9,9 +9,12 @@ import 'package:moonshine_fe/apis/geolocation.dart';
 
 class MapScreen extends StatefulWidget {
   final Geolocation geolocation;
+  final double lat, lon;
   const MapScreen({
     super.key,
     required this.geolocation,
+    required this.lat,
+    required this.lon,
   });
 
   @override
@@ -33,7 +36,12 @@ class _MapScreenState extends State<MapScreen> {
         markerId: const MarkerId("1"),
         draggable: true,
         onTap: () => print("Marker!"),
-        position: const LatLng(37.4537251, 126.7960716),
+        position: LatLng(
+          // 37.4537251,
+          // 126.7960716,
+          widget.lat,
+          widget.lon,
+        ),
       ),
     );
   }
@@ -69,12 +77,8 @@ class _MapScreenState extends State<MapScreen> {
             markers: Set.from(_markers),
             initialCameraPosition: CameraPosition(
               target: LatLng(
-                _currentPosition != null
-                    ? _currentPosition!.latitude
-                    : 37.5036383,
-                _currentPosition != null
-                    ? _currentPosition!.longitude
-                    : 126.9570617,
+                (widget.lat == 0.0) ? 37.5036383 : widget.lat,
+                (widget.lon == 0.0) ? 126.9570617 : widget.lon,
               ),
               zoom: 14,
             ),

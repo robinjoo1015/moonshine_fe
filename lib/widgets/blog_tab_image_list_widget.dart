@@ -83,8 +83,8 @@ class BlogTabImageList extends StatelessWidget {
                                 child: (id == -1)
                                     ? Container()
                                     : Text(
-                                        name.length > 20
-                                            ? name.substring(0, 20)
+                                        name.length > 14
+                                            ? name.substring(0, 14)
                                             : name,
                                         style: const TextStyle(
                                           fontSize: 16,
