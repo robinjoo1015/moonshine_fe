@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -136,6 +137,53 @@ class _BlogPostScreenState extends State<BlogPostScreen> {
                 type: widget.type,
                 callback: updateData,
               ),
+            ),
+            Column(
+              children: [
+                for (int i = 0; i < (imagePathList.length ~/ 3) + 1; i++)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            final size = constraints.maxWidth;
+                            return Row(
+                              children: [
+                                for (int j = 0; j < 3; j++)
+                                  Expanded(
+                                    child: (imagePathList.length > i * 3 + j)
+                                        ? Image(
+                                            image: FileImage(
+                                              File(
+                                                imagePathList[i * 3 + j],
+                                              ),
+                                            ),
+                                            width: size / 3,
+                                            height: size / 3,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Container(),
+                                  )
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                      // for (int j = 0; j < 3; j++)
+                      //   Expanded(
+                      //     child: (imagePathList.length > i * 3 + j)
+                      //         ? Image(
+                      //             image: FileImage(
+                      //               File(
+                      //                 imagePathList[i * 3 + j],
+                      //               ),
+                      //             ),
+                      //           )
+                      //         : Container(),
+                      // )
+                    ],
+                  ),
+              ],
             ),
             SizedBox(
               height: 70,

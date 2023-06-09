@@ -53,6 +53,7 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                           _tempSelection = value.item!;
                         });
                       },
+                      suggestionAction: SuggestionAction.unfocus,
                       suggestions: snapshot.data!
                           .map(
                             (item) => SearchFieldListItem(
@@ -157,6 +158,7 @@ class _BlogPostSelectState extends State<BlogPostSelect> {
                           _tempSelection = value.item!;
                         });
                       },
+                      suggestionAction: SuggestionAction.unfocus,
                       suggestions: snapshot.data!
                           .map(
                             (item) => SearchFieldListItem(
