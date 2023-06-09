@@ -154,7 +154,7 @@ class BlogDetailImageLists extends StatelessWidget {
                                     name: item['name']!,
                                     // url: item['url']!,
                                     geolocation: geolocation,
-                                    isFavorite: item['is_favorite'],
+                                    isFavorite: item['is_favorite'] ?? false,
                                   ),
                                 ],
                               );
@@ -334,66 +334,67 @@ class BlogDetailImageLists extends StatelessWidget {
                 ),
               ],
             ),
-            // FutureBuilder(
-            //   future: cocktailList,
-            //   builder: ((context, snapshot) {
-            //     if (snapshot.hasData) {
-            //       var cocktailListNew = [];
-            //       for (var cocktail in snapshot.data!) {
-            //         if (cocktail["id"] == detail["cocktail_id"]) {
-            //           cocktailListNew.add(cocktail);
-            //         }
-            //       }
-            //       return Row(
-            //         children: [
-            //           Expanded(
-            //             child: LayoutBuilder(
-            //               builder: (context, constraints) {
-            //                 final size = constraints.maxWidth;
-            //                 return SizedBox(
-            //                   height: size / 2,
-            //                   width: size,
-            //                   child: CarouselSlider(
-            //                     options: CarouselOptions(
-            //                       height: size / 2,
-            //                       viewportFraction: 0.45,
-            //                       scrollDirection: Axis.horizontal,
-            //                       animateToClosest: false,
-            //                       enableInfiniteScroll: false,
-            //                       disableCenter: true,
-            //                       pageSnapping: false,
-            //                       padEnds: false,
-            //                     ),
-            //                     items: cocktailListNew.map((item) {
-            //                       return Builder(
-            //                           builder: (BuildContext context) {
-            //                         return Flex(
-            //                           direction: Axis.horizontal,
-            //                           children: [
-            //                             BarTabItem(
-            //                               id: item['id']!,
-            //                               imgUrl: item['url']!,
-            //                               name: item['name']!,
-            //                               geolocation: geolocation,
-            //                             ),
-            //                           ],
-            //                         );
-            //                       });
-            //                     }).toList(),
-            //                   ),
-            //                 );
-            //               },
-            //             ),
-            //           ),
-            //         ],
-            //       );
-            //     } else {
-            //       return Container(
-            //         height: 100,
-            //       );
-            //     }
-            //   }),
-            // ),
+            FutureBuilder(
+              future: cocktailList,
+              builder: ((context, snapshot) {
+                if (snapshot.hasData) {
+                  var cocktailListNew = [];
+                  for (var cocktail in snapshot.data!) {
+                    if (cocktail["id"] == detail["cocktail_id"]) {
+                      cocktailListNew.add(cocktail);
+                    }
+                  }
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            final size = constraints.maxWidth;
+                            return SizedBox(
+                              height: size / 2,
+                              width: size,
+                              child: CarouselSlider(
+                                options: CarouselOptions(
+                                  height: size / 2,
+                                  viewportFraction: 0.45,
+                                  scrollDirection: Axis.horizontal,
+                                  animateToClosest: false,
+                                  enableInfiniteScroll: false,
+                                  disableCenter: true,
+                                  pageSnapping: false,
+                                  padEnds: false,
+                                ),
+                                items: cocktailListNew.map((item) {
+                                  return Builder(
+                                      builder: (BuildContext context) {
+                                    return Flex(
+                                      direction: Axis.horizontal,
+                                      children: [
+                                        CocktailTabItem(
+                                          id: item['id']!,
+                                          imgUrl: item['url']!,
+                                          name: item['name']!,
+                                          geolocation: geolocation,
+                                          isFavorite: false,
+                                        ),
+                                      ],
+                                    );
+                                  });
+                                }).toList(),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Container(
+                    height: 100,
+                  );
+                }
+              }),
+            ),
           ],
         );
       default:

@@ -129,21 +129,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 vertical: 20,
                 horizontal: 20,
               ),
-              child: Text('Favorite Bars'),
+              child: Text('Favorites'),
             ),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(
+            //     vertical: 20,
+            //     horizontal: 20,
+            //   ),
+            //   child: Text('Favorite Cocktails'),
+            // ),
             const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 20,
                 horizontal: 20,
               ),
-              child: Text('Favorite Cocktails'),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 20,
-              ),
-              child: Text('My Blog'),
+              child: Text('My Blogs'),
             ),
           ],
         ),

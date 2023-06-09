@@ -55,13 +55,16 @@ class _BlogPostScreenState extends State<BlogPostScreen> {
                       selectionData['mainSelection']['id'].toString(),
                 };
                 List<Map<String, String>> ratingListNew = [];
-                for (var rating in selectionData['ratingList']) {
-                  ratingListNew.add({
-                    'id': rating.keys.first['id'].toString(),
-                    'rating': rating[rating.keys.first].toString(),
-                  });
+                if (selectionData.containsKey('ratingList')) {
+                  for (var rating in selectionData['ratingList']) {
+                    ratingListNew.add({
+                      'id': rating.keys.first['id'].toString(),
+                      'rating': rating[rating.keys.first].toString(),
+                    });
+                    selectionDataNew['ratingList'] = jsonEncode(ratingListNew);
+                  }
                 }
-                selectionDataNew['ratingList'] = jsonEncode(ratingListNew);
+
                 postData['selectionData'] = jsonEncode(selectionDataNew);
                 postData['images'] = imageResponse;
                 postData['thumbnail'] =

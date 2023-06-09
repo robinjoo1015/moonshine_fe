@@ -40,11 +40,11 @@ class _BlogDetailImageScreenState extends State<BlogDetailImageScreen> {
               pinned: true,
               floating: true,
               forceElevated: innerBoxIsScrolled,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.bookmark_border_outlined),
-                )
+              actions: const [
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: const Icon(Icons.bookmark_border_outlined),
+                // )
               ],
             ),
           ];

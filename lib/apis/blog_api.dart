@@ -97,17 +97,19 @@ class BlogApi {
     // final userId = globals.userId;
     postData['userId'] = globals.userId.toString();
     print(json.encode(postData));
+    print(type);
     var response = await http.post(
-      Uri.parse('$baseUrl/$type/create'),
+      Uri.parse('$baseUrl/${type.toString()}/create'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: json.encode(postData),
     );
+    print(response.statusCode);
     if (response.statusCode == 200) {
       var decode = jsonDecode(response.body);
       // if (decode['status'] == 200) {
-      //   print(decode.toString());
+      print(decode.toString());
       // }
       return decode;
     } else {

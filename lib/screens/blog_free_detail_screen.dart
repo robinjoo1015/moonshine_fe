@@ -9,7 +9,7 @@ import 'package:moonshine_fe/config.dart' as globals;
 class BlogFreeDetailScreen extends StatefulWidget {
   final int id;
 
-  BlogFreeDetailScreen({
+  const BlogFreeDetailScreen({
     super.key,
     required this.id,
   });
@@ -37,6 +37,7 @@ class _BlogFreeDetailScreen extends State<BlogFreeDetailScreen> {
         "content": content,
       }),
     );
+    return null;
   }
 
   @override
@@ -63,11 +64,11 @@ class _BlogFreeDetailScreen extends State<BlogFreeDetailScreen> {
                 pinned: true,
                 floating: true,
                 forceElevated: innerBoxIsScrolled,
-                actions: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.bookmark_border_outlined),
-                  )
+                actions: const [
+                  // IconButton(
+                  //   onPressed: () {},
+                  //   icon: const Icon(Icons.bookmark_border_outlined),
+                  // )
                 ],
               ),
             ];
@@ -261,7 +262,7 @@ class _BlogFreeDetailScreen extends State<BlogFreeDetailScreen> {
                               child: TextField(
                                 controller: myController,
                                 maxLines: 2,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: 'Comment',
                                 ),
