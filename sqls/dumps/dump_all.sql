@@ -962,6 +962,8 @@ ALTER TABLE ONLY moonshine.users ALTER COLUMN user_id SET DEFAULT nextval('moons
 COPY moonshine.bar_favorites (user_id, bar_id) FROM stdin;
 1	1
 1	5
+10	7
+10	2
 \.
 
 
@@ -970,6 +972,9 @@ COPY moonshine.bar_favorites (user_id, bar_id) FROM stdin;
 --
 
 COPY moonshine.bar_image_composition (bar_id, image_id) FROM stdin;
+1	616
+1	617
+1	618
 \.
 
 
@@ -1458,14 +1463,12 @@ COPY moonshine.blog_post_comments (blog_post_comment_id, blog_post_id, user_id, 
 --
 
 COPY moonshine.blog_post_image_composition (blog_post_id, image_id, blog_post_image_comment) FROM stdin;
-1	480	Good!
-1	398	Good!
-1	444	Good!
-1	137	Good!
-3	505	Good!
-3	481	Good!
-4	116	Good!
-4	117	Good!
+13	616	\N
+13	617	\N
+13	618	\N
+14	619	\N
+14	620	\N
+14	621	\N
 \.
 
 
@@ -1474,12 +1477,8 @@ COPY moonshine.blog_post_image_composition (blog_post_id, image_id, blog_post_im
 --
 
 COPY moonshine.blog_posts (blog_post_id, blog_post_title, blog_post_content, blog_post_user_id, blog_post_image, blog_post_type, blog_post_created_at, blog_post_updated_at, blog_post_deleted_at, blog_post_deleted) FROM stdin;
-4	Test	Testing Testing~	1	3	3	2023-06-07 19:23:13.197327	2023-06-07 19:23:13.197327	\N	f
-5	Test	Testing Testing~	1	1	1	2023-06-07 19:24:48.752871	2023-06-07 19:24:48.752871	\N	f
-6	Test	Testing Testing~	1	3	3	2023-06-07 19:24:48.752871	2023-06-07 19:24:48.752871	\N	f
-7	Test	Testing Testing~	1	481	2	2023-06-07 19:24:48.752871	2023-06-07 19:24:48.752871	\N	f
-3	Test	Testing Testing~	1	337	2	2023-06-07 19:23:13.197327	2023-06-07 19:23:13.197327	\N	f
-1	Test	Testing Testing~	1	481	1	2023-06-07 19:22:15.344858	2023-06-07 19:22:15.344858	\N	f
+13	LiverpoolBar Review	Today, I went to Liverpool Bar at CAU.\nSoccer game was played on TV.\nIt was fun.\nBut, cocktails was not that good.\nI drank B-52 and Mojito.\nIt was so so.\n	1	616	1	2023-06-09 06:15:42.877004	2023-06-09 06:15:42.877004	\N	f
+14	Mojito Review	I will compare Liverpool Pub, Lucky Day, 소람 with Mojito.\nLiverpool Pub was the worst, and 소람 was best!!!	1	619	2	2023-06-09 06:28:31.506606	2023-06-09 06:28:31.506606	\N	f
 \.
 
 
@@ -1488,18 +1487,11 @@ COPY moonshine.blog_posts (blog_post_id, blog_post_title, blog_post_content, blo
 --
 
 COPY moonshine.blog_posts_bar_cocktail_composition (id, blog_post_id, bar_id, cocktail_id, bar_cocktail_score) FROM stdin;
-1	1	1	116	5
-2	1	1	337	5
-3	1	1	376	5
-4	1	1	419	5
-6	3	2	337	4.7
-5	3	1	337	4.7
-7	4	\N	116	5
-8	5	2	116	5
-9	5	2	337	5
-10	7	1	376	5
-11	7	2	337	5
-12	6	\N	419	5
+19	13	1	25	3
+20	13	1	193	3.5
+21	14	1	193	1.5
+22	14	7	193	5
+23	14	3	193	3.5
 \.
 
 
@@ -3430,6 +3422,16 @@ COPY moonshine.cocktail_favorites (user_id, cocktail_id) FROM stdin;
 --
 
 COPY moonshine.cocktail_image_composition (cocktail_id, image_id) FROM stdin;
+193	619
+193	620
+193	621
+1	623
+1	624
+193	635
+193	636
+193	637
+1	638
+1	639
 \.
 
 
@@ -4744,6 +4746,13 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 520	520.jpg	2023-06-07 14:21:52.861419	2023-06-07 14:21:52.861419	\N	f
 486	486.jpg	2023-06-06 12:53:12.661622	2023-06-06 12:53:12.661622	\N	f
 521	521.jpg	2023-06-07 14:21:52.861419	2023-06-07 14:21:52.861419	\N	f
+590	590.jpg	2023-06-09 04:49:15.195216	2023-06-09 04:49:15.195216	\N	f
+591	591.jpg	2023-06-09 04:49:15.320613	2023-06-09 04:49:15.320613	\N	f
+606	606.jpg	2023-06-09 05:06:04.226975	2023-06-09 05:06:04.226975	\N	f
+607	607.jpg	2023-06-09 05:06:04.385568	2023-06-09 05:06:04.385568	\N	f
+626	626.jpg	2023-06-09 11:38:31.817015	2023-06-09 11:38:31.817015	\N	f
+627	627.jpg	2023-06-09 11:38:32.412504	2023-06-09 11:38:32.412504	\N	f
+628	628.jpg	2023-06-09 11:38:32.492507	2023-06-09 11:38:32.492507	\N	f
 105	105.jpg	2023-06-05 23:07:57.171084	2023-06-05 23:07:57.171084	\N	f
 92	92.jpg	2023-06-05 23:07:57.123101	2023-06-05 23:07:57.123101	\N	f
 93	93.jpg	2023-06-05 23:07:57.124008	2023-06-05 23:07:57.124008	\N	f
@@ -4805,12 +4814,21 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 163	163.jpg	2023-06-05 23:07:57.428415	2023-06-05 23:07:57.428415	\N	f
 164	164.jpg	2023-06-05 23:07:57.429445	2023-06-05 23:07:57.429445	\N	f
 165	165.jpg	2023-06-05 23:07:57.434126	2023-06-05 23:07:57.434126	\N	f
+610	610.jpg	2023-06-09 05:13:44.020019	2023-06-09 05:13:44.020019	\N	f
+611	611.jpg	2023-06-09 05:13:44.113259	2023-06-09 05:13:44.113259	\N	f
+629	629.jpg	2023-06-09 11:40:35.663233	2023-06-09 11:40:35.663233	\N	f
 522	522.jpg	2023-06-07 15:37:37.087599	2023-06-07 15:37:37.087599	\N	f
 523	523.jpg	2023-06-07 15:37:37.087599	2023-06-07 15:37:37.087599	\N	f
 524	524.jpg	2023-06-07 15:37:37.087599	2023-06-07 15:37:37.087599	\N	f
 525	525.jpg	2023-06-07 15:37:37.087599	2023-06-07 15:37:37.087599	\N	f
 526	526.jpg	2023-06-07 15:37:37.087599	2023-06-07 15:37:37.087599	\N	f
+630	630.jpg	2023-06-09 11:40:35.923578	2023-06-09 11:40:35.923578	\N	f
 527	527.jpg	2023-06-07 15:37:37.087599	2023-06-07 15:37:37.087599	\N	f
+592	592.jpg	2023-06-09 04:51:59.733949	2023-06-09 04:51:59.733949	\N	f
+593	593.jpg	2023-06-09 04:51:59.855529	2023-06-09 04:51:59.855529	\N	f
+608	608.jpg	2023-06-09 05:12:26.399934	2023-06-09 05:12:26.399934	\N	f
+609	609.jpg	2023-06-09 05:12:26.508322	2023-06-09 05:12:26.508322	\N	f
+631	631.jpg	2023-06-09 11:40:35.935376	2023-06-09 11:40:35.935376	\N	f
 166	166.jpg	2023-06-05 23:07:57.438396	2023-06-05 23:07:57.438396	\N	f
 153	153.jpg	2023-06-05 23:07:57.40572	2023-06-05 23:07:57.40572	\N	f
 154	154.jpg	2023-06-05 23:07:57.409647	2023-06-05 23:07:57.409647	\N	f
@@ -4893,10 +4911,17 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 548	548.jpg	2023-06-07 16:11:45.527068	2023-06-07 16:11:45.527068	\N	f
 547	547.jpg	2023-06-07 16:11:45.527068	2023-06-07 16:11:45.527068	\N	f
 544	544.jpg	2023-06-07 16:11:45.527068	2023-06-07 16:11:45.527068	\N	f
+594	594.jpg	2023-06-09 04:55:48.839808	2023-06-09 04:55:48.839808	\N	f
 227	227.jpg	2023-06-05 23:07:57.723188	2023-06-05 23:07:57.723188	\N	f
 214	214.jpg	2023-06-05 23:07:57.660623	2023-06-05 23:07:57.660623	\N	f
 215	215.jpg	2023-06-05 23:07:57.667857	2023-06-05 23:07:57.667857	\N	f
 216	216.jpg	2023-06-05 23:07:57.674978	2023-06-05 23:07:57.674978	\N	f
+595	595.jpg	2023-06-09 04:55:49.38445	2023-06-09 04:55:49.38445	\N	f
+612	612.jpg	2023-06-09 05:18:39.01533	2023-06-09 05:18:39.01533	\N	f
+613	613.jpg	2023-06-09 05:18:39.232119	2023-06-09 05:18:39.232119	\N	f
+632	632.jpg	2023-06-09 11:42:38.422419	2023-06-09 11:42:38.422419	\N	f
+633	633.jpg	2023-06-09 11:42:38.786738	2023-06-09 11:42:38.786738	\N	f
+634	634.jpg	2023-06-09 11:42:38.929824	2023-06-09 11:42:38.929824	\N	f
 278	278.jpg	2023-06-05 23:07:57.983007	2023-06-05 23:07:57.983007	\N	f
 279	279.jpg	2023-06-05 23:07:57.986358	2023-06-05 23:07:57.986358	\N	f
 289	289.jpg	2023-06-05 23:07:58.052091	2023-06-05 23:07:58.052091	\N	f
@@ -4959,6 +4984,15 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 552	552.jpg	2023-06-07 16:11:45.527068	2023-06-07 16:11:45.527068	\N	f
 551	551.jpg	2023-06-07 16:11:45.527068	2023-06-07 16:11:45.527068	\N	f
 553	553.jpg	2023-06-07 16:11:45.527068	2023-06-07 16:11:45.527068	\N	f
+596	596.jpg	2023-06-09 04:59:31.716963	2023-06-09 04:59:31.716963	\N	f
+597	597.jpg	2023-06-09 04:59:31.855387	2023-06-09 04:59:31.855387	\N	f
+614	614.jpg	2023-06-09 05:20:46.318429	2023-06-09 05:20:46.318429	\N	f
+615	615.jpg	2023-06-09 05:20:46.608333	2023-06-09 05:20:46.608333	\N	f
+635	635.jpg	2023-06-09 11:43:44.720884	2023-06-09 11:43:44.720884	\N	f
+636	636.jpg	2023-06-09 11:43:45.119899	2023-06-09 11:43:45.119899	\N	f
+637	637.jpg	2023-06-09 11:43:45.132723	2023-06-09 11:43:45.132723	\N	f
+638	638.jpg	2023-06-09 11:44:34.3689	2023-06-09 11:44:34.3689	\N	f
+639	639.jpg	2023-06-09 11:44:34.429849	2023-06-09 11:44:34.429849	\N	f
 288	288.jpg	2023-06-05 23:07:58.044978	2023-06-05 23:07:58.044978	\N	f
 275	275.jpg	2023-06-05 23:07:57.973485	2023-06-05 23:07:57.973485	\N	f
 276	276.jpg	2023-06-05 23:07:57.974303	2023-06-05 23:07:57.974303	\N	f
@@ -5020,6 +5054,9 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 346	346.jpg	2023-06-05 23:07:58.32481	2023-06-05 23:07:58.32481	\N	f
 347	347.jpg	2023-06-05 23:07:58.32969	2023-06-05 23:07:58.32969	\N	f
 348	348.jpg	2023-06-05 23:07:58.333952	2023-06-05 23:07:58.333952	\N	f
+616	616.jpg	2023-06-09 06:15:42.725201	2023-06-09 06:15:42.725201	\N	f
+617	617.jpg	2023-06-09 06:15:42.787088	2023-06-09 06:15:42.787088	\N	f
+618	618.jpg	2023-06-09 06:15:42.812249	2023-06-09 06:15:42.812249	\N	f
 554	554.jpg	2023-06-08 10:34:34.740995	2023-06-08 10:34:34.740995	\N	f
 555	555.jpg	2023-06-08 10:34:34.740995	2023-06-08 10:34:34.740995	\N	f
 556	556.jpg	2023-06-08 10:34:34.740995	2023-06-08 10:34:34.740995	\N	f
@@ -5041,6 +5078,8 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 568	568.jpg	2023-06-08 10:34:34.740995	2023-06-08 10:34:34.740995	\N	f
 569	569.jpg	2023-06-08 10:34:34.740995	2023-06-08 10:34:34.740995	\N	f
 570	570.jpg	2023-06-08 10:34:34.740995	2023-06-08 10:34:34.740995	\N	f
+598	598.jpg	2023-06-09 05:00:24.689693	2023-06-09 05:00:24.689693	\N	f
+599	599.jpg	2023-06-09 05:00:24.891854	2023-06-09 05:00:24.891854	\N	f
 578	578.jpg	2023-06-08 11:01:45.058612	2023-06-08 11:01:45.058612	\N	f
 576	576.jpg	2023-06-08 11:01:45.058612	2023-06-08 11:01:45.058612	\N	f
 577	577.jpg	2023-06-08 11:01:45.058612	2023-06-08 11:01:45.058612	\N	f
@@ -5118,6 +5157,10 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 431	431.jpg	2023-06-05 23:07:58.707288	2023-06-05 23:07:58.707288	\N	f
 584	584.jpg	2023-06-08 11:01:45.058612	2023-06-08 11:01:45.058612	\N	f
 585	585.png	2023-06-08 11:24:18.38526	2023-06-08 11:24:18.38526	\N	f
+600	600.jpg	2023-06-09 05:01:07.796293	2023-06-09 05:01:07.796293	\N	f
+601	601.jpg	2023-06-09 05:01:07.929105	2023-06-09 05:01:07.929105	\N	f
+619	619.jpg	2023-06-09 06:28:31.174808	2023-06-09 06:28:31.174808	\N	f
+620	620.jpg	2023-06-09 06:28:31.377551	2023-06-09 06:28:31.377551	\N	f
 432	432.jpg	2023-06-05 23:07:58.713594	2023-06-05 23:07:58.713594	\N	f
 433	433.jpg	2023-06-05 23:07:58.717834	2023-06-05 23:07:58.717834	\N	f
 434	434.jpg	2023-06-05 23:07:58.727443	2023-06-05 23:07:58.727443	\N	f
@@ -5136,6 +5179,7 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 450	450.jpg	2023-06-05 14:48:32.828037	2023-06-05 14:48:32.828037	\N	f
 451	451.jpg	2023-06-05 14:48:32.828037	2023-06-05 14:48:32.828037	\N	f
 452	452.jpg	2023-06-05 14:48:32.828037	2023-06-05 14:48:32.828037	\N	f
+621	621.jpg	2023-06-09 06:28:31.393895	2023-06-09 06:28:31.393895	\N	f
 453	453.jpg	2023-06-05 14:48:32.828037	2023-06-05 14:48:32.828037	\N	f
 460	460.jpg	2023-06-05 15:42:37.077092	2023-06-05 15:42:37.077092	\N	f
 461	461.jpeg	2023-06-05 15:42:37.077092	2023-06-05 15:42:37.077092	\N	f
@@ -5162,6 +5206,14 @@ COPY moonshine.image (image_id, image_path, image_created_at, image_updated_at, 
 395	395.webp	2023-06-05 23:07:58.554968	2023-06-05 23:07:58.554968	\N	f
 443	443.png	2023-06-05 23:21:08	2023-06-05 23:21:10	\N	f
 449	449.webp	2023-06-05 14:48:32.828037	2023-06-05 14:48:32.828037	\N	f
+602	602.jpg	2023-06-09 05:02:45.503169	2023-06-09 05:02:45.503169	\N	f
+603	603.jpg	2023-06-09 05:02:45.621893	2023-06-09 05:02:45.621893	\N	f
+604	604.jpg	2023-06-09 05:03:32.830394	2023-06-09 05:03:32.830394	\N	f
+605	605.jpg	2023-06-09 05:03:32.936794	2023-06-09 05:03:32.936794	\N	f
+622	622.jpg	2023-06-09 11:37:01.636027	2023-06-09 11:37:01.636027	\N	f
+623	623.jpg	2023-06-09 11:37:01.932791	2023-06-09 11:37:01.932791	\N	f
+624	624.jpg	2023-06-09 11:37:02.64008	2023-06-09 11:37:02.64008	\N	f
+625	625.jpg	2023-06-09 11:37:06.904121	2023-06-09 11:37:06.904121	\N	f
 \.
 
 
@@ -5512,7 +5564,7 @@ COPY moonshine.message (message_id, message_content, message_receiver_id, messag
 --
 
 COPY moonshine.tastes (taste_id, gentle, boozy, sweet, dry, alcohol) FROM stdin;
-1	0	0	0	0	28
+704	0	0	0	0	0
 2	3	3	3	3	22
 3	0	0	0	0	30
 4	3	3	3	3	26
@@ -6075,6 +6127,7 @@ COPY moonshine.tastes (taste_id, gentle, boozy, sweet, dry, alcohol) FROM stdin;
 561	0	0	0	0	0
 562	0	0	0	0	0
 563	0	0	0	0	0
+705	0	0	0	0	0
 564	0	0	0	0	0
 565	0	0	0	0	0
 566	0	0	0	0	0
@@ -6214,7 +6267,10 @@ COPY moonshine.tastes (taste_id, gentle, boozy, sweet, dry, alcohol) FROM stdin;
 700	0	0	0	0	0
 701	0	0	0	0	0
 702	0	0	0	0	0
-703	4.2	4.9	5	0.3	39.6
+706	0	0	0	0	0
+1	3	5	1	4	28.89
+703	2.125	2.375	1.875	2.25	24.48625
+707	0	0	0	0	0
 \.
 
 
@@ -6224,6 +6280,10 @@ COPY moonshine.tastes (taste_id, gentle, boozy, sweet, dry, alcohol) FROM stdin;
 
 COPY moonshine.user_taste_composition (user_id, taste_id) FROM stdin;
 1	703
+9	704
+10	705
+11	706
+14	707
 \.
 
 
@@ -6234,6 +6294,9 @@ COPY moonshine.user_taste_composition (user_id, taste_id) FROM stdin;
 COPY moonshine.users (user_id, user_name, user_email, user_password, user_profile_picture, user_created_at, user_updated_at, user_deleted_at, user_deleted) FROM stdin;
 1	ADMIN	admin@moon.shine	d82087a6287be66026e4b4bbe6cab673b5e629fa7d2000d20e5e22a1182beb3c	\N	2023-06-08 02:55:22.549632	2023-06-08 02:55:22.549632	2023-06-08 02:55:22.549632	f
 9	Seongmin	kikiki156@naver.com	b2f6b0b3ea0d2ff2e455a68788dd35ce9b680b88aec75dae8b13c6a2627b7196	\N	2023-06-08 03:16:03.99543	2023-06-08 03:16:03.99543	2023-06-08 03:16:03.99543	f
+10	YoungSeok	robinjoo1015@naver.com	ce025ca1f517bc5e7feb4c991a071d3c2c2666f7c10f050e20f6e10d26cbeb01	\N	2023-06-09 03:32:57.819623	2023-06-09 03:32:57.819623	2023-06-09 03:32:57.819623	f
+11	JaehwaPark	Jaehwa@cau.ac.kr	5e579e0158115248e7190e8c3f01b469d28ff8391d542d179f4c3eabc2ca4200	\N	2023-06-09 07:25:01.734974	2023-06-09 07:25:01.734974	2023-06-09 07:25:01.734974	f
+14	JJaeHwa123	Jaehwa123@cau.ac.kr	5e579e0158115248e7190e8c3f01b469d28ff8391d542d179f4c3eabc2ca4200	\N	2023-06-09 07:28:37.427471	2023-06-09 07:28:37.427471	2023-06-09 07:28:37.427471	f
 \.
 
 
@@ -6269,28 +6332,28 @@ SELECT pg_catalog.setval('moonshine.blog_post_comments_blog_post_comment_id_seq'
 -- Name: blog_posts_bar_cocktail_composition_id_seq; Type: SEQUENCE SET; Schema: moonshine; Owner: moonshine
 --
 
-SELECT pg_catalog.setval('moonshine.blog_posts_bar_cocktail_composition_id_seq', 12, true);
+SELECT pg_catalog.setval('moonshine.blog_posts_bar_cocktail_composition_id_seq', 31, true);
 
 
 --
 -- Name: blog_posts_blog_post_id_seq; Type: SEQUENCE SET; Schema: moonshine; Owner: moonshine
 --
 
-SELECT pg_catalog.setval('moonshine.blog_posts_blog_post_id_seq', 7, true);
+SELECT pg_catalog.setval('moonshine.blog_posts_blog_post_id_seq', 20, true);
 
 
 --
 -- Name: blog_small_post_blog_small_post_id_seq; Type: SEQUENCE SET; Schema: moonshine; Owner: moonshine
 --
 
-SELECT pg_catalog.setval('moonshine.blog_small_post_blog_small_post_id_seq', 6, true);
+SELECT pg_catalog.setval('moonshine.blog_small_post_blog_small_post_id_seq', 15, true);
 
 
 --
 -- Name: blog_small_post_comment_blog_small_post_comment_id_seq; Type: SEQUENCE SET; Schema: moonshine; Owner: moonshine
 --
 
-SELECT pg_catalog.setval('moonshine.blog_small_post_comment_blog_small_post_comment_id_seq', 8, true);
+SELECT pg_catalog.setval('moonshine.blog_small_post_comment_blog_small_post_comment_id_seq', 13, true);
 
 
 --
@@ -6325,7 +6388,7 @@ SELECT pg_catalog.setval('moonshine.cocktails_cocktail_id_seq', 660, true);
 -- Name: image_image_id_seq; Type: SEQUENCE SET; Schema: moonshine; Owner: moonshine
 --
 
-SELECT pg_catalog.setval('moonshine.image_image_id_seq', 585, true);
+SELECT pg_catalog.setval('moonshine.image_image_id_seq', 639, true);
 
 
 --
@@ -6346,14 +6409,14 @@ SELECT pg_catalog.setval('moonshine.message_message_id_seq', 1, false);
 -- Name: taste_taste_id_seq; Type: SEQUENCE SET; Schema: moonshine; Owner: moonshine
 --
 
-SELECT pg_catalog.setval('moonshine.taste_taste_id_seq', 703, true);
+SELECT pg_catalog.setval('moonshine.taste_taste_id_seq', 707, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: moonshine; Owner: moonshine
 --
 
-SELECT pg_catalog.setval('moonshine.users_user_id_seq', 9, true);
+SELECT pg_catalog.setval('moonshine.users_user_id_seq', 14, true);
 
 
 --

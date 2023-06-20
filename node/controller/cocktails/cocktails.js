@@ -82,11 +82,20 @@ async function _getCocktail(user_id, id) {
     let cocktail_result = await pgConnection.query(query);
     let cocktail = cocktail_result.rows[0];
     let cocktail_id = cocktail.cocktail_id;
+
+    let cocktail_image_query = '' +
+        'SELECT image_path FROM moonshine.image ' +
+        'WHERE image_id = ' + String(cocktail.cocktail_image);
+    let cocktail_image_result = await pgConnection.query(cocktail_image_query);
+    let cocktail_image = cocktail_image_result.rows[0].image_path;
+
     const images_query = '' +
-        'SELECT image_id FROM moonshine.cocktail_image_composition ' +
+        'SELECT image_path FROM moonshine.cocktail_image_composition ' +
+        'INNER JOIN moonshine.image ' +
+        '   ON cocktail_image_composition.image_id = image.image_id ' +
         'WHERE cocktail_id = ' + String(cocktail_id);
     let image_result = await pgConnection.query(images_query);
-    const image_list = [];
+    let image_list = [];
 
     const ingredients_query = '' +
         'SELECT ingredient_name, ingredient_quantity ' +
@@ -175,9 +184,11 @@ async function _getCocktail(user_id, id) {
         }
         blog_list.push(component);
     }
+    console.log(image_list);
 
     return {
         name: cocktail.cocktail_name,
+        url: cocktail_image,
         images: image_list,
         ingredients: ingredient_list,
         tastes: taste,
